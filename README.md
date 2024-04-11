@@ -167,9 +167,9 @@ func main() {
 package main
 
 import (
-        goalteaon "github.com/ArhurHlt/goalteon"
-"github.com/ArthurHlt/goalteon""sync"
-
+	"github.com/ArhurHlt/goalteon"
+    "github.com/ArthurHlt/goalteon"
+	"sync"
 )
 
 // CustomLocker is dummy locker for show how to make a custom locker
@@ -206,3 +206,9 @@ func main() {
 }
 
 ```
+
+## Generate beans
+
+Run:
+
+`cd generator && ./generate.sh`
