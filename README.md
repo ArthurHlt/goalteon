@@ -168,7 +168,6 @@ package main
 
 import (
 	"github.com/ArhurHlt/goalteon"
-    "github.com/ArthurHlt/goalteon"
 	"sync"
 )
 
@@ -204,7 +203,6 @@ func main() {
         }),
    )
 }
-
 ```
 
 ## Generate beans
