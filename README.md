@@ -187,21 +187,21 @@ func (c *CustomLocker) Unlock() {
 
 func main() {
 	client := goalteon.NewClient(
-        "https://alteon-ip", "username", "password", 
+        "https://alteon-ip", "username", "password",
         goalteaon.WithInsecureSkipVerify(true),
         // disable lock between change request
         goalteaon.WithNoLock(),
         // disable auto apply save sync after a change(s) bean made by create/update/delete/bulk
         goalteaon.WithNoAutoApplySaveSync(),
-    )
-	
+	)
+
 	clientWithCustomLocker := goalteon.NewClient(
-        "https://alteon-ip", "username", "password", 
-        goalteaon.WithInsecureSkipVerify(true),
-        goalteaon.WithLocker(&CustomLocker{
-            mutex: &sync.Mutex{},
-        }),
-   )
+            "https://alteon-ip", "username", "password",
+            goalteaon.WithInsecureSkipVerify(true),
+            goalteaon.WithLocker(&CustomLocker{
+                mutex: &sync.Mutex{},
+            }),
+	)
 }
 ```
 
