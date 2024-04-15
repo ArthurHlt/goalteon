@@ -1,4 +1,4 @@
-package goalteaon
+package goalteon
 
 import (
 	"fmt"

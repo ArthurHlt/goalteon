@@ -1,4 +1,4 @@
-package goalteaon
+package goalteon
 
 import (
 	transport "github.com/ArthurHlt/basicauth-transport"
