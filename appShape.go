@@ -2,7 +2,7 @@ package goalteaon
 
 import (
 	"fmt"
-	"github.com/ArhurHlt/goalteon/beans"
+	"github.com/ArthurHlt/goalteon/beans"
 	"net/url"
 )
 

@@ -3,7 +3,7 @@ package goalteaon
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/ArhurHlt/goalteon/beans"
+	"github.com/ArthurHlt/goalteon/beans"
 	"io"
 	"net/http"
 	"reflect"
