@@ -7,6 +7,8 @@ import (
 	"fmt"
 	transport "github.com/ArthurHlt/basicauth-transport"
 	"github.com/ArthurHlt/goalteon/beans"
+	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"reflect"
@@ -24,6 +26,7 @@ type Client struct {
 	httpClient          *http.Client
 	locker              sync.Locker
 	noAutoApplySaveSync bool
+	debug               bool
 }
 
 func NewClient(target, user, password string, opts ...clientOpt) *Client {
@@ -62,7 +65,36 @@ func NewClient(target, user, password string, opts ...clientOpt) *Client {
 }
 
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
-	return c.httpClient.Do(req)
+	if c.debug {
+		log.Printf("running request '%s %s'\n", req.Method, req.URL.String())
+	}
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		if c.debug {
+			log.Printf("Error when running request '%s %s': %s\n",
+				req.Method, req.URL.String(), err.Error(),
+			)
+		}
+		return nil, err
+	}
+	if !c.debug {
+		return resp, nil
+	}
+	defer resp.Body.Close()
+	b, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Printf("Error when reading response body '%s %s': %s\n",
+			req.Method, req.URL.String(), err.Error(),
+		)
+		return nil, err
+	}
+	log.Printf("done request '%s %s', with status code %d and content: \n%s\n",
+		req.Method, req.URL.String(),
+		resp.StatusCode,
+		string(b),
+	)
+	resp.Body = io.NopCloser(bytes.NewBuffer(b))
+	return resp, nil
 }
 
 func (c *Client) NewRequest(method string, bean beans.Bean, urlParams url.Values) (*http.Request, error) {
@@ -112,6 +144,10 @@ func (c *Client) List(bean beans.Bean, urlParams url.Values) ([]beans.BeanType, 
 		return nil, err
 	}
 	return list, nil
+}
+
+func (c *Client) SetDebug(debug bool) {
+	c.debug = debug
 }
 
 func (c *Client) Get(bean beans.Bean, urlParams url.Values) (beans.BeanType, error) {
