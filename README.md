@@ -33,7 +33,7 @@ func main() {
     }
     
     // translate to params list for ease usage
-    // you can also use goalteaon.Translate to translate only one object
+    // you can also use goalteon.Translate to translate only one object
     resTr := goalteon.TranslateList[*beans.SlbNewCfgEnhVirtServerTableParams](res)
     b, err := json.MarshalIndent(resTr, "", "  ")
     if err != nil {

@@ -313,7 +313,7 @@ func Subtree(oid string) {
 		}
 	}
 
-	cmd := exec.Command("go", "fmt", "github.com/orange-cloudfoundry/goalteon/beans")
+	cmd := exec.Command("go", "fmt", "github.com/ArthurHlt/goalteon/beans")
 	cmd.Dir = ".."
 	err = cmd.Run()
 	if err != nil {
