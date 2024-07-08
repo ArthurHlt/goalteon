@@ -201,7 +201,7 @@ func (c *Client) ApplySaveSync() (st *StatusGlobal, err error) {
 		if st.AgApplyConfig != AgApplyConfigInProgress {
 			break
 		}
-		time.Sleep(50 * time.Millisecond)
+		time.Sleep(200 * time.Millisecond)
 	}
 
 	_, err = c.Save()
@@ -219,7 +219,7 @@ func (c *Client) ApplySaveSync() (st *StatusGlobal, err error) {
 		if st.AgSaveConfig != AgSaveConfigInProgress {
 			break
 		}
-		time.Sleep(50 * time.Millisecond)
+		time.Sleep(200 * time.Millisecond)
 	}
 
 	// do not check for errors here, as it is possible that the sync will fail it should not block anything
