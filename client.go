@@ -66,7 +66,18 @@ func NewClient(target, user, password string, opts ...clientOpt) *Client {
 
 func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	if c.debug {
-		log.Printf("running request '%s %s'\n", req.Method, req.URL.String())
+		var content []byte
+		if req.Body != nil {
+			b, err := io.ReadAll(req.Body)
+			if err != nil {
+				return nil, err
+			}
+			buf := bytes.NewBuffer(b)
+			req.Body = io.NopCloser(buf)
+			content = b
+		}
+
+		log.Printf("running request '%s %s' with content:\n\t%s\n", req.Method, req.URL.String(), string(content))
 	}
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
