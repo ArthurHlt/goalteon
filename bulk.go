@@ -54,7 +54,7 @@ func (c *Client) Bulk(items []*BulkItem) ([]*StatusResponse, error) {
 		return nil, fmt.Errorf("error when reverting all: %s", err.Error())
 	}
 	srs := make([]*StatusResponse, 0)
-	for _, item := range items {
+	for i, item := range items {
 		if item.Bean == nil {
 			return nil, fmt.Errorf("bean cannot be nil")
 		}
@@ -71,7 +71,7 @@ func (c *Client) Bulk(items []*BulkItem) ([]*StatusResponse, error) {
 		}
 		sr, err := UnmarshalStatusResponse(resp)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("on item %d: %w", i, err)
 		}
 		srs = append(srs, sr)
 	}
