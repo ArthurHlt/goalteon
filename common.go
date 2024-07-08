@@ -10,16 +10,17 @@ import (
 )
 
 type StatusResponse struct {
-	Status  string `json:"status"`
-	Message string `json:"message"`
+	StatusCode int    `json:"-"`
+	Status     string `json:"status"`
+	Message    string `json:"message"`
 }
 
 func (s *StatusResponse) IsError() bool {
-	return s.Status == "error"
+	return s.StatusCode > 299 || s.StatusCode < 200
 }
 
 func (s *StatusResponse) String() string {
-	return fmt.Sprintf("status: %s, message: %s", s.Status, s.Message)
+	return fmt.Sprintf("status (Code %d): %s, message: %s", s.StatusCode, s.Status, s.Message)
 }
 
 func (s *StatusResponse) Error() string {
@@ -36,10 +37,12 @@ func UnmarshalStatusResponse(resp *http.Response) (*StatusResponse, error) {
 		status, err := UnmarshalStatus(b)
 		if err != nil {
 			status = &StatusResponse{
-				Status:  "error",
-				Message: string(b),
+				StatusCode: resp.StatusCode,
+				Status:     "error",
+				Message:    string(b),
 			}
 		}
+		status.StatusCode = resp.StatusCode
 		return status, status
 	}
 	return UnmarshalStatus(b)
@@ -66,10 +69,12 @@ func UnmarshalResponse(resp *http.Response, params beans.BeanType) error {
 		status, err := UnmarshalStatus(b)
 		if err != nil {
 			status = &StatusResponse{
-				Status:  "error",
-				Message: string(b),
+				StatusCode: resp.StatusCode,
+				Status:     "error",
+				Message:    string(b),
 			}
 		}
+		status.StatusCode = resp.StatusCode
 		return status
 	}
 	if bytesParams, ok := params.(*beans.BytesParams); ok {
@@ -94,10 +99,12 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 		status, err := UnmarshalStatus(b)
 		if err != nil {
 			status = &StatusResponse{
-				Status:  "error",
-				Message: string(b),
+				StatusCode: resp.StatusCode,
+				Status:     "error",
+				Message:    string(b),
 			}
 		}
+		status.StatusCode = resp.StatusCode
 		return nil, status
 	}
 	mapVal := reflect.New(reflect.MakeMap(reflect.MapOf(reflect.TypeOf(""), reflect.SliceOf(bean.GetParamsType()))).Type())
