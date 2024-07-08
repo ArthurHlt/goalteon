@@ -113,7 +113,7 @@ func (c *Client) NewRequest(method string, bean beans.Bean, urlParams url.Values
 	var body *bytes.Buffer = nil
 	_, isBytesParams := params.(beans.BytesParams)
 	if params != nil && !isBytesParams {
-		b, err := json.Marshal(bean.GetParams())
+		b, err := json.MarshalIndent(bean.GetParams(), "", "")
 		if err != nil {
 			return nil, err
 		}
