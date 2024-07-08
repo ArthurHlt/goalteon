@@ -34,7 +34,7 @@ func UnmarshalStatusResponse(resp *http.Response) (*StatusResponse, error) {
 		return nil, err
 	}
 	if resp.StatusCode > 299 || resp.StatusCode < 200 {
-		status, err := UnmarshalStatus(b)
+		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
 			status = &StatusResponse{
 				StatusCode: resp.StatusCode,
@@ -45,16 +45,27 @@ func UnmarshalStatusResponse(resp *http.Response) (*StatusResponse, error) {
 		status.StatusCode = resp.StatusCode
 		return status, status
 	}
-	return UnmarshalStatus(b)
+	status, err := UnmarshalStatus(resp.StatusCode, b)
+	if err != nil {
+		return nil, err
+	}
+	if status.IsError() {
+		return status, status
+	}
+	return status, nil
 }
 
-func UnmarshalStatus(data []byte) (*StatusResponse, error) {
+func UnmarshalStatus(statusCode int, data []byte) (*StatusResponse, error) {
 	var statusResponse StatusResponse
 	err := json.Unmarshal(data, &statusResponse)
 	if err != nil {
 		return nil, fmt.Errorf("could not unmarshal status response (%s), content: %s", err.Error(), string(data))
 	}
 
+	if statusResponse.Status == "error" || statusResponse.Status == "err" {
+		statusCode = 500
+	}
+	statusResponse.StatusCode = statusCode
 	return &statusResponse, nil
 }
 
@@ -66,7 +77,7 @@ func UnmarshalResponse(resp *http.Response, params beans.BeanType) error {
 	}
 
 	if resp.StatusCode > 299 || resp.StatusCode < 200 {
-		status, err := UnmarshalStatus(b)
+		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
 			status = &StatusResponse{
 				StatusCode: resp.StatusCode,
@@ -74,7 +85,6 @@ func UnmarshalResponse(resp *http.Response, params beans.BeanType) error {
 				Message:    string(b),
 			}
 		}
-		status.StatusCode = resp.StatusCode
 		return status
 	}
 	if bytesParams, ok := params.(*beans.BytesParams); ok {
@@ -96,7 +106,7 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 		return nil, err
 	}
 	if resp.StatusCode > 299 || resp.StatusCode < 200 {
-		status, err := UnmarshalStatus(b)
+		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
 			status = &StatusResponse{
 				StatusCode: resp.StatusCode,
@@ -104,7 +114,6 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 				Message:    string(b),
 			}
 		}
-		status.StatusCode = resp.StatusCode
 		return nil, status
 	}
 	mapVal := reflect.New(reflect.MakeMap(reflect.MapOf(reflect.TypeOf(""), reflect.SliceOf(bean.GetParamsType()))).Type())
