@@ -86,6 +86,14 @@ const (
 	SlbNewAdvhcDnsTableDelete_Unsupported SlbNewAdvhcDnsTableDelete = 2147483647
 )
 
+type SlbNewAdvhcDnsTableSnat int32
+
+const (
+	SlbNewAdvhcDnsTableSnat_Enabled     SlbNewAdvhcDnsTableSnat = 1
+	SlbNewAdvhcDnsTableSnat_Disabled    SlbNewAdvhcDnsTableSnat = 2
+	SlbNewAdvhcDnsTableSnat_Unsupported SlbNewAdvhcDnsTableSnat = 2147483647
+)
+
 type SlbNewAdvhcDnsTableParams struct {
 	// DNS Health check id.
 	ID string `json:"ID,omitempty"`
@@ -123,6 +131,8 @@ type SlbNewAdvhcDnsTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcDnsTableDelete `json:"Delete,omitempty"`
+	// DNS Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcDnsTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcDnsTableParams) iMABean() {}

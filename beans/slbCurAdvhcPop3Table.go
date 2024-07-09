@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcPop3TableInvert_Unsupported SlbCurAdvhcPop3TableInvert = 2147483647
 )
 
+type SlbCurAdvhcPop3TableSnat int32
+
+const (
+	SlbCurAdvhcPop3TableSnat_Enabled     SlbCurAdvhcPop3TableSnat = 1
+	SlbCurAdvhcPop3TableSnat_Disabled    SlbCurAdvhcPop3TableSnat = 2
+	SlbCurAdvhcPop3TableSnat_Unsupported SlbCurAdvhcPop3TableSnat = 2147483647
+)
+
 type SlbCurAdvhcPop3TableParams struct {
 	// POP3 Health check id.
 	ID string `json:"ID,omitempty"`
@@ -101,6 +109,8 @@ type SlbCurAdvhcPop3TableParams struct {
 	UserName string `json:"UserName,omitempty"`
 	// POP3 Health check password.
 	Password string `json:"Password,omitempty"`
+	// POP3 Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcPop3TableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcPop3TableParams) iMABean() {}

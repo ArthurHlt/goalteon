@@ -97,6 +97,14 @@ const (
 	SlbNewAdvhcSslHelloTableCipherName_Unsupported SlbNewAdvhcSslHelloTableCipherName = 2147483647
 )
 
+type SlbNewAdvhcSslHelloTableSnat int32
+
+const (
+	SlbNewAdvhcSslHelloTableSnat_Enabled     SlbNewAdvhcSslHelloTableSnat = 1
+	SlbNewAdvhcSslHelloTableSnat_Disabled    SlbNewAdvhcSslHelloTableSnat = 2
+	SlbNewAdvhcSslHelloTableSnat_Unsupported SlbNewAdvhcSslHelloTableSnat = 2147483647
+)
+
 type SlbNewAdvhcSslHelloTableParams struct {
 	// SSL Hello Health check id.
 	ID string `json:"ID,omitempty"`
@@ -136,6 +144,8 @@ type SlbNewAdvhcSslHelloTableParams struct {
 	CipherName SlbNewAdvhcSslHelloTableCipherName `json:"CipherName,omitempty"`
 	// Cipher-suite allowed for SSLHELLO HC Context.
 	CipherUserdef string `json:"CipherUserdef,omitempty"`
+	// SSL Hello Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcSslHelloTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcSslHelloTableParams) iMABean() {}

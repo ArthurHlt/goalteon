@@ -87,6 +87,15 @@ const (
 	SlbNewAppwallWebappsCfgTableWebappDel_Unsupported SlbNewAppwallWebappsCfgTableWebappDel = 2147483647
 )
 
+type SlbNewAppwallWebappsCfgTableWebappCldirection int32
+
+const (
+	SlbNewAppwallWebappsCfgTableWebappCldirection_Request       SlbNewAppwallWebappsCfgTableWebappCldirection = 0
+	SlbNewAppwallWebappsCfgTableWebappCldirection_Response      SlbNewAppwallWebappsCfgTableWebappCldirection = 1
+	SlbNewAppwallWebappsCfgTableWebappCldirection_Bidirectional SlbNewAppwallWebappsCfgTableWebappCldirection = 2
+	SlbNewAppwallWebappsCfgTableWebappCldirection_Unsupported   SlbNewAppwallWebappsCfgTableWebappCldirection = 2147483647
+)
+
 type SlbNewAppwallWebappsCfgTableParams struct {
 	// Secure web application ID
 	WebappId string `json:"WebappId,omitempty"`
@@ -102,6 +111,10 @@ type SlbNewAppwallWebappsCfgTableParams struct {
 	WebappMode SlbNewAppwallWebappsCfgTableWebappMode `json:"WebappMode,omitempty"`
 	// By setting the value to delete(2), the entire row is deleted.
 	WebappDel SlbNewAppwallWebappsCfgTableWebappDel `json:"WebappDel,omitempty"`
+	// Set timeout.
+	WebappCltimeout uint32 `json:"WebappCltimeout,omitempty"`
+	// Set direction.
+	WebappCldirection SlbNewAppwallWebappsCfgTableWebappCldirection `json:"WebappCldirection,omitempty"`
 }
 
 func (p SlbNewAppwallWebappsCfgTableParams) iMABean() {}

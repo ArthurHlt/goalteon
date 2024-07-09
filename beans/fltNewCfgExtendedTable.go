@@ -453,6 +453,8 @@ type FltNewCfgExtendedTableParams struct {
 	RtSrcTnl FltNewCfgExtendedTableRtSrcTnl `json:"RtSrcTnl,omitempty"`
 	// The aw monitor private key.
 	SslawMonPriKey string `json:"SslawMonPriKey,omitempty"`
+	// The aw monitor ssl policy.
+	SslawMonPolicy string `json:"SslawMonPolicy,omitempty"`
 	// Enable or disable Force bind for proxy.
 	ForceBind FltNewCfgExtendedTableForceBind `json:"ForceBind,omitempty"`
 }

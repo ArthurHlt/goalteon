@@ -160,6 +160,10 @@ type SlbNewCfgEnhVirtServicesSecondPartTableParams struct {
 	BeTcpPolId string `json:"BeTcpPolId,omitempty"`
 	// Connection management configuration for Tcp traffic(Enable/disable) [Default: Disable].
 	BasicConnmgtStatus SlbNewCfgEnhVirtServicesSecondPartTableBasicConnmgtStatus `json:"BasicConnmgtStatus,omitempty"`
+	// GM SSL Server encryption Certificate name associated with this virtual service.
+	ServCertEnc string `json:"ServCertEnc,omitempty"`
+	// GM SSL Server sign Certificate name associated with this virtual service.
+	ServCertSign string `json:"ServCertSign,omitempty"`
 }
 
 func (p SlbNewCfgEnhVirtServicesSecondPartTableParams) iMABean() {}

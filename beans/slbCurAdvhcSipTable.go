@@ -86,6 +86,22 @@ const (
 	SlbCurAdvhcSipTableTransport_Unsupported SlbCurAdvhcSipTableTransport = 2147483647
 )
 
+type SlbCurAdvhcSipTableSnat int32
+
+const (
+	SlbCurAdvhcSipTableSnat_Enabled     SlbCurAdvhcSipTableSnat = 1
+	SlbCurAdvhcSipTableSnat_Disabled    SlbCurAdvhcSipTableSnat = 2
+	SlbCurAdvhcSipTableSnat_Unsupported SlbCurAdvhcSipTableSnat = 2147483647
+)
+
+type SlbCurAdvhcSipTableSips int32
+
+const (
+	SlbCurAdvhcSipTableSips_Enabled     SlbCurAdvhcSipTableSips = 1
+	SlbCurAdvhcSipTableSips_Disabled    SlbCurAdvhcSipTableSips = 2
+	SlbCurAdvhcSipTableSips_Unsupported SlbCurAdvhcSipTableSips = 2147483647
+)
+
 type SlbCurAdvhcSipTableParams struct {
 	// SIP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -123,6 +139,12 @@ type SlbCurAdvhcSipTableParams struct {
 	From string `json:"From,omitempty"`
 	// SIP Health check expected response code.
 	ResponseCodes string `json:"ResponseCodes,omitempty"`
+	// SIP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcSipTableSnat `json:"Snat,omitempty"`
+	// SIP Health check SIPS enable/disable flag.
+	Sips SlbCurAdvhcSipTableSips `json:"Sips,omitempty"`
+	// SIP Health Check Cipher-suite allowed for SSL for SIPS Context.
+	SipsCipherUserdef string `json:"SipsCipherUserdef,omitempty"`
 }
 
 func (p SlbCurAdvhcSipTableParams) iMABean() {}

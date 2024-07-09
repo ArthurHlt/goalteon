@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcWtsTableDelete_Unsupported SlbNewAdvhcWtsTableDelete = 2147483647
 )
 
+type SlbNewAdvhcWtsTableSnat int32
+
+const (
+	SlbNewAdvhcWtsTableSnat_Enabled     SlbNewAdvhcWtsTableSnat = 1
+	SlbNewAdvhcWtsTableSnat_Disabled    SlbNewAdvhcWtsTableSnat = 2
+	SlbNewAdvhcWtsTableSnat_Unsupported SlbNewAdvhcWtsTableSnat = 2147483647
+)
+
 type SlbNewAdvhcWtsTableParams struct {
 	// WTS Health check id.
 	ID string `json:"ID,omitempty"`
@@ -113,6 +121,8 @@ type SlbNewAdvhcWtsTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcWtsTableDelete `json:"Delete,omitempty"`
+	// WTS Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcWtsTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcWtsTableParams) iMABean() {}

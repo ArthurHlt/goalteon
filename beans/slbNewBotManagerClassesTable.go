@@ -137,6 +137,55 @@ const (
 	SlbNewBotManagerClassesTableJsInjectStatus_Unsupported SlbNewBotManagerClassesTableJsInjectStatus = 2147483647
 )
 
+type SlbNewBotManagerClassesTableCustomWebBlockStatus int32
+
+const (
+	SlbNewBotManagerClassesTableCustomWebBlockStatus_Enabled     SlbNewBotManagerClassesTableCustomWebBlockStatus = 1
+	SlbNewBotManagerClassesTableCustomWebBlockStatus_Disabled    SlbNewBotManagerClassesTableCustomWebBlockStatus = 2
+	SlbNewBotManagerClassesTableCustomWebBlockStatus_Unsupported SlbNewBotManagerClassesTableCustomWebBlockStatus = 2147483647
+)
+
+type SlbNewBotManagerClassesTableCustomMobBlockStatus int32
+
+const (
+	SlbNewBotManagerClassesTableCustomMobBlockStatus_Enabled     SlbNewBotManagerClassesTableCustomMobBlockStatus = 1
+	SlbNewBotManagerClassesTableCustomMobBlockStatus_Disabled    SlbNewBotManagerClassesTableCustomMobBlockStatus = 2
+	SlbNewBotManagerClassesTableCustomMobBlockStatus_Unsupported SlbNewBotManagerClassesTableCustomMobBlockStatus = 2147483647
+)
+
+type SlbNewBotManagerClassesTableCustomMobCaptchaStatus int32
+
+const (
+	SlbNewBotManagerClassesTableCustomMobCaptchaStatus_Enabled     SlbNewBotManagerClassesTableCustomMobCaptchaStatus = 1
+	SlbNewBotManagerClassesTableCustomMobCaptchaStatus_Disabled    SlbNewBotManagerClassesTableCustomMobCaptchaStatus = 2
+	SlbNewBotManagerClassesTableCustomMobCaptchaStatus_Unsupported SlbNewBotManagerClassesTableCustomMobCaptchaStatus = 2147483647
+)
+
+type SlbNewBotManagerClassesTableTrkevent int32
+
+const (
+	SlbNewBotManagerClassesTableTrkevent_Enabled     SlbNewBotManagerClassesTableTrkevent = 1
+	SlbNewBotManagerClassesTableTrkevent_Disabled    SlbNewBotManagerClassesTableTrkevent = 2
+	SlbNewBotManagerClassesTableTrkevent_Unsupported SlbNewBotManagerClassesTableTrkevent = 2147483647
+)
+
+type SlbNewBotManagerClassesTableSameSite int32
+
+const (
+	SlbNewBotManagerClassesTableSameSite_None        SlbNewBotManagerClassesTableSameSite = 0
+	SlbNewBotManagerClassesTableSameSite_Lax         SlbNewBotManagerClassesTableSameSite = 1
+	SlbNewBotManagerClassesTableSameSite_Strict      SlbNewBotManagerClassesTableSameSite = 2
+	SlbNewBotManagerClassesTableSameSite_Unsupported SlbNewBotManagerClassesTableSameSite = 2147483647
+)
+
+type SlbNewBotManagerClassesTableAppClassAppType int32
+
+const (
+	SlbNewBotManagerClassesTableAppClassAppType_None   SlbNewBotManagerClassesTableAppClassAppType = 1
+	SlbNewBotManagerClassesTableAppClassAppType_Web    SlbNewBotManagerClassesTableAppClassAppType = 2
+	SlbNewBotManagerClassesTableAppClassAppType_Mobile SlbNewBotManagerClassesTableAppClassAppType = 3
+)
+
 type SlbNewBotManagerClassesTableParams struct {
 	// Set bot manager class id.
 	Id string `json:"Id,omitempty"`
@@ -186,6 +235,66 @@ type SlbNewBotManagerClassesTableParams struct {
 	AppType SlbNewBotManagerClassesTableAppType `json:"AppType,omitempty"`
 	// Enable or disable jsinject
 	JsInjectStatus SlbNewBotManagerClassesTableJsInjectStatus `json:"JsInjectStatus,omitempty"`
+	// Enable or disable custom web block.
+	CustomWebBlockStatus SlbNewBotManagerClassesTableCustomWebBlockStatus `json:"CustomWebBlockStatus,omitempty"`
+	// Set the custom web block response code.
+	CustomWebBlockRespCode uint64 `json:"CustomWebBlockRespCode,omitempty"`
+	// Set the custom web block response body.
+	CustomWebBlockRespBody string `json:"CustomWebBlockRespBody,omitempty"`
+	// Set the custom web block first header name.
+	CustomWebBlockFirstHeaderName string `json:"CustomWebBlockFirstHeaderName,omitempty"`
+	// Set the custom web block first header value.
+	CustomWebBlockFirstHeaderValue string `json:"CustomWebBlockFirstHeaderValue,omitempty"`
+	// Set the custom web block second header name.
+	CustomWebBlockSecondHeaderName string `json:"CustomWebBlockSecondHeaderName,omitempty"`
+	// Set the custom web block second header value.
+	CustomWebBlockSecondHeaderValue string `json:"CustomWebBlockSecondHeaderValue,omitempty"`
+	// Enable or disable custom mobile block.
+	CustomMobBlockStatus SlbNewBotManagerClassesTableCustomMobBlockStatus `json:"CustomMobBlockStatus,omitempty"`
+	// Set the custom mobile block response code.
+	CustomMobBlockRespCode uint64 `json:"CustomMobBlockRespCode,omitempty"`
+	// Set the custom mobile block response body.
+	CustomMobBlockRespBody string `json:"CustomMobBlockRespBody,omitempty"`
+	// Set the custom mobile block first header name.
+	CustomMobBlockFirstHeaderName string `json:"CustomMobBlockFirstHeaderName,omitempty"`
+	// Set the custom mobile block first header value.
+	CustomMobBlockFirstHeaderValue string `json:"CustomMobBlockFirstHeaderValue,omitempty"`
+	// Set the custom mobile block second header name.
+	CustomMobBlockSecondHeaderName string `json:"CustomMobBlockSecondHeaderName,omitempty"`
+	// Set the custom mobile block second header value.
+	CustomMobBlockSecondHeaderValue string `json:"CustomMobBlockSecondHeaderValue,omitempty"`
+	// Enable or disable custom mobile Captcha.
+	CustomMobCaptchaStatus SlbNewBotManagerClassesTableCustomMobCaptchaStatus `json:"CustomMobCaptchaStatus,omitempty"`
+	// Set the custom mobile Captcha response code.
+	CustomMobCaptchaRespCode uint64 `json:"CustomMobCaptchaRespCode,omitempty"`
+	// Set the custom mobile Captcha response body.
+	CustomMobCaptchaRespBody string `json:"CustomMobCaptchaRespBody,omitempty"`
+	// Set the custom mobile Captcha first header name.
+	CustomMobCaptchaFirstHeaderName string `json:"CustomMobCaptchaFirstHeaderName,omitempty"`
+	// Set the custom mobile Captcha first header value.
+	CustomMobCaptchaFirstHeaderValue string `json:"CustomMobCaptchaFirstHeaderValue,omitempty"`
+	// Set the custom mobile Captcha second header name.
+	CustomMobCaptchaSecondHeaderName string `json:"CustomMobCaptchaSecondHeaderName,omitempty"`
+	// Set the custom mobile Captcha second header value.
+	CustomMobCaptchaSecondHeaderValue string `json:"CustomMobCaptchaSecondHeaderValue,omitempty"`
+	// Set Shield Square trkevent header as enabled or disabled
+	Trkevent SlbNewBotManagerClassesTableTrkevent `json:"Trkevent,omitempty"`
+	// Set the SameSite header header field.
+	SameSite SlbNewBotManagerClassesTableSameSite `json:"SameSite,omitempty"`
+	// Set which application to use if classification succeeded.
+	AppClassAppType SlbNewBotManagerClassesTableAppClassAppType `json:"AppClassAppType,omitempty"`
+	// Set content class ID containing only header/s lookup with a key of user-agent.
+	AppClassUserAgent string `json:"AppClassUserAgent,omitempty"`
+	// Set content class ID containing only hostname/s or path/s (or both) lookups.
+	AppClassUrl string `json:"AppClassUrl,omitempty"`
+	// Set content class ID containing only header/s lookup.
+	AppClassHeader string `json:"AppClassHeader,omitempty"`
+	// Set content class ID containing only cookie/s lookup.
+	AppClassCookie string `json:"AppClassCookie,omitempty"`
+	// Set headers filter when allhdrs is enabled.
+	AllHeadersFilter string `json:"AllHeadersFilter,omitempty"`
+	// Set a list of header names to include/exclude when allhdrs is enabled.
+	AllHeadersList string `json:"AllHeadersList,omitempty"`
 }
 
 func (p SlbNewBotManagerClassesTableParams) iMABean() {}

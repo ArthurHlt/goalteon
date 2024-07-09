@@ -95,6 +95,7 @@ const (
 	SlbNewSslCfgCertsTableHashAlgo_Sha384      SlbNewSslCfgCertsTableHashAlgo = 4
 	SlbNewSslCfgCertsTableHashAlgo_Sha512      SlbNewSslCfgCertsTableHashAlgo = 5
 	SlbNewSslCfgCertsTableHashAlgo_Unknown     SlbNewSslCfgCertsTableHashAlgo = 6
+	SlbNewSslCfgCertsTableHashAlgo_Sm3         SlbNewSslCfgCertsTableHashAlgo = 7
 	SlbNewSslCfgCertsTableHashAlgo_Unsupported SlbNewSslCfgCertsTableHashAlgo = 2147483647
 )
 
@@ -133,6 +134,7 @@ const (
 	SlbNewSslCfgCertsTableKeyType_Rsa         SlbNewSslCfgCertsTableKeyType = 1
 	SlbNewSslCfgCertsTableKeyType_Ec          SlbNewSslCfgCertsTableKeyType = 2
 	SlbNewSslCfgCertsTableKeyType_Unknown     SlbNewSslCfgCertsTableKeyType = 6
+	SlbNewSslCfgCertsTableKeyType_Sm2         SlbNewSslCfgCertsTableKeyType = 7
 	SlbNewSslCfgCertsTableKeyType_Unsupported SlbNewSslCfgCertsTableKeyType = 2147483647
 )
 
@@ -218,6 +220,7 @@ const (
 	SlbNewSslCfgCertsTableCurveNameEc_Wtls10      SlbNewSslCfgCertsTableCurveNameEc = 63
 	SlbNewSslCfgCertsTableCurveNameEc_Wtls11      SlbNewSslCfgCertsTableCurveNameEc = 64
 	SlbNewSslCfgCertsTableCurveNameEc_Wtls12      SlbNewSslCfgCertsTableCurveNameEc = 65
+	SlbNewSslCfgCertsTableCurveNameEc_Sm          SlbNewSslCfgCertsTableCurveNameEc = 66
 	SlbNewSslCfgCertsTableCurveNameEc_Unsupported SlbNewSslCfgCertsTableCurveNameEc = 2147483647
 )
 

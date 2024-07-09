@@ -145,6 +145,46 @@ type HttpEnhPerServStatsTableParams struct {
 	PerServStatsPeakAvgEvictionBytes int32 `json:"PerServStatsPeakAvgEvictionBytes,omitempty"`
 	// HTTP2 Peak of average HPACK table size in Kb.
 	PerServStatsPeakAvgHpackTableSize int32 `json:"PerServStatsPeakAvgHpackTableSize,omitempty"`
+	// HTTP3 connection count.
+	PerServStatsHttp30ConnectionCount int32 `json:"PerServStatsHttp30ConnectionCount,omitempty"`
+	// HTTP 3.0 connection count peak.
+	PerServStatsHttp30ConnectionPeak int32 `json:"PerServStatsHttp30ConnectionPeak,omitempty"`
+	// HTTP 3.0 request count.
+	PerServStatsHttp30RequestCount int32 `json:"PerServStatsHttp30RequestCount,omitempty"`
+	// HTTP3 client streams.
+	PerServStatsHttp30ClientStreams int32 `json:"PerServStatsHttp30ClientStreams,omitempty"`
+	// HTTP3 average connection duration (seconds).
+	PerServStatsH3ConnectionDurationAvgStr string `json:"PerServStatsH3ConnectionDurationAvgStr,omitempty"`
+	// HTTP3 headers request compression ratio.
+	PerServStatsH3HeadersRequestCompRatio int32 `json:"PerServStatsH3HeadersRequestCompRatio,omitempty"`
+	// HTTP3 headers response compression ratio.
+	PerServStatsH3HeadersResponseCompRatio int32 `json:"PerServStatsH3HeadersResponseCompRatio,omitempty"`
+	// HTTP3 big headers count.
+	PerServStatsH3BigHeaders int32 `json:"PerServStatsH3BigHeaders,omitempty"`
+	// HTTP3 average eviction bytes.
+	PerServStatsH3AvgEvictionBytes int32 `json:"PerServStatsH3AvgEvictionBytes,omitempty"`
+	// HTTP3 average QPACK table size.
+	PerServStatsH3AvgQpackTableSize int32 `json:"PerServStatsH3AvgQpackTableSize,omitempty"`
+	// HTTP3 Peak of client streams.
+	PerServStatsH3PeakClientStreams int32 `json:"PerServStatsH3PeakClientStreams,omitempty"`
+	// HTTP3 Peak of connection duration average (seconds).
+	PerServStatsH3PeakConnectionDurationAvgStr string `json:"PerServStatsH3PeakConnectionDurationAvgStr,omitempty"`
+	// HTTP3 Peak of headers request compression ratio.
+	PerServStatsH3PeakHeadersRequestCompRatio int32 `json:"PerServStatsH3PeakHeadersRequestCompRatio,omitempty"`
+	// HTTP3 Peak of headers response compression ratio.
+	PerServStatsH3PeakHeadersResponseCompRatio int32 `json:"PerServStatsH3PeakHeadersResponseCompRatio,omitempty"`
+	// HTTP3 Peak of number of big headers.
+	PerServStatsH3PeakBigHeaders int32 `json:"PerServStatsH3PeakBigHeaders,omitempty"`
+	// HTTP3 Peak of average eviction in bytes.
+	PerServStatsH3PeakAvgEvictionBytes int32 `json:"PerServStatsH3PeakAvgEvictionBytes,omitempty"`
+	// HTTP3 Peak of average HPACK table size in Kb.
+	PerServStatsH3PeakAvgQpackTableSize int32 `json:"PerServStatsH3PeakAvgQpackTableSize,omitempty"`
+	// HTTP 3.0 total request count.
+	PerServStatsHttp30TotalRequestCount int32 `json:"PerServStatsHttp30TotalRequestCount,omitempty"`
+	// Average of current latency for virtual service.
+	PerServStatsAverageLatency int32 `json:"PerServStatsAverageLatency,omitempty"`
+	// Average of total latency for virtual service.
+	PerServStatsTotalAverageLatency int32 `json:"PerServStatsTotalAverageLatency,omitempty"`
 }
 
 func (p HttpEnhPerServStatsTableParams) iMABean() {}

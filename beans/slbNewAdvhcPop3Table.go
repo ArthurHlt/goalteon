@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcPop3TableDelete_Unsupported SlbNewAdvhcPop3TableDelete = 2147483647
 )
 
+type SlbNewAdvhcPop3TableSnat int32
+
+const (
+	SlbNewAdvhcPop3TableSnat_Enabled     SlbNewAdvhcPop3TableSnat = 1
+	SlbNewAdvhcPop3TableSnat_Disabled    SlbNewAdvhcPop3TableSnat = 2
+	SlbNewAdvhcPop3TableSnat_Unsupported SlbNewAdvhcPop3TableSnat = 2147483647
+)
+
 type SlbNewAdvhcPop3TableParams struct {
 	// POP3 Health check id.
 	ID string `json:"ID,omitempty"`
@@ -115,6 +123,8 @@ type SlbNewAdvhcPop3TableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcPop3TableDelete `json:"Delete,omitempty"`
+	// POP3 Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcPop3TableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcPop3TableParams) iMABean() {}

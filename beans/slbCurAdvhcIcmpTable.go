@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcIcmpTableInvert_Unsupported SlbCurAdvhcIcmpTableInvert = 2147483647
 )
 
+type SlbCurAdvhcIcmpTableSnat int32
+
+const (
+	SlbCurAdvhcIcmpTableSnat_Enabled     SlbCurAdvhcIcmpTableSnat = 1
+	SlbCurAdvhcIcmpTableSnat_Disabled    SlbCurAdvhcIcmpTableSnat = 2
+	SlbCurAdvhcIcmpTableSnat_Unsupported SlbCurAdvhcIcmpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcIcmpTableParams struct {
 	// ICMP health check id.
 	ID string `json:"ID,omitempty"`
@@ -97,6 +105,8 @@ type SlbCurAdvhcIcmpTableParams struct {
 	DownInterval uint64 `json:"DownInterval,omitempty"`
 	// ICMP health check invert flag.
 	Invert SlbCurAdvhcIcmpTableInvert `json:"Invert,omitempty"`
+	// ICMP hHealth Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcIcmpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcIcmpTableParams) iMABean() {}

@@ -2017,6 +2017,7 @@ totalDstIPACLsCurrEnt OBJECT-TYPE
         "Current number of entries for total destination IP ACLs.
          Note:This mib is not supported for VX instance of virtualization."
     ::= { switchCapSecInfo 14 }
+
 ipDosAtkPrevention OBJECT-TYPE
     SYNTAX Integer32
     MAX-ACCESS read-only
@@ -2844,6 +2845,19 @@ licenseDeleteKeyRLM OBJECT-TYPE
      "Current License key removed via RLM."
     ::= {agLicenseOper 25}
 
+licenseForController OBJECT-TYPE
+    SYNTAX INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-write
+    STATUS current
+    DESCRIPTION
+    "Enable/Disable license management by controller.
+    Note:This mib is supported only on vADC."
+    ::= {agLicenseOper 26}
+
 agUserNewPasswdOper OBJECT-TYPE
     SYNTAX  DisplayString (SIZE(0..128))
     MAX-ACCESS  read-only
@@ -3381,159 +3395,496 @@ vadcVrrpOperBackup OBJECT-TYPE
 
 agAppLogAppShape OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable AppShape++ Trace Logging."
+        "Set the AppShape++ Trace Logging."
     ::= { agAppLogOper 1 }
 
 agAppLogCaching OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Caching Trace Logging."
+        "Set the Caching Trace Logging."
     ::= { agAppLogOper 2 }
 
 agAppLogCompression OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Compression Trace Logging."
+        "Set the Compression Trace Logging."
     ::= { agAppLogOper 3 }
 
 agAppLogContentClass OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Content Class Trace Logging."
+        "Set the Content Class Trace Logging."
     ::= { agAppLogOper 4 }
 
 agAppLogHTTP OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable HTTP Trace Logging."
+        "Set the HTTP Trace Logging."
     ::= { agAppLogOper 5 }
 
 agAppLogHTTPModification OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable HTTP Modification Trace Logging."
+        "Set the HTTP Modification Trace Logging."
     ::= { agAppLogOper 6 }
 
 agAppLogSSL OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable SSL Trace Logging."
+        "Set the SSL Trace Logging."
     ::= { agAppLogOper 7 }
 
 agAppLogTCP OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable TCP Trace Logging."
+        "Set the TCP Trace Logging."
     ::= { agAppLogOper 8 }
 
 agAppLogDataTable OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Data Table Trace Logging."
+        "Set the Data Table Trace Logging."
     ::= { agAppLogOper 9 }
 
 agAppLogMemory OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Memory Trace Logging."
+        "Set the Memory Trace Logging."
     ::= { agAppLogOper 10 }
 
 agAppLogFastview OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Fastview Trace Logging."
+        "Set the Fastview Trace Logging."
     ::= { agAppLogOper 11 }
 
 agAppLogFastviewSmf OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable Fastview SMF Trace Logging."
+        "Set the Fastview SMF Trace Logging."
     ::= { agAppLogOper 12 }
 
 agAppLogExternalFetcher OBJECT-TYPE
     SYNTAX  INTEGER {
-        enabled(1),
-        disabled(2),
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
         unsupported(2147483647)
         }
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "Enable or disable External Fetcher Trace Logging."
+        "Set the External Fetcher Trace Logging."
     ::= { agAppLogOper 13 }
+
+agAppLogBotmng OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Bot-Manager Trace Logging."
+    ::= { agAppLogOper 14 }
+
+agAppLogSideband OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Sideband Trace Logging."
+    ::= { agAppLogOper 15 }
+
+agAppLogConfiguration OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Configuration Trace Logging."
+    ::= { agAppLogOper 16 }
+
+agAppLogParsing OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Parsing Trace Logging."
+    ::= { agAppLogOper 17 }
+
+agAppLogDxp OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Dxp Trace Logging."
+    ::= { agAppLogOper 18 }
+
+agAppLogHttp2 OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Http2 Trace Logging."
+    ::= { agAppLogOper 19 }
+
+agAppLogHttp2Hpack OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Http2Hpack Trace Logging."
+    ::= { agAppLogOper 20 }
+
+agAppLogHttp2Priority OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Http2Priority Trace Logging."
+    ::= { agAppLogOper 21 }
+
+agAppLogHttp2Parsing OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Http2Parsing Trace Logging."
+    ::= { agAppLogOper 22 }
+
+agAppLogTreck OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Treck Trace Logging."
+    ::= { agAppLogOper 23 }
+
+agAppLogTrafficEvents OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Traffic Events Trace Logging."
+    ::= { agAppLogOper 24 }
+
+agAppLogEngine OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Engine Trace Logging."
+    ::= { agAppLogOper 25 }
+
+agAppLogQuic OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Quic Trace Logging."
+    ::= { agAppLogOper 26 }
+
+agAppLogHttp3 OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the HTTP3 Trace Logging."
+    ::= { agAppLogOper 27 }
+
+agAppLogAging OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Aging Trace Logging."
+    ::= { agAppLogOper 28 }
+
+agAppLogPacket OBJECT-TYPE
+    SYNTAX  INTEGER {
+        none(1),
+        fatal(2),
+        error(3),
+        warning(4),
+        info(5),
+        debug(6),
+        debug2(7),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set the Packet Trace Logging."
+    ::= { agAppLogOper 29 }
 
 agAppLogConfigFlushFreq OBJECT-TYPE
     SYNTAX  INTEGER (0..1000)
@@ -4190,7 +4541,7 @@ agNewCfgHttpServerPort OBJECT-TYPE
     ::= { agSystem 18 }
 
 agCurCfgLoginBanner OBJECT-TYPE
-    SYNTAX  RadwareLongDisplayString (SIZE (0..1300))
+    SYNTAX  RadwareLongDisplayString (SIZE (0..1350))
     MAX-ACCESS  read-only
     STATUS  current
     DESCRIPTION
@@ -4198,7 +4549,7 @@ agCurCfgLoginBanner OBJECT-TYPE
     ::= { agSystem 19 }
 
 agNewCfgLoginBanner OBJECT-TYPE
-    SYNTAX  RadwareLongDisplayString (SIZE (0..1300))
+    SYNTAX  RadwareLongDisplayString (SIZE (0..1350))
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
@@ -5386,6 +5737,14 @@ agFormFactor OBJECT-TYPE
         "An administratively-assigned value that identifies managed device form-factor."
     ::= { agSystem 78 }
 
+agPlatformType OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..255))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "An administratively-assigned value that identifies managed device Platform."
+    ::= { agSystem 81 }
+
 
 agCurCfgTputInterval OBJECT-TYPE
     SYNTAX  INTEGER (1..60)
@@ -6223,6 +6582,18 @@ connmngStatsFIPSCard OBJECT-TYPE
    DESCRIPTION
        "FIPS card status"
    ::= {agSystem 117}
+
+connmngStatsSMlib OBJECT-TYPE
+   SYNTAX  INTEGER {
+	enabled(1),
+	disabled(0),
+        unsupported(2147483647)
+	}
+   MAX-ACCESS  read-only
+   STATUS  current
+   DESCRIPTION
+       "ShangMi/GMssl status"
+   ::= {agSystem 1117}
 
 
 agCurCfgBPDUMaxRate OBJECT-TYPE
@@ -7089,6 +7460,23 @@ agAlteonCliCommand OBJECT-TYPE
         "
     ::= { agSystem 220 }
 
+agCurCfgClusterId OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..32))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current cluster id."
+    ::= { agSystem 222 }
+
+agNewCfgClusterId OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..32))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new cluster id."
+    ::= { agSystem 223 }
+
+
 -- IPV6 MIBS
 agMgmtCurCfgIpv6Addr OBJECT-TYPE
     SYNTAX  DisplayString (SIZE(0..40))
@@ -7365,7 +7753,29 @@ agMgmtNewCfgIfAlias OBJECT-TYPE
     "  The interface alias of the management port."
     ::= { agMgmt 100 }
 
+agMgmtCurCfgAwProxy OBJECT-TYPE
+    SYNTAX  INTEGER {
+        data(1),
+        mgmt(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Specifies AppWall proxy access is over management port or data port."
+   ::= { agMgmt 101 } 
 
+agMgmtNewCfgAwProxy OBJECT-TYPE
+    SYNTAX  INTEGER {
+        data(1),
+        mgmt(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Specifies AppWall proxy access is over management port or data port."
+   ::= { agMgmt 102 } 
 
 
 
@@ -12776,9 +13186,9 @@ lmLicInfoErrorMsg OBJECT-TYPE
 
 lmLicInfoGelMngLicPresence OBJECT-TYPE
     SYNTAX INTEGER {
-        available(1),
-        unavailable(2),
-        unsupported(2147483647)
+       available(1),
+       unavailable(2),
+       unsupported(2147483647)
     }
     MAX-ACCESS read-only
     STATUS current
@@ -13645,6 +14055,30 @@ agMgmtNewCfgNetHsm OBJECT-TYPE
         "Specifies Network HSM access is over management port or data port."
    ::= { agMgmt 57 }
 
+agMgmtCurCfgLdap OBJECT-TYPE
+    SYNTAX  INTEGER {
+        data(1),
+        mgmt(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Specifies LDAP server access is over management port or data port."
+   ::= { agMgmt 58 }
+
+agMgmtNewCfgLdap OBJECT-TYPE
+    SYNTAX  INTEGER {
+        data(1),
+        mgmt(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Specifies LDAP server access is over management port or data port."
+   ::= { agMgmt 59 }
+
 
 agMgmtPort   OBJECT IDENTIFIER ::= { agMgmt 23 }
 
@@ -13902,7 +14336,7 @@ tacNewCfgPrimaryIpAddr OBJECT-TYPE
     MAX-ACCESS  read-write
     STATUS  current
     DESCRIPTION
-        "The IP address of the Primary TACACS+ server."
+            "The IP address of the Primary TACACS+ server."
     ::= { agTacacsConfig 2 }
 
 tacCurCfgSecondaryIpAddr OBJECT-TYPE
@@ -16181,7 +16615,103 @@ ipRepIndirectNewCfg OBJECT-TYPE
     DESCRIPTION
         "Feed Download Location"
     ::= { ipRepCfg 32 }
-    
+
+ipRepAggregateCurCfg OBJECT-TYPE
+    SYNTAX  INTEGER{
+        val1(1),
+        val2(15),
+        val3(30),
+        val4(60),
+        val5(300),
+        val6(900),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Aggregate interval"
+    ::= { ipRepCfg 33 }
+
+ipRepAggregateNewCfg OBJECT-TYPE
+    SYNTAX  INTEGER{
+        val1(1),
+        val2(15),
+        val3(30),
+        val4(60),
+        val5(300),
+        val6(900),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Aggregate interval"
+    ::= { ipRepCfg 34 }
+
+ipRepTrevpolCurCfg OBJECT-TYPE
+    SYNTAX DisplayString(SIZE(0..128))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Set Traffic Event Log Policy."
+    ::= { ipRepCfg 35 }
+
+ipRepTrevpolNewCfg OBJECT-TYPE
+    SYNTAX DisplayString(SIZE(0..128))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set Traffic Event Log Policy."
+    ::= { ipRepCfg 36 }
+
+ipRepEvntRateCurCfg OBJECT-TYPE
+    SYNTAX  INTEGER (1..1000)
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "EAAF events to send per second for every single SP."
+    ::= { ipRepCfg 37 }
+
+ipRepEvntRateNewCfg OBJECT-TYPE
+    SYNTAX  INTEGER (1..1000)
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "EAAF events to send per second for every single SP."
+    ::= { ipRepCfg 38 }
+
+ipRepEvntRateDeviceCurCfg OBJECT-TYPE
+    SYNTAX  INTEGER (1..1000)
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "EAAF events to send per second for device."
+    ::= { ipRepCfg 39 }
+
+ipRepEndpointCurCfg OBJECT-TYPE
+    SYNTAX  INTEGER{
+        manual(0),
+        active(1),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Set vision/Cyber controller endpoint for indirect feed download."
+    ::= { ipRepCfg 40 } 
+
+ipRepEndpointNewCfg OBJECT-TYPE
+    SYNTAX  INTEGER{
+        manual(0),
+        active(1),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write 
+    STATUS  current
+    DESCRIPTION
+        "Set vision/Cyber controller endpoint for indirect feed download."
+    ::= { ipRepCfg 41 }
+
 -- white list
 
 ipRepNewWhiteListTable OBJECT-TYPE
@@ -19398,12 +19928,88 @@ agAccessNewPwscritSpecialCharsMin OBJECT-TYPE
     ::= { agAccessUser 30 }
 
 agAccessPwscritMessage OBJECT-TYPE
-    SYNTAX  DisplayString (SIZE(0..300))
+    SYNTAX  DisplayString (SIZE(0..500))
     MAX-ACCESS  read-only
     STATUS  current
     DESCRIPTION
         "The password criteria message to be displayed to the user."
     ::= { agAccessUser 31 }
+
+agAccessCurPwscritReptLength OBJECT-TYPE
+    SYNTAX  INTEGER (2..15)
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+        "Set user minimum Repetition length."
+    ::= { agAccessUser 32 }
+
+agAccessNewPwscritReptLength OBJECT-TYPE
+    SYNTAX  INTEGER (2..15)
+	MAX-ACCESS  read-write
+	STATUS  current
+	DESCRIPTION
+        "Set user minimum Repetition length."
+    ::= { agAccessUser 33 }
+	
+agAccessCurPwscritSeqLength OBJECT-TYPE
+    SYNTAX  INTEGER (2..10)
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+        "Set user minimum Sequence length."
+    ::= { agAccessUser 34 }
+	
+agAccessNewPwscritSeqLength OBJECT-TYPE
+    SYNTAX  INTEGER (2..10)
+	MAX-ACCESS  read-write
+	STATUS  current
+	DESCRIPTION
+        "Set user minimum Sequence length."
+    ::= { agAccessUser 35 }
+	
+agAccessCurPwscritAdminPsw OBJECT-TYPE
+    SYNTAX  INTEGER {
+	   enabled(1),
+       disabled(2)
+	}
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+        "Enable or disable password criteria check for Default Admin."
+    ::= { agAccessUser 36 }
+
+agAccessNewPwscritAdminPsw OBJECT-TYPE
+    SYNTAX  INTEGER {
+	   enabled(1),
+       disabled(2)
+	}
+	MAX-ACCESS  read-write
+	STATUS  current
+	DESCRIPTION
+        "Enable or disable password criteria check for Default Admin."
+    ::= { agAccessUser 37 }
+	
+agAccessCurPwscritIncludePsw OBJECT-TYPE
+    SYNTAX  INTEGER {
+	   enabled(1),
+       disabled(2)
+	}
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+        "Enable or disable password to include the username."
+    ::= { agAccessUser 38 }
+	
+agAccessNewPwscritIncludePsw OBJECT-TYPE
+    SYNTAX  INTEGER {
+	   enabled(1),
+       disabled(2)
+	}
+	MAX-ACCESS  read-write
+	STATUS  current
+	DESCRIPTION
+        "Enable or disable password to include the username."
+    ::= { agAccessUser 39 }
 
 agAccessTelnet OBJECT-TYPE
     SYNTAX  INTEGER  {
@@ -21866,6 +22472,7 @@ agCurCfgThresholdTDClrCpu OBJECT-TYPE
         "High TD Clear CPU Utilization detection."
     ::= { agAlertThreshold 25 }
 
+
 licCompanyName OBJECT-TYPE
     SYNTAX DisplayString (SIZE(0..255))
     MAX-ACCESS  read-write
@@ -22621,6 +23228,14 @@ mpMemStatsRss OBJECT-TYPE
     DESCRIPTION
         "MP Resident(RSS Linux) memory in MB"
     ::= { mpMemStats 5 }
+
+mpMemStatsCached OBJECT-TYPE
+    SYNTAX Counter64
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Cached(Linux) information in KB."
+    ::= { mpMemStats 6 }
 
 -- NTP Statisitics
 
@@ -25525,11 +26140,74 @@ agAwsAssociatedIpFloatingIp OBJECT-TYPE
         "Get AWS Alteon floating/elastic IP, as a part of HA associated IP set.
          Note: This MIB is only supported on VA platform."
     ::= { agAwsssociatedIpTableIdEntry 4 }      
+
+agAwsAssociatedRtTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF AgAwsAssociatedRtTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Associated route table of for AWS ha.
+         Note: This MIB is only supported on VA platform."
+    ::= { agentAwsInfo 4 }
+
+agAwsssociatedRtTableIdEntry OBJECT-TYPE
+    SYNTAX  AgAwsAssociatedRtTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "A row in AWS ha associated route table.
+         Note: This MIB is only supported on VA platform."
+    INDEX   { agAwsAssociatedRtIndex }
+    ::= { agAwsAssociatedRtTable 1 }	
+    
+AgAwsAssociatedRtTableIdEntry ::= SEQUENCE {
+    agAwsAssociatedRtIndex      INTEGER,
+    agAwsAssociatedRtRouteId    DisplayString,
+    agAwsAssociatedRtEniId   	DisplayString,
+    agAwsAssociatedRtPeerEniId  DisplayString
+    }  
+    
+agAwsAssociatedRtIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "AWS HA associated route table index.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsssociatedRtTableIdEntry 1 }	
+			
+	
+agAwsAssociatedRtRouteId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get AWS Alteon Route ID, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsssociatedRtTableIdEntry 2 }  
+    
+agAwsAssociatedRtEniId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get AWS Alteon eni ID, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsssociatedRtTableIdEntry 3 }  
+    
+agAwsAssociatedRtPeerEniId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get AWS Alteon backup(s) eni ID, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsssociatedRtTableIdEntry 4 }      
+ 
               
 
 -- Added in 31.x
 -- agentIpRepInfo     OBJECT IDENTIFIER ::= { agentInfo 15 }
--- agentAzureInfo     OBJECT IDENTIFIER ::= { agentInfo 16 }
 
 agLastSyncInfoTableToString OBJECT-TYPE
     SYNTAX  DisplayString
@@ -26278,7 +26956,159 @@ agAwsNewCfgAssociatedIpTableDelete OBJECT-TYPE
         "By setting the value to delete(2), Delete a specific assiciated id table entry.
          Note: This MIB is only supported on VA platform."
     ::= { agAwsNewCfgAssociatedIpTableIdEntry 5 }
+
+
+agAwsAssociatedRtTableMaxSize OBJECT-TYPE
+    SYNTAX  Integer32 
+    MAX-ACCESS  read-only 
+    STATUS  current 
+    DESCRIPTION 
+        "The maximum number of ids in associated-route table. 
+         Note: This MIB is only supported on VA platform."
+    ::= { agSystemAws 8 }	
+
+agAwsCurCfgAssociatedRtTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF AgAwsCurCfgAssociatedRtTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Associated route table of for AWS ha.
+         Note: This MIB is only supported on VA platform."
+    ::= { agSystemAws 9 }
+
+agAwsCurCfgAssociatedRtTableIdEntry OBJECT-TYPE
+    SYNTAX  AgAwsCurCfgAssociatedRtTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "A row in AWS ha associated route table..
+         Note: This MIB is only supported on VA platform."
+    INDEX   { agAwsCurCfgAssociatedRtIndex }
+    ::= { agAwsCurCfgAssociatedRtTable 1 }	
+    
+AgAwsCurCfgAssociatedRtTableIdEntry ::= SEQUENCE {
+    agAwsCurCfgAssociatedRtIndex      INTEGER,
+    agAwsCurCfgAssociatedRtRouteId    DisplayString,
+    agAwsCurCfgAssociatedRtEniId      DisplayString,
+    agAwsCurCfgAssociatedRtPeerEniId  DisplayString
+    }   
+
+agAwsCurCfgAssociatedRtIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "AWS HA associated route table index..
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsCurCfgAssociatedRtTableIdEntry 1 }	
+			
 	
+agAwsCurCfgAssociatedRtRouteId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..64))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get AWS Alteon route id, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsCurCfgAssociatedRtTableIdEntry 2 }  
+    
+agAwsCurCfgAssociatedRtEniId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..64))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get AWS Alteon eni id, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsCurCfgAssociatedRtTableIdEntry 3 }  
+    
+agAwsCurCfgAssociatedRtPeerEniId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..64))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get AWS Alteon backup(s) eni id, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsCurCfgAssociatedRtTableIdEntry 4 }      
+ 
+agAwsNewCfgAssociatedRtTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF AgAwsNewCfgAssociatedRtTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Associated route table of for AWS ha.
+         Note: This MIB is only supported on VA platform."
+    ::= { agSystemAws 10 }
+    
+agAwsNewCfgAssociatedRtTableIdEntry OBJECT-TYPE
+    SYNTAX  AgAwsNewCfgAssociatedRtTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "A row in AWS ha associated route table.
+         Note: This MIB is only supported on VA platform."
+    INDEX   { agAwsNewCfgAssociatedRtIndex }
+    ::= { agAwsNewCfgAssociatedRtTable 1 }	
+    
+AgAwsNewCfgAssociatedRtTableIdEntry ::= SEQUENCE {
+    agAwsNewCfgAssociatedRtIndex        INTEGER,
+    agAwsNewCfgAssociatedRtRouteId      DisplayString,
+    agAwsNewCfgAssociatedRtEniId        DisplayString,
+    agAwsNewCfgAssociatedRtPeerEniId    DisplayString,
+    agAwsNewCfgAssociatedRtTableDelete  INTEGER
+    }   
+
+agAwsNewCfgAssociatedRtIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "AWS ha associated route table index.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsNewCfgAssociatedRtTableIdEntry 1 }	
+		
+	
+agAwsNewCfgAssociatedRtRouteId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..64))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set AWS Alteon route id, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsNewCfgAssociatedRtTableIdEntry 2 }  
+    
+agAwsNewCfgAssociatedRtEniId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..64))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set AWS Alteon eni id, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsNewCfgAssociatedRtTableIdEntry 3 }  
+    
+agAwsNewCfgAssociatedRtPeerEniId OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..64))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set AWS Alteon backup(s) eni id, as a part of HA associated route set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsNewCfgAssociatedRtTableIdEntry 4 }  
+    
+agAwsNewCfgAssociatedRtTableDelete OBJECT-TYPE
+    SYNTAX  INTEGER {
+        other(1),
+        delete(2),
+        all(3),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "By setting the value to delete(2), Delete a specific assiciated id table entry.
+         Note: This MIB is only supported on VA platform."
+    ::= { agAwsNewCfgAssociatedRtTableIdEntry 5 }
+
+-- End of system AWS configuration     
 
 
 radwareSnmpPrivProtocols	OBJECT-IDENTITY
@@ -26299,7 +27129,6 @@ radwareUsmAESCfb256PrivProtocol	OBJECT-IDENTITY
 	"The CFB128-AES-256 Privacy Protocol"
     ::= { radwareSnmpPrivProtocols 2 }
 
--- End of system AWS configuration     
 
 --
 -- Mgmt IP Static Route Configuration
@@ -26581,5 +27410,915 @@ agMgmtIpv6NewCfgStaticRouteAction OBJECT-TYPE
     ::= { agMgmtIpv6NewCfgStaticRouteEntry 5 }
 
 -- End of Mgmt IP Static Route Configuration
+agSystemGcp        OBJECT IDENTIFIER ::= { agSystem 225 } 
+-- gcp properties
 
+agIsGcp OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..15))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "An administratively-assigned value that identifies if managed device is GCP platform.
+         Note: This MIB is only supported on VA platform."
+    ::= {agSystem 226 }
+
+agentGcpInfo     OBJECT IDENTIFIER ::= { agentInfo 20}
+   
+agGcpAssociatedIpTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF AgGcpAssociatedIpTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Associated ip table of for GCP ha.
+         Note: This MIB is only supported on VA platform."
+    ::= { agentGcpInfo 1 }
+
+agGcpssociatedIpTableIdEntry OBJECT-TYPE
+    SYNTAX  AgGcpAssociatedIpTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "A row in GCP ha associated ip table.
+         Note: This MIB is only supported on VA platform."
+    INDEX   { agGcpAssociatedIpIndex }
+    ::= { agGcpAssociatedIpTable 1 }	
+    
+AgGcpAssociatedIpTableIdEntry ::= SEQUENCE {
+    agGcpAssociatedIpIndex       	INTEGER,
+    agGcpAssociatedIpPrivateIp    DisplayString,
+    agGcpAssociatedIpPeerIp     	DisplayString,
+    agGcpAssociatedIpFloatingIp   DisplayString
+    }  
+    
+agGcpAssociatedIpIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "GCP HA associated ip table index.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpssociatedIpTableIdEntry 1 }	
+			
+	
+agGcpAssociatedIpPrivateIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get GCP Alteon private IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpssociatedIpTableIdEntry 2 }  
+    
+agGcpAssociatedIpPeerIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get GCP Alteon backup(s) IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpssociatedIpTableIdEntry 3 }  
+    
+agGcpAssociatedIpFloatingIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get GCP Alteon floating/elastic IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpssociatedIpTableIdEntry 4 }      
+
+-- System GCP configuration 
+
+agGcpAssociatedIpTableMaxSize OBJECT-TYPE
+    SYNTAX  Integer32 
+    MAX-ACCESS  read-only 
+    STATUS  current 
+    DESCRIPTION 
+        "The maximum number of ids in associated-ip table. 
+         Note: This MIB is only supported on VA platform."
+    ::= { agSystemGcp 1 }	
+
+agGcpCurCfgAssociatedIpTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF AgGcpCurCfgAssociatedIpTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Associated ip table of for GCP ha.
+         Note: This MIB is only supported on VA platform."
+    ::= { agSystemGcp 2 }
+
+agGcpCurCfgAssociatedIpTableIdEntry OBJECT-TYPE
+    SYNTAX  AgGcpCurCfgAssociatedIpTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "A row in GCP ha associated ip table..
+         Note: This MIB is only supported on VA platform."
+    INDEX   { agGcpCurCfgAssociatedIpIndex }
+    ::= { agGcpCurCfgAssociatedIpTable 1 }	
+    
+AgGcpCurCfgAssociatedIpTableIdEntry ::= SEQUENCE {
+    agGcpCurCfgAssociatedIpIndex       	INTEGER,
+    agGcpCurCfgAssociatedIpPrivateIp    DisplayString,
+    agGcpCurCfgAssociatedIpPeerIp     	DisplayString,
+    agGcpCurCfgAssociatedIpFloatingIp   DisplayString
+    }   
+
+agGcpCurCfgAssociatedIpIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "GCP HA associated ip table index..
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpCurCfgAssociatedIpTableIdEntry 1 }	
+			
+	
+agGcpCurCfgAssociatedIpPrivateIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get GCP Alteon private IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpCurCfgAssociatedIpTableIdEntry 2 }  
+    
+agGcpCurCfgAssociatedIpPeerIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get GCP Alteon bachup(s) IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpCurCfgAssociatedIpTableIdEntry 3 }  
+    
+agGcpCurCfgAssociatedIpFloatingIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Get GCP Alteon floating/elastic IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpCurCfgAssociatedIpTableIdEntry 4 }      
+         
+agGcpNewCfgAssociatedIpTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF AgGcpNewCfgAssociatedIpTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Associated ip table of for GCP ha.
+         Note: This MIB is only supported on VA platform."
+    ::= { agSystemGcp 3 }
+    
+agGcpNewCfgAssociatedIpTableIdEntry OBJECT-TYPE
+    SYNTAX  AgGcpNewCfgAssociatedIpTableIdEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "A row in GCP ha associated ip table.
+         Note: This MIB is only supported on VA platform."
+    INDEX   { agGcpNewCfgAssociatedIpIndex }
+    ::= { agGcpNewCfgAssociatedIpTable 1 }	
+    
+AgGcpNewCfgAssociatedIpTableIdEntry ::= SEQUENCE {
+    agGcpNewCfgAssociatedIpIndex       	INTEGER,
+    agGcpNewCfgAssociatedIpPrivateIp    DisplayString,
+    agGcpNewCfgAssociatedIpPeerIp     	DisplayString,
+    agGcpNewCfgAssociatedIpFloatingIp   DisplayString,
+    agGcpNewCfgAssociatedIpTableDelete  INTEGER
+    }   
+
+agGcpNewCfgAssociatedIpIndex OBJECT-TYPE
+    SYNTAX INTEGER
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "GCP ha associated ip table index.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpNewCfgAssociatedIpTableIdEntry 1 }	
+		
+	
+agGcpNewCfgAssociatedIpPrivateIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set GCP Alteon private IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpNewCfgAssociatedIpTableIdEntry 2 }  
+    
+agGcpNewCfgAssociatedIpPeerIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set GCP Alteon bachup(s) IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpNewCfgAssociatedIpTableIdEntry 3 }  
+    
+agGcpNewCfgAssociatedIpFloatingIp OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Set GCP Alteon floating IP, as a part of HA associated IP set.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpNewCfgAssociatedIpTableIdEntry 4 }  
+    
+agGcpNewCfgAssociatedIpTableDelete OBJECT-TYPE
+    SYNTAX  INTEGER {
+        other(1),
+        delete(2),
+        all(3),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "By setting the value to delete(2), Delete a specific assiciated id table entry.
+         Note: This MIB is only supported on VA platform."
+    ::= { agGcpNewCfgAssociatedIpTableIdEntry 5 }
+
+-- End of system GCP configuration     
+
+
+
+
+--
+-- cyber controller vision HA configuration
+--
+agCyberControllerHaConfig  OBJECT IDENTIFIER 
+    ::= { agentConfig 31 }
+
+agVisHaPrimaryIpAddr OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Cyber controller Primary IP address."
+    ::= { agCyberControllerHaConfig 1 }
+
+agCyberControllerHaTable OBJECT-TYPE
+   SYNTAX  SEQUENCE OF AgCyberControllerHaTableEntry
+   MAX-ACCESS  not-accessible
+   STATUS  current
+   DESCRIPTION
+       "Cyber controller Ha table."
+   ::= {  agCyberControllerHaConfig 2 }
+
+agCyberControllerHaTableEntry OBJECT-TYPE
+   SYNTAX AgCyberControllerHaTableEntry
+   MAX-ACCESS  not-accessible
+   STATUS  current
+   DESCRIPTION
+        "A row in the cyber controller table."
+   INDEX   { agCyberControllerIndx }
+   ::= { agCyberControllerHaTable 1 }
+
+AgCyberControllerHaTableEntry ::= SEQUENCE {
+    agCyberControllerIndx      Integer32,
+    agCyberControllerIp        DisplayString,
+    agCyberControllerIpVer     INTEGER,
+    agCyberControllerRole      INTEGER,
+    agCyberControllerStatus    INTEGER,
+    agCyberControllerTstamp    DisplayString
+}
+
+agCyberControllerIndx OBJECT-TYPE
+    SYNTAX  Integer32
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The index of Cyber controller HA table."
+    ::= { agCyberControllerHaTableEntry 1}
+
+agCyberControllerIp OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Cyber controller IP address."
+    ::= { agCyberControllerHaTableEntry 2}
+ 
+agCyberControllerIpVer OBJECT-TYPE
+    SYNTAX  INTEGER {
+        ipv4(1),
+        ipv6(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Cyber controller ip version."
+    ::= { agCyberControllerHaTableEntry 3}
+ 
+agCyberControllerRole OBJECT-TYPE
+    SYNTAX  INTEGER {
+        standalone(1),
+        primary(2),
+        secondary(3),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Cyber controller role."
+    ::= { agCyberControllerHaTableEntry 4}
+
+agCyberControllerStatus OBJECT-TYPE
+    SYNTAX  INTEGER {
+        active(1),
+        inactive(2),
+        standalone(3),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Cyber controller state."
+    ::= { agCyberControllerHaTableEntry 5}
+
+agCyberControllerTstamp OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..32))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Cyber controller timestamp."
+    ::= { agCyberControllerHaTableEntry 6}
+
+--
+--LDAP Configuration
+--
+agLdapConfig OBJECT IDENTIFIER
+   ::= { agentConfig 32 }
+
+ldapCurCfgState OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current state of Ldap:Enable/Disable."
+    ::= { agLdapConfig 1 }
+
+ldapNewCfgState OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new state of Ldap:Enable/Disable."
+    ::= { agLdapConfig 2 }
+
+ldapCurCfgFQDN OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..255))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current fully qualified domain name for Ldap."
+    ::= { agLdapConfig 3 }
+
+ldapNewCfgFQDN OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..255))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new fully qualified domain name for Ldap."
+    ::= { agLdapConfig 4 }
+
+ldapCurCfgPrimaryIpAddr OBJECT-TYPE
+    SYNTAX  IpAddress
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current IP address of the primary Ldap server."
+    ::= { agLdapConfig 5 }
+
+ldapNewCfgPrimaryIpAddr OBJECT-TYPE
+    SYNTAX  IpAddress
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new IP address of the primary Ldap server."
+    ::= { agLdapConfig 6 }
+
+ldapCurCfgSecondaryIpAddr OBJECT-TYPE
+    SYNTAX  IpAddress
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current IP address of the secondary Ldap server."
+    ::= { agLdapConfig 7 }
+
+ldapNewCfgSecondaryIpAddr OBJECT-TYPE
+    SYNTAX  IpAddress
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new IP address of the secondary Ldap server."
+    ::= { agLdapConfig 8}
+
+ldapCurCfgPrimaryIpv6Addr OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The current IPv6 address of the primary Ldap server.
+         Address should be 16-byte haxadecimal colon notation.
+         Valid IPv6 address should be in any of the following forms
+         xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or
+         xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx"
+    ::= { agLdapConfig 9 }
+
+ldapNewCfgPrimaryIpv6Addr OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION
+        "The new IPv6 address of the primary Ldap server.
+         Address should be 16-byte haxadecimal colon notation.
+         Valid IPv6 address should be in any of the following forms
+         xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or
+         xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx"
+    ::= { agLdapConfig 10 }
+
+ldapCurCfgSecondaryIpv6Addr OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The current IPv6 address of the secondary Ldap server.
+         Address should be 16-byte haxadecimal colon notation.
+         Valid IPv6 address should be in any of the following forms
+         xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or
+         xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx"
+    ::= { agLdapConfig 11 }
+
+ldapNewCfgSecondaryIpv6Addr OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION
+        "The new IPv6 address of the secondary Ldap server.
+         Address should be 16-byte haxadecimal colon notation.
+         Valid IPv6 address should be in any of the following forms
+         xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or
+         xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx"
+    ::= { agLdapConfig 12 }
+
+ldapCurCfgPort OBJECT-TYPE
+    SYNTAX  INTEGER  (1..65000)
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Specify the current Ldap port number."
+    ::= { agLdapConfig 13 }
+
+ldapNewCfgPort OBJECT-TYPE
+    SYNTAX  INTEGER  (1..65000)
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Specify the new Ldap port number."
+    ::= { agLdapConfig 14 }
+
+ldapCurCfgSecure OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current secure Ldap:Enable/Disable."
+    ::= { agLdapConfig 15 }
+
+ldapNewCfgSecure OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new secure Ldap:Enable/Disable."
+    ::= { agLdapConfig 16 }
+
+ldapCurCfgBindDN OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current administrator bind_dn for Ldap."
+    ::= { agLdapConfig 17 }
+
+ldapNewCfgBindDN OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new administrator bind_dn for Ldap."
+    ::= { agLdapConfig 18 }
+
+ldapCurCfgBindPswd OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The character string representing the current bind password for Ldap."
+    ::= { agLdapConfig 19 }
+
+ldapNewCfgBindPswd OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The character string representing the new bind password for Ldap."
+    ::= { agLdapConfig 20 }
+
+ldapCurCfgConfBindPswd OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The character string is used to confirm the current bind password for Ldap."
+    ::= { agLdapConfig 21 }
+
+ldapNewCfgConfBindPswd OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The character string is used to confirm the new bind password for Ldap."
+    ::= { agLdapConfig 22 }
+
+ldapCurCfgUserID OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..30))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current Ldap user Id attribute for username matching."
+    ::= { agLdapConfig 23 }
+
+ldapNewCfgUserID OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..30))
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new Ldap user Id attribute for username matching."
+    ::= { agLdapConfig 24 }
+
+ldapCurCfgTimeout OBJECT-TYPE
+    SYNTAX  INTEGER  (1..60)
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current maximum number of seconds before resending authentication
+         to Ldap server."
+    ::= { agLdapConfig 25 }
+
+ldapNewCfgTimeout OBJECT-TYPE
+    SYNTAX  INTEGER  (1..60)
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new maximum number of seconds before resending authentication
+         to Ldap server."
+    ::= { agLdapConfig 26 }
+
+ldapCurCfgRetries OBJECT-TYPE
+    SYNTAX  INTEGER  (1..3)
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The current Ldap server retries."
+    ::= { agLdapConfig 27 }
+
+ldapNewCfgRetries OBJECT-TYPE
+    SYNTAX  INTEGER  (1..3)
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "The new Ldap server retries."
+    ::= { agLdapConfig 28 }
+
+ldapCurCfgLocalAuth OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Enable/Disable the current Ldap local user authentication priority."
+    ::= { agLdapConfig 29 }
+
+ldapNewCfgLocalAuth OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Enable/Disable the new Ldap local user authentication priority."
+    ::= { agLdapConfig 30 }
+
+ldapCurCfgSecBd OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Enable or disbale the current Ldap secure backdoor for telnet/ssh/http."
+    ::= { agLdapConfig 31 }
+
+ldapNewCfgSecBd OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current
+    DESCRIPTION
+        "Enable or disable the new Ldap secure backdoor for telnet/ssh/http."
+    ::= { agLdapConfig 32 }
+
+agCurCfgLdapBaseDnTable OBJECT-TYPE
+   SYNTAX  SEQUENCE OF AgCurCfgLdapBaseDnTableEntry
+   MAX-ACCESS  not-accessible
+   STATUS  current
+   DESCRIPTION
+       "The current Ldap Base Dn table."
+   ::= {  agLdapConfig 33 }
+
+agCurCfgLdapBaseDnTableEntry OBJECT-TYPE
+   SYNTAX AgCurCfgLdapBaseDnTableEntry
+   MAX-ACCESS  not-accessible
+   STATUS  current
+   DESCRIPTION
+        "A row in the current Ldap Base Dn table."
+   INDEX   { agCurCfgLdapBaseDnIndx}
+   ::= { agCurCfgLdapBaseDnTable 1 }
+
+AgCurCfgLdapBaseDnTableEntry ::= SEQUENCE {
+    agCurCfgLdapBaseDnIndx      Integer32,
+    agCurCfgLdapBaseDnURI       DisplayString
+}
+
+agCurCfgLdapBaseDnIndx OBJECT-TYPE
+    SYNTAX  Integer32
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The Current index of Ldap Base Dn table."
+    ::= { agCurCfgLdapBaseDnTableEntry 1}
+
+agCurCfgLdapBaseDnURI OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The Current URI entry of Ldap Base Dn table."
+    ::= { agCurCfgLdapBaseDnTableEntry 2}
+
+agNewCfgLdapBaseDnTable OBJECT-TYPE
+   SYNTAX  SEQUENCE OF AgNewCfgLdapBaseDnTableEntry
+   MAX-ACCESS  not-accessible
+   STATUS  current
+   DESCRIPTION
+       "The new Ldap Base Dn table."
+   ::= {  agLdapConfig 34 }
+
+agNewCfgLdapBaseDnTableEntry OBJECT-TYPE
+   SYNTAX AgNewCfgLdapBaseDnTableEntry
+   MAX-ACCESS  not-accessible
+   STATUS  current
+   DESCRIPTION
+        "A row in the new Ldap Base Dn table."
+   INDEX   { agNewCfgLdapBaseDnIndx }
+   ::= { agNewCfgLdapBaseDnTable 1 }
+
+AgNewCfgLdapBaseDnTableEntry ::= SEQUENCE {
+    agNewCfgLdapBaseDnIndx      Integer32,
+    agNewCfgLdapBaseDnURI       DisplayString,
+    agNewCfgLdapBaseDnDelete    INTEGER
+}
+
+agNewCfgLdapBaseDnIndx OBJECT-TYPE
+    SYNTAX  Integer32
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The new index of Ldap Base Dn table."
+    ::= { agNewCfgLdapBaseDnTableEntry 1}
+
+agNewCfgLdapBaseDnURI OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..256))
+    MAX-ACCESS  read-create
+    STATUS  current
+    DESCRIPTION
+        "The new URI entry of Ldap Base Dn table."
+    ::= { agNewCfgLdapBaseDnTableEntry 2}
+
+agNewCfgLdapBaseDnDelete OBJECT-TYPE
+    SYNTAX INTEGER {
+        other(1),
+        delete(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "By setting the value to delete(2), the Ldap Base Dn entry is deleted."
+    ::= { agNewCfgLdapBaseDnTableEntry 3 }
+
+agCurCfgLdapUserRoleMappingTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF AgCurCfgLdapUserRoleMappingEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+      "The table of LDAP User Role Mapping configuration."
+    ::= { agLdapConfig 35  }
+
+agCurCfgLdapUserRoleMappingEntry OBJECT-TYPE
+    SYNTAX AgCurCfgLdapUserRoleMappingEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+      "Information about a LDAP User Role Mapping."
+      INDEX { agCurCfgLdapUserRoleMappingindex }
+    ::= { agCurCfgLdapUserRoleMappingTable 1 }
+
+AgCurCfgLdapUserRoleMappingEntry ::= SEQUENCE {
+    agCurCfgLdapUserRoleMappingindex  INTEGER,
+    agCurCfgLdapUserRoleMappingobjclass DisplayString,
+    agCurCfgLdapUserRoleMappingattribut DisplayString,
+    agCurCfgLdapUserRoleMappingvalue    DisplayString,
+    agCurCfgLdapUserRoleMappingrole     INTEGER
+    }
+
+agCurCfgLdapUserRoleMappingindex OBJECT-TYPE
+    SYNTAX INTEGER (1..10)
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+    "The user role mapping ID."
+    ::= { agCurCfgLdapUserRoleMappingEntry 1}
+
+agCurCfgLdapUserRoleMappingobjclass OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..32))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Set the object class name for user-role mapping."
+    ::= { agCurCfgLdapUserRoleMappingEntry 2}
+
+agCurCfgLdapUserRoleMappingattribut OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..256))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Set the attribute field for the user-role mapping."
+    ::= { agCurCfgLdapUserRoleMappingEntry 3}
+
+agCurCfgLdapUserRoleMappingvalue OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..256))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Set the Attribute's value for the user-role mapping."
+    ::= { agCurCfgLdapUserRoleMappingEntry 4}
+
+agCurCfgLdapUserRoleMappingrole OBJECT-TYPE
+    SYNTAX INTEGER {
+        user(0),
+        crtadmin(1),
+        slboper(2),
+        l4oper(3),
+        oper(4),
+        slbadmin(5),
+        l4admin(6),
+        admin(7),
+        slbview(8),
+            l3oper(9),
+            l3admin(10),
+            l1oper(11),
+            l2oper(12),
+       unsupported(2147483647)
+        }
+
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Set the user-role."
+    ::= { agCurCfgLdapUserRoleMappingEntry 5}
+
+agNewCfgLdapUserRoleMappingTable OBJECT-TYPE
+    SYNTAX SEQUENCE OF AgNewCfgLdapUserRoleMappingEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+      "The table of LDAP User Role Mapping configuration."
+    ::= { agLdapConfig 36 }
+
+agNewCfgLdapUserRoleMappingEntry OBJECT-TYPE
+    SYNTAX AgNewCfgLdapUserRoleMappingEntry
+    MAX-ACCESS not-accessible
+    STATUS current
+    DESCRIPTION
+      "Information about a LDAP User Role Mapping."
+    INDEX { agNewCfgLdapUserRoleMappingindex }
+    ::= { agNewCfgLdapUserRoleMappingTable 1 }
+
+AgNewCfgLdapUserRoleMappingEntry ::= SEQUENCE {
+    agNewCfgLdapUserRoleMappingindex  INTEGER,
+    agNewCfgLdapUserRoleMappingobjclass DisplayString,
+    agNewCfgLdapUserRoleMappingattribut DisplayString,
+    agNewCfgLdapUserRoleMappingvalue    DisplayString,
+    agNewCfgLdapUserRoleMappingrole     INTEGER,
+    agNewCfgLdapUserRoleMappingDelete    INTEGER
+
+    }
+agNewCfgLdapUserRoleMappingindex OBJECT-TYPE
+    SYNTAX INTEGER (1..10)
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+    "The user role mapping ID."
+    ::= { agNewCfgLdapUserRoleMappingEntry 1}
+
+agNewCfgLdapUserRoleMappingobjclass OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..32))
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Set the object class name for user-role mapping."
+    ::= { agNewCfgLdapUserRoleMappingEntry 2}
+
+agNewCfgLdapUserRoleMappingattribut OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..256))
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Set the attribute field for the user-role mapping."
+    ::= { agNewCfgLdapUserRoleMappingEntry 3}
+
+agNewCfgLdapUserRoleMappingvalue OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..256))
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Set the Attribute's value for the user-role mapping."
+    ::= { agNewCfgLdapUserRoleMappingEntry 4}
+
+agNewCfgLdapUserRoleMappingrole OBJECT-TYPE
+    SYNTAX INTEGER {
+        user(0),
+        crtadmin(1),
+        slboper(2),
+        l4oper(3),
+        oper(4),
+        slbadmin(5),
+        l4admin(6),
+        admin(7),
+        slbview(8),
+            l3oper(9),
+            l3admin(10),
+            l1oper(11),
+            l2oper(12),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Set the user-role."
+    ::= { agNewCfgLdapUserRoleMappingEntry 5}
+
+agNewCfgLdapUserRoleMappingDelete OBJECT-TYPE
+    SYNTAX INTEGER {
+        other(1),
+        delete(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+    "delete the user-role mapping."
+    ::= { agNewCfgLdapUserRoleMappingEntry 6 }
+     
 END

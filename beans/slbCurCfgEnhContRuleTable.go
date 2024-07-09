@@ -75,6 +75,23 @@ const (
 	SlbCurCfgEnhContRuleTableState_Unsupported SlbCurCfgEnhContRuleTableState = 2147483647
 )
 
+type SlbCurCfgEnhContRuleTableBotMProcessing int32
+
+const (
+	SlbCurCfgEnhContRuleTableBotMProcessing_Inherit     SlbCurCfgEnhContRuleTableBotMProcessing = 1
+	SlbCurCfgEnhContRuleTableBotMProcessing_Specific    SlbCurCfgEnhContRuleTableBotMProcessing = 2
+	SlbCurCfgEnhContRuleTableBotMProcessing_Disabled    SlbCurCfgEnhContRuleTableBotMProcessing = 3
+	SlbCurCfgEnhContRuleTableBotMProcessing_Unsupported SlbCurCfgEnhContRuleTableBotMProcessing = 2147483647
+)
+
+type SlbCurCfgEnhContRuleTableSecwaProcessing int32
+
+const (
+	SlbCurCfgEnhContRuleTableSecwaProcessing_Inherit     SlbCurCfgEnhContRuleTableSecwaProcessing = 1
+	SlbCurCfgEnhContRuleTableSecwaProcessing_Disabled    SlbCurCfgEnhContRuleTableSecwaProcessing = 2
+	SlbCurCfgEnhContRuleTableSecwaProcessing_Unsupported SlbCurCfgEnhContRuleTableSecwaProcessing = 2147483647
+)
+
 type SlbCurCfgEnhContRuleTableSidebandProccessing int32
 
 const (
@@ -107,6 +124,12 @@ type SlbCurCfgEnhContRuleTableParams struct {
 	State SlbCurCfgEnhContRuleTableState `json:"State,omitempty"`
 	// Fastview web application name associated with this rule.
 	FastWa string `json:"FastWa,omitempty"`
+	// Set Bot Manager processing for this rule
+	BotMProcessing SlbCurCfgEnhContRuleTableBotMProcessing `json:"BotMProcessing,omitempty"`
+	// Set Bot Manager Policy for this rule.
+	BotMPolicy string `json:"BotMPolicy,omitempty"`
+	// Set Secured Web Application Processing for this rule.
+	SecwaProcessing SlbCurCfgEnhContRuleTableSecwaProcessing `json:"SecwaProcessing,omitempty"`
 	// Set SecurePath Policy for this rule.
 	SecurePathPolicy string `json:"SecurePathPolicy,omitempty"`
 	// Set Sideband Processing for this rule.

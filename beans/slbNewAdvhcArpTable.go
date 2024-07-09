@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcArpTableDelete_Unsupported SlbNewAdvhcArpTableDelete = 2147483647
 )
 
+type SlbNewAdvhcArpTableSnat int32
+
+const (
+	SlbNewAdvhcArpTableSnat_Enabled     SlbNewAdvhcArpTableSnat = 1
+	SlbNewAdvhcArpTableSnat_Disabled    SlbNewAdvhcArpTableSnat = 2
+	SlbNewAdvhcArpTableSnat_Unsupported SlbNewAdvhcArpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcArpTableParams struct {
 	// ARP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -109,6 +117,8 @@ type SlbNewAdvhcArpTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcArpTableDelete `json:"Delete,omitempty"`
+	// ARP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcArpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcArpTableParams) iMABean() {}

@@ -132,6 +132,14 @@ const (
 	SlbNewTrafficEventClassesTableSecurity_Unsupported SlbNewTrafficEventClassesTableSecurity = 2147483647
 )
 
+type SlbNewTrafficEventClassesTableIPREP int32
+
+const (
+	SlbNewTrafficEventClassesTableIPREP_Enabled     SlbNewTrafficEventClassesTableIPREP = 1
+	SlbNewTrafficEventClassesTableIPREP_Disabled    SlbNewTrafficEventClassesTableIPREP = 2
+	SlbNewTrafficEventClassesTableIPREP_Unsupported SlbNewTrafficEventClassesTableIPREP = 2147483647
+)
+
 type SlbNewTrafficEventClassesTableParams struct {
 	// Set traffic event class id.
 	Id string `json:"Id,omitempty"`
@@ -171,6 +179,8 @@ type SlbNewTrafficEventClassesTableParams struct {
 	Security SlbNewTrafficEventClassesTableSecurity `json:"Security,omitempty"`
 	// Traffic event policy serialization format CEF or JSON.
 	Format string `json:"Format,omitempty"`
+	// Set EAAF status either ena or dis for the traffic event policy.
+	IPREP SlbNewTrafficEventClassesTableIPREP `json:"IPREP,omitempty"`
 }
 
 func (p SlbNewTrafficEventClassesTableParams) iMABean() {}

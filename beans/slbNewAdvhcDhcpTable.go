@@ -105,6 +105,14 @@ const (
 	SlbNewAdvhcDhcpTableDhcpDuidType_Unsupported   SlbNewAdvhcDhcpTableDhcpDuidType = 2147483647
 )
 
+type SlbNewAdvhcDhcpTableSnat int32
+
+const (
+	SlbNewAdvhcDhcpTableSnat_Enabled     SlbNewAdvhcDhcpTableSnat = 1
+	SlbNewAdvhcDhcpTableSnat_Disabled    SlbNewAdvhcDhcpTableSnat = 2
+	SlbNewAdvhcDhcpTableSnat_Unsupported SlbNewAdvhcDhcpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcDhcpTableParams struct {
 	// DHCP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -148,6 +156,8 @@ type SlbNewAdvhcDhcpTableParams struct {
 	DhcpDuidLLA string `json:"DhcpDuidLLA,omitempty"`
 	// DHCP server's DUID time, e.g. 500058203.
 	DhcpDuidTime uint32 `json:"DhcpDuidTime,omitempty"`
+	// DHCP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcDhcpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcDhcpTableParams) iMABean() {}

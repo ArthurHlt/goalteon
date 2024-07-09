@@ -62,6 +62,14 @@ const (
 	SlbAdvhcDsspTableTransparent_Unsupported SlbAdvhcDsspTableTransparent = 2147483647
 )
 
+type SlbAdvhcDsspTableSnat int32
+
+const (
+	SlbAdvhcDsspTableSnat_Enabled     SlbAdvhcDsspTableSnat = 1
+	SlbAdvhcDsspTableSnat_Disabled    SlbAdvhcDsspTableSnat = 2
+	SlbAdvhcDsspTableSnat_Unsupported SlbAdvhcDsspTableSnat = 2147483647
+)
+
 type SlbAdvhcDsspTableParams struct {
 	// .
 	ID string `json:"ID,omitempty"`
@@ -83,6 +91,8 @@ type SlbAdvhcDsspTableParams struct {
 	RestoreRetries uint64 `json:"RestoreRetries,omitempty"`
 	// .
 	Timeout uint64 `json:"Timeout,omitempty"`
+	// .
+	Snat SlbAdvhcDsspTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbAdvhcDsspTableParams) iMABean() {}

@@ -556,6 +556,22 @@ const (
 	FltNewCfgTableMacToMe_Unsupported FltNewCfgTableMacToMe = 2147483647
 )
 
+type FltNewCfgTableAwinflow int32
+
+const (
+	FltNewCfgTableAwinflow_After       FltNewCfgTableAwinflow = 1
+	FltNewCfgTableAwinflow_Before      FltNewCfgTableAwinflow = 2
+	FltNewCfgTableAwinflow_Unsupported FltNewCfgTableAwinflow = 2147483647
+)
+
+type FltNewCfgTableJsinject int32
+
+const (
+	FltNewCfgTableJsinject_Enabled     FltNewCfgTableJsinject = 1
+	FltNewCfgTableJsinject_Disabled    FltNewCfgTableJsinject = 2
+	FltNewCfgTableJsinject_Unsupported FltNewCfgTableJsinject = 2147483647
+)
+
 type FltNewCfgTableParams struct {
 	// The filtering table index.
 	Indx int32 `json:"Indx,omitempty"`
@@ -897,6 +913,20 @@ type FltNewCfgTableParams struct {
 	Fbvlan uint32 `json:"Fbvlan,omitempty"`
 	// URL filter classification mode.
 	Urlfmode uint32 `json:"Urlfmode,omitempty"`
+	// Set Bot Manager Policy.
+	Botpol string `json:"Botpol,omitempty"`
+	// Set if AW processing comes before or after Alteon HTTP parsing.
+	Awinflow FltNewCfgTableAwinflow `json:"Awinflow,omitempty"`
+	// Server GmSSL encryption certificate / group name associated with this filter.
+	SrvCertEnc string `json:"SrvCertEnc,omitempty"`
+	// Server GmSSL signing certificate / group name associated with this filter.
+	SrvCertSign string `json:"SrvCertSign,omitempty"`
+	// Set Sideband policy.
+	SidebandID string `json:"SidebandID,omitempty"`
+	// Set secure path Policy.
+	SecurePathPolicy string `json:"SecurePathPolicy,omitempty"`
+	// Set JS inject mode .
+	Jsinject FltNewCfgTableJsinject `json:"Jsinject,omitempty"`
 }
 
 func (p FltNewCfgTableParams) iMABean() {}

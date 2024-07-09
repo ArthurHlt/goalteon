@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcWtsTableInvert_Unsupported SlbCurAdvhcWtsTableInvert = 2147483647
 )
 
+type SlbCurAdvhcWtsTableSnat int32
+
+const (
+	SlbCurAdvhcWtsTableSnat_Enabled     SlbCurAdvhcWtsTableSnat = 1
+	SlbCurAdvhcWtsTableSnat_Disabled    SlbCurAdvhcWtsTableSnat = 2
+	SlbCurAdvhcWtsTableSnat_Unsupported SlbCurAdvhcWtsTableSnat = 2147483647
+)
+
 type SlbCurAdvhcWtsTableParams struct {
 	// WTS Health check id.
 	ID string `json:"ID,omitempty"`
@@ -99,6 +107,8 @@ type SlbCurAdvhcWtsTableParams struct {
 	Invert SlbCurAdvhcWtsTableInvert `json:"Invert,omitempty"`
 	// WTS Health check user name.
 	UserName string `json:"UserName,omitempty"`
+	// WTS Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcWtsTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcWtsTableParams) iMABean() {}

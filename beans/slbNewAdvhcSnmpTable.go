@@ -95,6 +95,14 @@ const (
 	SlbNewAdvhcSnmpTableDelete_Unsupported SlbNewAdvhcSnmpTableDelete = 2147483647
 )
 
+type SlbNewAdvhcSnmpTableSnat int32
+
+const (
+	SlbNewAdvhcSnmpTableSnat_Enabled     SlbNewAdvhcSnmpTableSnat = 1
+	SlbNewAdvhcSnmpTableSnat_Disabled    SlbNewAdvhcSnmpTableSnat = 2
+	SlbNewAdvhcSnmpTableSnat_Unsupported SlbNewAdvhcSnmpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcSnmpTableParams struct {
 	// SNMP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -150,6 +158,8 @@ type SlbNewAdvhcSnmpTableParams struct {
 	OverloadMaxValue int32 `json:"OverloadMaxValue,omitempty"`
 	// expected response for server overload.
 	OverloadString string `json:"OverloadString,omitempty"`
+	// SNMP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcSnmpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcSnmpTableParams) iMABean() {}

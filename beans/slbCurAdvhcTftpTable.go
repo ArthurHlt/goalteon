@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcTftpTableInvert_Unsupported SlbCurAdvhcTftpTableInvert = 2147483647
 )
 
+type SlbCurAdvhcTftpTableSnat int32
+
+const (
+	SlbCurAdvhcTftpTableSnat_Enabled     SlbCurAdvhcTftpTableSnat = 1
+	SlbCurAdvhcTftpTableSnat_Disabled    SlbCurAdvhcTftpTableSnat = 2
+	SlbCurAdvhcTftpTableSnat_Unsupported SlbCurAdvhcTftpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcTftpTableParams struct {
 	// TFTP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -99,6 +107,8 @@ type SlbCurAdvhcTftpTableParams struct {
 	Invert SlbCurAdvhcTftpTableInvert `json:"Invert,omitempty"`
 	// .
 	TftpfileFullPath string `json:"TftpfileFullPath,omitempty"`
+	// TFTP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcTftpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcTftpTableParams) iMABean() {}

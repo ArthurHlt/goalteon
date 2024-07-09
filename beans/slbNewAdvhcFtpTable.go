@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcFtpTableDelete_Unsupported SlbNewAdvhcFtpTableDelete = 2147483647
 )
 
+type SlbNewAdvhcFtpTableSnat int32
+
+const (
+	SlbNewAdvhcFtpTableSnat_Enabled     SlbNewAdvhcFtpTableSnat = 1
+	SlbNewAdvhcFtpTableSnat_Disabled    SlbNewAdvhcFtpTableSnat = 2
+	SlbNewAdvhcFtpTableSnat_Unsupported SlbNewAdvhcFtpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcFtpTableParams struct {
 	// FTP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -117,6 +125,8 @@ type SlbNewAdvhcFtpTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcFtpTableDelete `json:"Delete,omitempty"`
+	// FTP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcFtpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcFtpTableParams) iMABean() {}

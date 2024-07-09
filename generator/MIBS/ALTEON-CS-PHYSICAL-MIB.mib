@@ -132,7 +132,9 @@ VlanCurCfgTableEntry ::= SEQUENCE {
     vlanCurCfgOpInfo            INTEGER,
     vlanCurCfgApInfo            INTEGER,
     vlanCurCfgIpv6Lla           DisplayString,
-    vlanCurCfgVlanName          DisplayString
+    vlanCurCfgVlanName          DisplayString,
+    vlanCurCfgMtuSize           Integer32,
+    vlanCurCfgMtuFrag           INTEGER
     }
 
 vlanCurCfgVlanId OBJECT-TYPE
@@ -407,6 +409,27 @@ vlanCurCfgIpv6Lla OBJECT-TYPE
          This mib is supported only on VA and Stand Alone platforms."
     ::= { vlanCurCfgTableEntry 25 }
 
+vlanCurCfgMtuSize OBJECT-TYPE
+     SYNTAX  Integer32 ( 1500..9216 )
+     MAX-ACCESS  read-only
+      STATUS  current
+      DESCRIPTION
+          "The VLAN MtuSize,
+           Note:This mib is supported only for VX instance of Virtualization."
+      ::= { vlanCurCfgTableEntry 26 }
+
+vlanCurCfgMtuFrag OBJECT-TYPE
+      SYNTAX  INTEGER  {
+          enabled(2),
+          disabled(3),
+          unsupported(2147483647)
+          }
+      MAX-ACCESS  read-only
+      STATUS  current
+      DESCRIPTION
+          "Enable or disable a VLAN MtuFrag"
+      ::= { vlanCurCfgTableEntry 27 }
+
 vlanNewCfgTable OBJECT-TYPE
     SYNTAX  SEQUENCE OF VlanNewCfgTableEntry
     MAX-ACCESS  not-accessible
@@ -453,7 +476,9 @@ VlanNewCfgTableEntry ::= SEQUENCE {
     vlanNewCfgOpInfo            INTEGER,
     vlanNewCfgApInfo            INTEGER,
     vlanNewCfgIpv6Lla           DisplayString,
-    vlanNewCfgDelete 		INTEGER
+    vlanNewCfgDelete 		INTEGER,
+    vlanNewCfgMtuSize           Integer32,
+    vlanNewCfgMtuFrag           INTEGER
     }
 
 vlanNewCfgVlanId OBJECT-TYPE
@@ -759,6 +784,27 @@ vlanNewCfgIpv6Lla OBJECT-TYPE
         "IPV6 Link Local Address,
          This mib is supported only on VA and Stand Alone platforms."
     ::= { vlanNewCfgTableEntry 28 }
+
+vlanNewCfgMtuSize OBJECT-TYPE
+    SYNTAX Integer32 ( 1500..9216 )
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "The VLAN MtuSize,
+         This mib is supported only on VA and Stand Alone platforms."
+    ::= { vlanNewCfgTableEntry 29 }
+
+vlanNewCfgMtuFrag OBJECT-TYPE
+    SYNTAX  INTEGER  {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-create
+    STATUS  current
+    DESCRIPTION
+        "Enable or disable a VLAN MtuFrag"
+    ::= { vlanNewCfgTableEntry 30 }
 
 
 -- Link Aggregation Control Protocol Group
@@ -3672,6 +3718,32 @@ lldpNewVendtlv OBJECT-TYPE
         Note:This mib is not supported in vADC instance on Virtualization."
     ::= { lldp 8 }
 
+lldpCurSysNametlv OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Enable or disable publishing system name TLVs.
+        Note:This mib is not supported in vADC instance on Virtualization."
+    ::= { lldp 9 }
+
+lldpNewSysNametlv OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-create
+    STATUS  current
+    DESCRIPTION
+        "Enable or disable publishing system name TLVs.
+        Note:This mib is not supported in vADC instance on Virtualization."
+    ::= { lldp 10 }
+
 
 -- FDB Statistics
  
@@ -4631,7 +4703,9 @@ VlanInfoTableEntry ::= SEQUENCE {
     vlanInfoJumbo             INTEGER,
     vlanInfoBwmContract       Integer32,
     vlanInfoLearn             INTEGER,
-    vlanInfoPorts             OCTET STRING
+    vlanInfoPorts             OCTET STRING,
+    vlanInfoMTU               Integer32,
+    vlanInfoFrag              INTEGER
     }
 
 vlanInfoId OBJECT-TYPE
@@ -4718,6 +4792,26 @@ vlanInfoPorts OBJECT-TYPE
          where x : 1 - The represented port belongs to the VLAN
 		   0 - The represented port does not belong to the VLAN"
     ::= { vlanInfoTableEntry 7 }
+
+vlanInfoMTU OBJECT-TYPE
+    SYNTAX  Integer32
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "MTU informtation of a VLAN"
+    ::= { vlanInfoTableEntry 8 }
+
+vlanInfoFrag OBJECT-TYPE
+    SYNTAX  INTEGER  {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "Enable or disable, VLAN fragmentation state information"
+    ::= { vlanInfoTableEntry 9 }
 
 vlanInfoTableVADC OBJECT-TYPE
     SYNTAX SEQUENCE OF VlanInfoTableVADCEntry

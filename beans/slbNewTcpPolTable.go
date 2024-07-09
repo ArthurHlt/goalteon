@@ -152,6 +152,22 @@ const (
 	SlbNewTcpPolTableNagle_Unsupported SlbNewTcpPolTableNagle = 2147483647
 )
 
+type SlbNewTcpPolTableTimestamp int32
+
+const (
+	SlbNewTcpPolTableTimestamp_Enabled     SlbNewTcpPolTableTimestamp = 1
+	SlbNewTcpPolTableTimestamp_Disabled    SlbNewTcpPolTableTimestamp = 2
+	SlbNewTcpPolTableTimestamp_Unsupported SlbNewTcpPolTableTimestamp = 2147483647
+)
+
+type SlbNewTcpPolTableTcpKeepalive int32
+
+const (
+	SlbNewTcpPolTableTcpKeepalive_Enabled     SlbNewTcpPolTableTcpKeepalive = 1
+	SlbNewTcpPolTableTcpKeepalive_Disabled    SlbNewTcpPolTableTcpKeepalive = 2
+	SlbNewTcpPolTableTcpKeepalive_Unsupported SlbNewTcpPolTableTcpKeepalive = 2147483647
+)
+
 type SlbNewTcpPolTableParams struct {
 	// The TCP policy name(key id) as an index.
 	NameIdIndex string `json:"NameIdIndex,omitempty"`
@@ -185,6 +201,16 @@ type SlbNewTcpPolTableParams struct {
 	Nagle SlbNewTcpPolTableNagle `json:"Nagle,omitempty"`
 	// Connection closing aging in seconds on FIN receipt (0 - no aging).
 	Finage uint64 `json:"Finage,omitempty"`
+	// Enable/Disable TCP timestamp.
+	Timestamp SlbNewTcpPolTableTimestamp `json:"Timestamp,omitempty"`
+	// Enable/Disable TCP keepalive.
+	TcpKeepalive SlbNewTcpPolTableTcpKeepalive `json:"TcpKeepalive,omitempty"`
+	// TCP Keepalive idle
+	TcpkaIdle uint64 `json:"TcpkaIdle,omitempty"`
+	// TCP Keepalive count
+	TcpkaCount uint32 `json:"TcpkaCount,omitempty"`
+	// TCP Keepalive interval
+	TcpkaInterval uint32 `json:"TcpkaInterval,omitempty"`
 }
 
 func (p SlbNewTcpPolTableParams) iMABean() {}

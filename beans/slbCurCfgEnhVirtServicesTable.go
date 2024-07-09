@@ -323,8 +323,14 @@ type SlbCurCfgEnhVirtServicesTableParams struct {
 	RtSrcTnl SlbCurCfgEnhVirtServicesTableRtSrcTnl `json:"RtSrcTnl,omitempty"`
 	// The number of the virtual server.
 	Sideband string `json:"Sideband,omitempty"`
+	// The sideband processing time in ms during the past collection interval.
+	SidebandTime string `json:"SidebandTime,omitempty"`
 	// Number of packets that are currently handled per second by the virtual service .
 	PktPerSec uint32 `json:"PktPerSec,omitempty"`
+	// The average request transfer to AX in ms during the past collection interval.
+	ReqTransfer string `json:"ReqTransfer,omitempty"`
+	// The average server response time in ms during the past collection interval.
+	ServerResponse string `json:"ServerResponse,omitempty"`
 }
 
 func (p SlbCurCfgEnhVirtServicesTableParams) iMABean() {}

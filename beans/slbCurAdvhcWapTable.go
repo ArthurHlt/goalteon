@@ -89,6 +89,14 @@ const (
 	SlbCurAdvhcWapTableCouple_Unsupported SlbCurAdvhcWapTableCouple = 2147483647
 )
 
+type SlbCurAdvhcWapTableSnat int32
+
+const (
+	SlbCurAdvhcWapTableSnat_Enabled     SlbCurAdvhcWapTableSnat = 1
+	SlbCurAdvhcWapTableSnat_Disabled    SlbCurAdvhcWapTableSnat = 2
+	SlbCurAdvhcWapTableSnat_Unsupported SlbCurAdvhcWapTableSnat = 2147483647
+)
+
 type SlbCurAdvhcWapTableParams struct {
 	// WAP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -134,6 +142,8 @@ type SlbCurAdvhcWapTableParams struct {
 	Wtpoffset int32 `json:"Wtpoffset,omitempty"`
 	// WAP Health check couple flag.
 	Couple SlbCurAdvhcWapTableCouple `json:"Couple,omitempty"`
+	// WAP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcWapTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcWapTableParams) iMABean() {}

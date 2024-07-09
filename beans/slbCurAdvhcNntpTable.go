@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcNntpTableInvert_Unsupported SlbCurAdvhcNntpTableInvert = 2147483647
 )
 
+type SlbCurAdvhcNntpTableSnat int32
+
+const (
+	SlbCurAdvhcNntpTableSnat_Enabled     SlbCurAdvhcNntpTableSnat = 1
+	SlbCurAdvhcNntpTableSnat_Disabled    SlbCurAdvhcNntpTableSnat = 2
+	SlbCurAdvhcNntpTableSnat_Unsupported SlbCurAdvhcNntpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcNntpTableParams struct {
 	// NNTP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -99,6 +107,8 @@ type SlbCurAdvhcNntpTableParams struct {
 	Invert SlbCurAdvhcNntpTableInvert `json:"Invert,omitempty"`
 	// NNTP Health check newsgroup name.
 	NewsgroupName string `json:"NewsgroupName,omitempty"`
+	// NNTP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcNntpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcNntpTableParams) iMABean() {}

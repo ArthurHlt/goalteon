@@ -12,7 +12,9 @@ type SlbNewSslCfgSSLCdpEntryTable struct {
 	SlbNewSslCfgSSLCdpGrpIdIndex string
 	// The Cdp Entry number as an index.
 	SlbNewSslCfgSSLCdpEntryIndex int32
-	Params                       *SlbNewSslCfgSSLCdpEntryTableParams
+	// The Cdp Entry number as an Endpoint.
+	SlbNewSslCfgSSLCdpEntryEndpoint int32
+	Params                          *SlbNewSslCfgSSLCdpEntryTableParams
 }
 
 func NewSlbNewSslCfgSSLCdpEntryTableList() *SlbNewSslCfgSSLCdpEntryTable {
@@ -22,12 +24,14 @@ func NewSlbNewSslCfgSSLCdpEntryTableList() *SlbNewSslCfgSSLCdpEntryTable {
 func NewSlbNewSslCfgSSLCdpEntryTable(
 	slbNewSslCfgSSLCdpGrpIdIndex string,
 	slbNewSslCfgSSLCdpEntryIndex int32,
+	slbNewSslCfgSSLCdpEntryEndpoint int32,
 	params *SlbNewSslCfgSSLCdpEntryTableParams,
 ) *SlbNewSslCfgSSLCdpEntryTable {
 	return &SlbNewSslCfgSSLCdpEntryTable{
-		SlbNewSslCfgSSLCdpGrpIdIndex: slbNewSslCfgSSLCdpGrpIdIndex,
-		SlbNewSslCfgSSLCdpEntryIndex: slbNewSslCfgSSLCdpEntryIndex,
-		Params:                       params,
+		SlbNewSslCfgSSLCdpGrpIdIndex:    slbNewSslCfgSSLCdpGrpIdIndex,
+		SlbNewSslCfgSSLCdpEntryIndex:    slbNewSslCfgSSLCdpEntryIndex,
+		SlbNewSslCfgSSLCdpEntryEndpoint: slbNewSslCfgSSLCdpEntryEndpoint,
+		Params:                          params,
 	}
 }
 
@@ -46,10 +50,11 @@ func (c *SlbNewSslCfgSSLCdpEntryTable) GetParamsType() reflect.Type {
 func (c *SlbNewSslCfgSSLCdpEntryTable) Path() string {
 	path := "/config/" + c.Name()
 	if reflect.ValueOf(c.SlbNewSslCfgSSLCdpGrpIdIndex).IsZero() &&
-		reflect.ValueOf(c.SlbNewSslCfgSSLCdpEntryIndex).IsZero() {
+		reflect.ValueOf(c.SlbNewSslCfgSSLCdpEntryIndex).IsZero() &&
+		reflect.ValueOf(c.SlbNewSslCfgSSLCdpEntryEndpoint).IsZero() {
 		return path
 	}
-	return path + "/" + fmt.Sprint(c.SlbNewSslCfgSSLCdpGrpIdIndex) + "/" + fmt.Sprint(c.SlbNewSslCfgSSLCdpEntryIndex)
+	return path + "/" + fmt.Sprint(c.SlbNewSslCfgSSLCdpGrpIdIndex) + "/" + fmt.Sprint(c.SlbNewSslCfgSSLCdpEntryIndex) + "/" + fmt.Sprint(c.SlbNewSslCfgSSLCdpEntryEndpoint)
 }
 
 type SlbNewSslCfgSSLCdpEntryTableDelete int32
@@ -73,6 +78,8 @@ type SlbNewSslCfgSSLCdpEntryTableParams struct {
 	Password string `json:"Password,omitempty"`
 	// By setting the value to delete(2), the entire row is deleted.
 	Delete SlbNewSslCfgSSLCdpEntryTableDelete `json:"Delete,omitempty"`
+	// The Cdp Entry number as an Endpoint.
+	Endpoint int32 `json:"Endpoint,omitempty"`
 }
 
 func (p SlbNewSslCfgSSLCdpEntryTableParams) iMABean() {}

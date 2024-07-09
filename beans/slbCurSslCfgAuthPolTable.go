@@ -127,7 +127,7 @@ type SlbCurSslCfgAuthPolTableParams struct {
 	ValidityCachtime int32 `json:"ValidityCachtime,omitempty"`
 	// OCSP response time deviation.
 	ValidityTimedev int32 `json:"ValidityTimedev,omitempty"`
-	// Allowed signing algorithm for the OCSP response[all, md5, sha1, sha256, sha384, sha512].
+	// Allowed signing algorithm for the OCSP response[all, md5, sha1, sha256, sha384, sha512, sm2_with_sm3].
 	ValidityAlgorthmName string `json:"ValidityAlgorthmName,omitempty"`
 	// Enable/Disable validating every CA certificate in the CA chain.
 	ValidityVchain SlbCurSslCfgAuthPolTableValidityVchain `json:"ValidityVchain,omitempty"`

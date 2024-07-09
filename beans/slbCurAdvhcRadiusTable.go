@@ -79,6 +79,14 @@ const (
 	SlbCurAdvhcRadiusTableDownType_Unsupported    SlbCurAdvhcRadiusTableDownType = 2147483647
 )
 
+type SlbCurAdvhcRadiusTableSnat int32
+
+const (
+	SlbCurAdvhcRadiusTableSnat_Enabled     SlbCurAdvhcRadiusTableSnat = 1
+	SlbCurAdvhcRadiusTableSnat_Disabled    SlbCurAdvhcRadiusTableSnat = 2
+	SlbCurAdvhcRadiusTableSnat_Unsupported SlbCurAdvhcRadiusTableSnat = 2147483647
+)
+
 type SlbCurAdvhcRadiusTableParams struct {
 	// RADIUS health check id.
 	ID string `json:"ID,omitempty"`
@@ -114,6 +122,8 @@ type SlbCurAdvhcRadiusTableParams struct {
 	Password string `json:"Password,omitempty"`
 	// RADIUS health check secret.
 	Secret string `json:"Secret,omitempty"`
+	// RADIUS Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcRadiusTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcRadiusTableParams) iMABean() {}

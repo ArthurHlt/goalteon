@@ -94,6 +94,14 @@ const (
 	SlbNewAdvhcLdapTableBaseFmt_Unsupported SlbNewAdvhcLdapTableBaseFmt = 2147483647
 )
 
+type SlbNewAdvhcLdapTableSnat int32
+
+const (
+	SlbNewAdvhcLdapTableSnat_Enabled     SlbNewAdvhcLdapTableSnat = 1
+	SlbNewAdvhcLdapTableSnat_Disabled    SlbNewAdvhcLdapTableSnat = 2
+	SlbNewAdvhcLdapTableSnat_Unsupported SlbNewAdvhcLdapTableSnat = 2147483647
+)
+
 type SlbNewAdvhcLdapTableParams struct {
 	// LDAP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -137,6 +145,8 @@ type SlbNewAdvhcLdapTableParams struct {
 	Delete SlbNewAdvhcLdapTableDelete `json:"Delete,omitempty"`
 	// LDAP base DN format.
 	BaseFmt SlbNewAdvhcLdapTableBaseFmt `json:"BaseFmt,omitempty"`
+	// LDAP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcLdapTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcLdapTableParams) iMABean() {}

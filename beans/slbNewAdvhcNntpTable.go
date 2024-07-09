@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcNntpTableDelete_Unsupported SlbNewAdvhcNntpTableDelete = 2147483647
 )
 
+type SlbNewAdvhcNntpTableSnat int32
+
+const (
+	SlbNewAdvhcNntpTableSnat_Enabled     SlbNewAdvhcNntpTableSnat = 1
+	SlbNewAdvhcNntpTableSnat_Disabled    SlbNewAdvhcNntpTableSnat = 2
+	SlbNewAdvhcNntpTableSnat_Unsupported SlbNewAdvhcNntpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcNntpTableParams struct {
 	// NNTP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -113,6 +121,8 @@ type SlbNewAdvhcNntpTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcNntpTableDelete `json:"Delete,omitempty"`
+	// NNTP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcNntpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcNntpTableParams) iMABean() {}

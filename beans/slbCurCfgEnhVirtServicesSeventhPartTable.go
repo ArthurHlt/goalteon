@@ -136,6 +136,40 @@ const (
 	SlbCurCfgEnhVirtServicesSeventhPartTableIsDnsSecVip_Unsupported SlbCurCfgEnhVirtServicesSeventhPartTableIsDnsSecVip = 2147483647
 )
 
+type SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow int32
+
+const (
+	SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow_After       SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow = 1
+	SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow_Before      SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow = 2
+	SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow_Unsupported SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow = 2147483647
+)
+
+type SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW int32
+
+const (
+	SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW_Enabled     SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW = 1
+	SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW_Disabled    SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW = 2
+	SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW_Unsupported SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW = 2147483647
+)
+
+type SlbCurCfgEnhVirtServicesSeventhPartTableJsinject int32
+
+const (
+	SlbCurCfgEnhVirtServicesSeventhPartTableJsinject_Enabled     SlbCurCfgEnhVirtServicesSeventhPartTableJsinject = 1
+	SlbCurCfgEnhVirtServicesSeventhPartTableJsinject_Disabled    SlbCurCfgEnhVirtServicesSeventhPartTableJsinject = 2
+	SlbCurCfgEnhVirtServicesSeventhPartTableJsinject_Unsupported SlbCurCfgEnhVirtServicesSeventhPartTableJsinject = 2147483647
+)
+
+type SlbCurCfgEnhVirtServicesSeventhPartTableDohType int32
+
+const (
+	SlbCurCfgEnhVirtServicesSeventhPartTableDohType_Disabled       SlbCurCfgEnhVirtServicesSeventhPartTableDohType = 1
+	SlbCurCfgEnhVirtServicesSeventhPartTableDohType_DohUdp         SlbCurCfgEnhVirtServicesSeventhPartTableDohType = 2
+	SlbCurCfgEnhVirtServicesSeventhPartTableDohType_DohUdpFallback SlbCurCfgEnhVirtServicesSeventhPartTableDohType = 3
+	SlbCurCfgEnhVirtServicesSeventhPartTableDohType_DohTcp         SlbCurCfgEnhVirtServicesSeventhPartTableDohType = 4
+	SlbCurCfgEnhVirtServicesSeventhPartTableDohType_Unsupported    SlbCurCfgEnhVirtServicesSeventhPartTableDohType = 2147483647
+)
+
 type SlbCurCfgEnhVirtServicesSeventhPartTableParams struct {
 	// The number of the virtual server.
 	ServSeventhPartIndex string `json:"ServSeventhPartIndex,omitempty"`
@@ -246,8 +280,22 @@ type SlbCurCfgEnhVirtServicesSeventhPartTableParams struct {
 	Namesrvr string `json:"Namesrvr,omitempty"`
 	// It returns Yes(1) if virtual service is configure auto with a DNS Responder VIP, else returns no(0).
 	IsDnsSecVip SlbCurCfgEnhVirtServicesSeventhPartTableIsDnsSecVip `json:"IsDnsSecVip,omitempty"`
+	// Http3 policy name associated with this virtual service.
+	Http3 string `json:"Http3,omitempty"`
+	// Quic policy name associated with this virtual service.
+	Quic string `json:"Quic,omitempty"`
+	// Set if AW processing comes before or after Alteon HTTP parsing.
+	Awinflow SlbCurCfgEnhVirtServicesSeventhPartTableAwinflow `json:"Awinflow,omitempty"`
+	// Enable/disable security web application processing when no content rule matches.
+	FallbackUseAW SlbCurCfgEnhVirtServicesSeventhPartTableFallbackUseAW `json:"FallbackUseAW,omitempty"`
+	// Set HTTP3 port for this virtual service
+	Http3port uint64 `json:"Http3port,omitempty"`
 	// Set SecurePath Policy.
 	SecurePathpol string `json:"SecurePathpol,omitempty"`
+	// Set JS inject mode .
+	Jsinject SlbCurCfgEnhVirtServicesSeventhPartTableJsinject `json:"Jsinject,omitempty"`
+	// Set DOH mode .
+	DohType SlbCurCfgEnhVirtServicesSeventhPartTableDohType `json:"DohType,omitempty"`
 }
 
 func (p SlbCurCfgEnhVirtServicesSeventhPartTableParams) iMABean() {}

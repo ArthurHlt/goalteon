@@ -78,6 +78,14 @@ const (
 	SlbCurAdvhcUdpTablePadding_Unsupported SlbCurAdvhcUdpTablePadding = 2147483647
 )
 
+type SlbCurAdvhcUdpTableSnat int32
+
+const (
+	SlbCurAdvhcUdpTableSnat_Enabled     SlbCurAdvhcUdpTableSnat = 1
+	SlbCurAdvhcUdpTableSnat_Disabled    SlbCurAdvhcUdpTableSnat = 2
+	SlbCurAdvhcUdpTableSnat_Unsupported SlbCurAdvhcUdpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcUdpTableParams struct {
 	// UDP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -109,6 +117,8 @@ type SlbCurAdvhcUdpTableParams struct {
 	// This setting specifies if padding to 64 bytes should be done
 	// for the UDP health check packet.
 	Padding SlbCurAdvhcUdpTablePadding `json:"Padding,omitempty"`
+	// UDP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcUdpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcUdpTableParams) iMABean() {}

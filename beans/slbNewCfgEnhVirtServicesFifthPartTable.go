@@ -202,6 +202,7 @@ type SlbNewCfgEnhVirtServicesFifthPartTableSendRST int32
 const (
 	SlbNewCfgEnhVirtServicesFifthPartTableSendRST_Reset       SlbNewCfgEnhVirtServicesFifthPartTableSendRST = 1
 	SlbNewCfgEnhVirtServicesFifthPartTableSendRST_Drop        SlbNewCfgEnhVirtServicesFifthPartTableSendRST = 2
+	SlbNewCfgEnhVirtServicesFifthPartTableSendRST_UdpIcmpErr  SlbNewCfgEnhVirtServicesFifthPartTableSendRST = 3
 	SlbNewCfgEnhVirtServicesFifthPartTableSendRST_Unsupported SlbNewCfgEnhVirtServicesFifthPartTableSendRST = 2147483647
 )
 
@@ -233,6 +234,14 @@ const (
 	SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage_Server      SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage = 3
 	SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage_Both        SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage = 4
 	SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage_Unsupported SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage = 2147483647
+)
+
+type SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly int32
+
+const (
+	SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly_No          SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly = 1
+	SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly_Yes         SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly = 2
+	SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly_Unsupported SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly = 2147483647
 )
 
 type SlbNewCfgEnhVirtServicesFifthPartTableParams struct {
@@ -299,7 +308,7 @@ type SlbNewCfgEnhVirtServicesFifthPartTableParams struct {
 	SecPol string `json:"SecPol,omitempty"`
 	// service always on when AS++ script attached.
 	AlwaysOn SlbNewCfgEnhVirtServicesFifthPartTableAlwaysOn `json:"AlwaysOn,omitempty"`
-	// Enable/Disable sending reset when the service is down.
+	// Enable/Disable sending reset/icmp-err when the service is down.
 	SendRST SlbNewCfgEnhVirtServicesFifthPartTableSendRST `json:"SendRST,omitempty"`
 	// Set close connection on aging treatment.
 	ClsOnSlowage SlbNewCfgEnhVirtServicesFifthPartTableClsOnSlowage `json:"ClsOnSlowage,omitempty"`
@@ -307,6 +316,8 @@ type SlbNewCfgEnhVirtServicesFifthPartTableParams struct {
 	CookieSameSite SlbNewCfgEnhVirtServicesFifthPartTableCookieSameSite `json:"CookieSameSite,omitempty"`
 	// Set close connection on fastaging treatment.
 	ClsOnFastage SlbNewCfgEnhVirtServicesFifthPartTableClsOnFastage `json:"ClsOnFastage,omitempty"`
+	// Is cookie http only [yes/no] [Default: no].
+	CookieHttponly SlbNewCfgEnhVirtServicesFifthPartTableCookieHttponly `json:"CookieHttponly,omitempty"`
 }
 
 func (p SlbNewCfgEnhVirtServicesFifthPartTableParams) iMABean() {}

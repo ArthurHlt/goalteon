@@ -178,3 +178,47 @@ func (c *GetAppShapeBean) GetParamsType() reflect.Type {
 }
 
 func (c *GetAppShapeBean) IMAScalarBean() {}
+
+type HcExtScriptImportBean struct {
+	Content BytesParams
+}
+
+func (c *HcExtScriptImportBean) Name() string {
+	return ""
+}
+
+func (c *HcExtScriptImportBean) Path() string {
+	return "/config/exthcscriptimport"
+}
+
+func (c *HcExtScriptImportBean) GetParams() BeanType {
+	return c.Content
+}
+
+func (c *HcExtScriptImportBean) GetParamsType() reflect.Type {
+	return reflect.TypeOf(c.Content)
+}
+
+func (c *HcExtScriptImportBean) IMAScalarBean() {}
+
+type GetHcExtScriptBean struct {
+	Content BytesParams
+}
+
+func (c *GetHcExtScriptBean) Name() string {
+	return ""
+}
+
+func (c *GetHcExtScriptBean) Path() string {
+	return "/config/getexthcscript"
+}
+
+func (c *GetHcExtScriptBean) GetParams() BeanType {
+	return c.Content
+}
+
+func (c *GetHcExtScriptBean) GetParamsType() reflect.Type {
+	return reflect.TypeOf(c.Content)
+}
+
+func (c *GetHcExtScriptBean) IMAScalarBean() {}

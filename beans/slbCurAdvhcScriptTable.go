@@ -78,6 +78,14 @@ const (
 	SlbCurAdvhcScriptTableAlways_Unsupported SlbCurAdvhcScriptTableAlways = 2147483647
 )
 
+type SlbCurAdvhcScriptTableSnat int32
+
+const (
+	SlbCurAdvhcScriptTableSnat_Enabled     SlbCurAdvhcScriptTableSnat = 1
+	SlbCurAdvhcScriptTableSnat_Disabled    SlbCurAdvhcScriptTableSnat = 2
+	SlbCurAdvhcScriptTableSnat_Unsupported SlbCurAdvhcScriptTableSnat = 2147483647
+)
+
 type SlbCurAdvhcScriptTableParams struct {
 	// Script Health check id.
 	ID string `json:"ID,omitempty"`
@@ -107,6 +115,8 @@ type SlbCurAdvhcScriptTableParams struct {
 	Interval uint64 `json:"Interval,omitempty"`
 	// This flag determines whether HC is allowed for standalone real.
 	Always SlbCurAdvhcScriptTableAlways `json:"Always,omitempty"`
+	// Script Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcScriptTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcScriptTableParams) iMABean() {}

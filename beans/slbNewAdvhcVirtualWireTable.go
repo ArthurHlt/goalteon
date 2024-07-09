@@ -79,6 +79,14 @@ const (
 	SlbNewAdvhcVirtualWireTableDelete_Unsupported SlbNewAdvhcVirtualWireTableDelete = 2147483647
 )
 
+type SlbNewAdvhcVirtualWireTableSnat int32
+
+const (
+	SlbNewAdvhcVirtualWireTableSnat_Enabled     SlbNewAdvhcVirtualWireTableSnat = 1
+	SlbNewAdvhcVirtualWireTableSnat_Disabled    SlbNewAdvhcVirtualWireTableSnat = 2
+	SlbNewAdvhcVirtualWireTableSnat_Unsupported SlbNewAdvhcVirtualWireTableSnat = 2147483647
+)
+
 type SlbNewAdvhcVirtualWireTableParams struct {
 	// Set Virtual Wire Health Check ID.
 	ID string `json:"ID,omitempty"`
@@ -112,6 +120,8 @@ type SlbNewAdvhcVirtualWireTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcVirtualWireTableDelete `json:"Delete,omitempty"`
+	// Set Virtual Wire Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcVirtualWireTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcVirtualWireTableParams) iMABean() {}

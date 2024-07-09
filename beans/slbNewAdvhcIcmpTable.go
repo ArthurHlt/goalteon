@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcIcmpTableDelete_Unsupported SlbNewAdvhcIcmpTableDelete = 2147483647
 )
 
+type SlbNewAdvhcIcmpTableSnat int32
+
+const (
+	SlbNewAdvhcIcmpTableSnat_Enabled     SlbNewAdvhcIcmpTableSnat = 1
+	SlbNewAdvhcIcmpTableSnat_Disabled    SlbNewAdvhcIcmpTableSnat = 2
+	SlbNewAdvhcIcmpTableSnat_Unsupported SlbNewAdvhcIcmpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcIcmpTableParams struct {
 	// ICMP health check id.
 	ID string `json:"ID,omitempty"`
@@ -111,6 +119,8 @@ type SlbNewAdvhcIcmpTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcIcmpTableDelete `json:"Delete,omitempty"`
+	// ICMP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcIcmpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcIcmpTableParams) iMABean() {}

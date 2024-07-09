@@ -12,7 +12,9 @@ type SlbCurSslCfgSSLCdpEntryTable struct {
 	SlbCurSslCfgSSLCdpGrpIdIndex string
 	// The Cdp Entry number as an index.
 	SlbCurSslCfgSSLCdpEntryIndex int32
-	Params                       *SlbCurSslCfgSSLCdpEntryTableParams
+	// The Cdp Entry number as an endpoint.
+	SlbCurSslCfgSSLCdpEntryEndpoint int32
+	Params                          *SlbCurSslCfgSSLCdpEntryTableParams
 }
 
 func NewSlbCurSslCfgSSLCdpEntryTableList() *SlbCurSslCfgSSLCdpEntryTable {
@@ -22,12 +24,14 @@ func NewSlbCurSslCfgSSLCdpEntryTableList() *SlbCurSslCfgSSLCdpEntryTable {
 func NewSlbCurSslCfgSSLCdpEntryTable(
 	slbCurSslCfgSSLCdpGrpIdIndex string,
 	slbCurSslCfgSSLCdpEntryIndex int32,
+	slbCurSslCfgSSLCdpEntryEndpoint int32,
 	params *SlbCurSslCfgSSLCdpEntryTableParams,
 ) *SlbCurSslCfgSSLCdpEntryTable {
 	return &SlbCurSslCfgSSLCdpEntryTable{
-		SlbCurSslCfgSSLCdpGrpIdIndex: slbCurSslCfgSSLCdpGrpIdIndex,
-		SlbCurSslCfgSSLCdpEntryIndex: slbCurSslCfgSSLCdpEntryIndex,
-		Params:                       params,
+		SlbCurSslCfgSSLCdpGrpIdIndex:    slbCurSslCfgSSLCdpGrpIdIndex,
+		SlbCurSslCfgSSLCdpEntryIndex:    slbCurSslCfgSSLCdpEntryIndex,
+		SlbCurSslCfgSSLCdpEntryEndpoint: slbCurSslCfgSSLCdpEntryEndpoint,
+		Params:                          params,
 	}
 }
 
@@ -46,10 +50,11 @@ func (c *SlbCurSslCfgSSLCdpEntryTable) GetParamsType() reflect.Type {
 func (c *SlbCurSslCfgSSLCdpEntryTable) Path() string {
 	path := "/config/" + c.Name()
 	if reflect.ValueOf(c.SlbCurSslCfgSSLCdpGrpIdIndex).IsZero() &&
-		reflect.ValueOf(c.SlbCurSslCfgSSLCdpEntryIndex).IsZero() {
+		reflect.ValueOf(c.SlbCurSslCfgSSLCdpEntryIndex).IsZero() &&
+		reflect.ValueOf(c.SlbCurSslCfgSSLCdpEntryEndpoint).IsZero() {
 		return path
 	}
-	return path + "/" + fmt.Sprint(c.SlbCurSslCfgSSLCdpGrpIdIndex) + "/" + fmt.Sprint(c.SlbCurSslCfgSSLCdpEntryIndex)
+	return path + "/" + fmt.Sprint(c.SlbCurSslCfgSSLCdpGrpIdIndex) + "/" + fmt.Sprint(c.SlbCurSslCfgSSLCdpEntryIndex) + "/" + fmt.Sprint(c.SlbCurSslCfgSSLCdpEntryEndpoint)
 }
 
 type SlbCurSslCfgSSLCdpEntryTableParams struct {
@@ -63,6 +68,8 @@ type SlbCurSslCfgSSLCdpEntryTableParams struct {
 	User string `json:"User,omitempty"`
 	// The Cdp Entry URL Password.
 	Password string `json:"Password,omitempty"`
+	// The Cdp Entry number as an endpoint.
+	Endpoint int32 `json:"Endpoint,omitempty"`
 }
 
 func (p SlbCurSslCfgSSLCdpEntryTableParams) iMABean() {}

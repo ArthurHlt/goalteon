@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcImapTableInvert_Unsupported SlbCurAdvhcImapTableInvert = 2147483647
 )
 
+type SlbCurAdvhcImapTableSnat int32
+
+const (
+	SlbCurAdvhcImapTableSnat_Enabled     SlbCurAdvhcImapTableSnat = 1
+	SlbCurAdvhcImapTableSnat_Disabled    SlbCurAdvhcImapTableSnat = 2
+	SlbCurAdvhcImapTableSnat_Unsupported SlbCurAdvhcImapTableSnat = 2147483647
+)
+
 type SlbCurAdvhcImapTableParams struct {
 	// IMAP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -101,6 +109,8 @@ type SlbCurAdvhcImapTableParams struct {
 	UserName string `json:"UserName,omitempty"`
 	// IMAP Health check password.
 	Password string `json:"Password,omitempty"`
+	// IMAP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcImapTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcImapTableParams) iMABean() {}

@@ -87,6 +87,14 @@ const (
 	SlbCurAdvhcSnmpTableReadjustWeight_Unsupported SlbCurAdvhcSnmpTableReadjustWeight = 2147483647
 )
 
+type SlbCurAdvhcSnmpTableSnat int32
+
+const (
+	SlbCurAdvhcSnmpTableSnat_Enabled     SlbCurAdvhcSnmpTableSnat = 1
+	SlbCurAdvhcSnmpTableSnat_Disabled    SlbCurAdvhcSnmpTableSnat = 2
+	SlbCurAdvhcSnmpTableSnat_Unsupported SlbCurAdvhcSnmpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcSnmpTableParams struct {
 	// SNMP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -136,6 +144,8 @@ type SlbCurAdvhcSnmpTableParams struct {
 	OverloadMaxValue int32 `json:"OverloadMaxValue,omitempty"`
 	// .
 	OverloadString string `json:"OverloadString,omitempty"`
+	// SNMP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcSnmpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcSnmpTableParams) iMABean() {}

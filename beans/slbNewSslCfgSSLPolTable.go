@@ -404,6 +404,30 @@ const (
 	SlbNewSslCfgSSLPolTableFeReuseTicket_Unsupported SlbNewSslCfgSSLPolTableFeReuseTicket = 2147483647
 )
 
+type SlbNewSslCfgSSLPolTableFEGmSslVersion int32
+
+const (
+	SlbNewSslCfgSSLPolTableFEGmSslVersion_Enabled     SlbNewSslCfgSSLPolTableFEGmSslVersion = 1
+	SlbNewSslCfgSSLPolTableFEGmSslVersion_Disabled    SlbNewSslCfgSSLPolTableFEGmSslVersion = 2
+	SlbNewSslCfgSSLPolTableFEGmSslVersion_Unsupported SlbNewSslCfgSSLPolTableFEGmSslVersion = 2147483647
+)
+
+type SlbNewSslCfgSSLPolTableBEGmSslVersion int32
+
+const (
+	SlbNewSslCfgSSLPolTableBEGmSslVersion_Enabled     SlbNewSslCfgSSLPolTableBEGmSslVersion = 1
+	SlbNewSslCfgSSLPolTableBEGmSslVersion_Disabled    SlbNewSslCfgSSLPolTableBEGmSslVersion = 2
+	SlbNewSslCfgSSLPolTableBEGmSslVersion_Unsupported SlbNewSslCfgSSLPolTableBEGmSslVersion = 2147483647
+)
+
+type SlbNewSslCfgSSLPolTableFEGmSslPriority int32
+
+const (
+	SlbNewSslCfgSSLPolTableFEGmSslPriority_Enabled     SlbNewSslCfgSSLPolTableFEGmSslPriority = 1
+	SlbNewSslCfgSSLPolTableFEGmSslPriority_Disabled    SlbNewSslCfgSSLPolTableFEGmSslPriority = 2
+	SlbNewSslCfgSSLPolTableFEGmSslPriority_Unsupported SlbNewSslCfgSSLPolTableFEGmSslPriority = 2147483647
+)
+
 type SlbNewSslCfgSSLPolTableParams struct {
 	// The SSL policy name(key id) as an index.
 	NameIdIndex string `json:"NameIdIndex,omitempty"`
@@ -525,6 +549,12 @@ type SlbNewSslCfgSSLPolTableParams struct {
 	BeReuseTicket SlbNewSslCfgSSLPolTableBeReuseTicket `json:"BeReuseTicket,omitempty"`
 	// Enable/disable TLS 1.2 session ticket
 	FeReuseTicket SlbNewSslCfgSSLPolTableFeReuseTicket `json:"FeReuseTicket,omitempty"`
+	// Enable or disable frontend GM SSL.
+	FEGmSslVersion SlbNewSslCfgSSLPolTableFEGmSslVersion `json:"FEGmSslVersion,omitempty"`
+	// Enable or disable backend GM SSL.
+	BEGmSslVersion SlbNewSslCfgSSLPolTableBEGmSslVersion `json:"BEGmSslVersion,omitempty"`
+	// Enable or disable frontend GM SSL.
+	FEGmSslPriority SlbNewSslCfgSSLPolTableFEGmSslPriority `json:"FEGmSslPriority,omitempty"`
 	// Allowed signature algorithms.
 	FESslsigs string `json:"FESslsigs,omitempty"`
 	// Allowed signature algorithms in backend SSL.

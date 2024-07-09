@@ -78,6 +78,14 @@ const (
 	SlbCurAdvhcDnsTableTransport_Unsupported SlbCurAdvhcDnsTableTransport = 2147483647
 )
 
+type SlbCurAdvhcDnsTableSnat int32
+
+const (
+	SlbCurAdvhcDnsTableSnat_Enabled     SlbCurAdvhcDnsTableSnat = 1
+	SlbCurAdvhcDnsTableSnat_Disabled    SlbCurAdvhcDnsTableSnat = 2
+	SlbCurAdvhcDnsTableSnat_Unsupported SlbCurAdvhcDnsTableSnat = 2147483647
+)
+
 type SlbCurAdvhcDnsTableParams struct {
 	// DNS Health check id.
 	ID string `json:"ID,omitempty"`
@@ -109,6 +117,8 @@ type SlbCurAdvhcDnsTableParams struct {
 	DomainName string `json:"DomainName,omitempty"`
 	// DNS Health check transport layer.
 	Transport SlbCurAdvhcDnsTableTransport `json:"Transport,omitempty"`
+	// DNS Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcDnsTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcDnsTableParams) iMABean() {}

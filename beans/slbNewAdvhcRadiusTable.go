@@ -87,6 +87,14 @@ const (
 	SlbNewAdvhcRadiusTableDelete_Unsupported SlbNewAdvhcRadiusTableDelete = 2147483647
 )
 
+type SlbNewAdvhcRadiusTableSnat int32
+
+const (
+	SlbNewAdvhcRadiusTableSnat_Enabled     SlbNewAdvhcRadiusTableSnat = 1
+	SlbNewAdvhcRadiusTableSnat_Disabled    SlbNewAdvhcRadiusTableSnat = 2
+	SlbNewAdvhcRadiusTableSnat_Unsupported SlbNewAdvhcRadiusTableSnat = 2147483647
+)
+
 type SlbNewAdvhcRadiusTableParams struct {
 	// RADIUS health check id.
 	ID string `json:"ID,omitempty"`
@@ -128,6 +136,8 @@ type SlbNewAdvhcRadiusTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcRadiusTableDelete `json:"Delete,omitempty"`
+	// RADIUS Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcRadiusTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcRadiusTableParams) iMABean() {}

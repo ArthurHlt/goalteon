@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcArpTableInvert_Unsupported SlbCurAdvhcArpTableInvert = 2147483647
 )
 
+type SlbCurAdvhcArpTableSnat int32
+
+const (
+	SlbCurAdvhcArpTableSnat_Enabled     SlbCurAdvhcArpTableSnat = 1
+	SlbCurAdvhcArpTableSnat_Disabled    SlbCurAdvhcArpTableSnat = 2
+	SlbCurAdvhcArpTableSnat_Unsupported SlbCurAdvhcArpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcArpTableParams struct {
 	// ARP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -95,6 +103,8 @@ type SlbCurAdvhcArpTableParams struct {
 	DownInterval uint64 `json:"DownInterval,omitempty"`
 	// ARP Health check invert flag.
 	Invert SlbCurAdvhcArpTableInvert `json:"Invert,omitempty"`
+	// ARP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcArpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcArpTableParams) iMABean() {}

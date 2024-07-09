@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcFtpTableInvert_Unsupported SlbCurAdvhcFtpTableInvert = 2147483647
 )
 
+type SlbCurAdvhcFtpTableSnat int32
+
+const (
+	SlbCurAdvhcFtpTableSnat_Enabled     SlbCurAdvhcFtpTableSnat = 1
+	SlbCurAdvhcFtpTableSnat_Disabled    SlbCurAdvhcFtpTableSnat = 2
+	SlbCurAdvhcFtpTableSnat_Unsupported SlbCurAdvhcFtpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcFtpTableParams struct {
 	// FTP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -103,6 +111,8 @@ type SlbCurAdvhcFtpTableParams struct {
 	Password string `json:"Password,omitempty"`
 	// FTP Health check file path parameter.
 	Path string `json:"Path,omitempty"`
+	// FTP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcFtpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcFtpTableParams) iMABean() {}

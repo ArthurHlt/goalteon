@@ -80,6 +80,7 @@ const (
 	SlbAdvhcGeneralTableType_Clusthcfr      SlbAdvhcGeneralTableType = 28
 	SlbAdvhcGeneralTableType_Clusthcme      SlbAdvhcGeneralTableType = 29
 	SlbAdvhcGeneralTableType_Advvirtualwire SlbAdvhcGeneralTableType = 30
+	SlbAdvhcGeneralTableType_Extscripthc    SlbAdvhcGeneralTableType = 31
 	SlbAdvhcGeneralTableType_Ocsp           SlbAdvhcGeneralTableType = 32
 	SlbAdvhcGeneralTableType_Unsupported    SlbAdvhcGeneralTableType = 2147483647
 )

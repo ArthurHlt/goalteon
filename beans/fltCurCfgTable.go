@@ -608,6 +608,22 @@ const (
 	FltCurCfgTableRtSrcTnl_Unsupported FltCurCfgTableRtSrcTnl = 2147483647
 )
 
+type FltCurCfgTableAwinflow int32
+
+const (
+	FltCurCfgTableAwinflow_After       FltCurCfgTableAwinflow = 1
+	FltCurCfgTableAwinflow_Before      FltCurCfgTableAwinflow = 2
+	FltCurCfgTableAwinflow_Unsupported FltCurCfgTableAwinflow = 2147483647
+)
+
+type FltCurCfgTableJsinject int32
+
+const (
+	FltCurCfgTableJsinject_Enabled     FltCurCfgTableJsinject = 1
+	FltCurCfgTableJsinject_Disabled    FltCurCfgTableJsinject = 2
+	FltCurCfgTableJsinject_Unsupported FltCurCfgTableJsinject = 2147483647
+)
+
 type FltCurCfgTableForceBind int32
 
 const (
@@ -968,6 +984,22 @@ type FltCurCfgTableParams struct {
 	RtSrcTnl FltCurCfgTableRtSrcTnl `json:"RtSrcTnl,omitempty"`
 	// Aw monitor private key name.
 	SslawMonPriKey string `json:"SslawMonPriKey,omitempty"`
+	// Aw monitor policy name.
+	SslawMonPolicy string `json:"SslawMonPolicy,omitempty"`
+	// Get Bot Manager Policy.
+	Botpol string `json:"Botpol,omitempty"`
+	// Set if AW processing comes before or after Alteon HTTP parsing.
+	Awinflow FltCurCfgTableAwinflow `json:"Awinflow,omitempty"`
+	// Server GmSSL signing certificate / group name associated with this filter.
+	SrvCertSign string `json:"SrvCertSign,omitempty"`
+	// Server GmSSL encryption certificate / group name associated with this filter.
+	SrvCertEnc string `json:"SrvCertEnc,omitempty"`
+	// Get Sideband policy.
+	SidebandID string `json:"SidebandID,omitempty"`
+	// Get secure path Policy.
+	SecurePathPolicy string `json:"SecurePathPolicy,omitempty"`
+	// Get JS inject mode .
+	Jsinject FltCurCfgTableJsinject `json:"Jsinject,omitempty"`
 	// Enable or disable Force bind for proxy.
 	ForceBind FltCurCfgTableForceBind `json:"ForceBind,omitempty"`
 }

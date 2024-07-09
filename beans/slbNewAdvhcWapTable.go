@@ -97,6 +97,14 @@ const (
 	SlbNewAdvhcWapTableDelete_Unsupported SlbNewAdvhcWapTableDelete = 2147483647
 )
 
+type SlbNewAdvhcWapTableSnat int32
+
+const (
+	SlbNewAdvhcWapTableSnat_Enabled     SlbNewAdvhcWapTableSnat = 1
+	SlbNewAdvhcWapTableSnat_Disabled    SlbNewAdvhcWapTableSnat = 2
+	SlbNewAdvhcWapTableSnat_Unsupported SlbNewAdvhcWapTableSnat = 2147483647
+)
+
 type SlbNewAdvhcWapTableParams struct {
 	// WAP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -149,6 +157,8 @@ type SlbNewAdvhcWapTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcWapTableDelete `json:"Delete,omitempty"`
+	// WAP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcWapTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcWapTableParams) iMABean() {}

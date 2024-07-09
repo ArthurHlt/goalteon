@@ -94,6 +94,14 @@ const (
 	SlbNewAdvhcTcpTableAlways_Unsupported SlbNewAdvhcTcpTableAlways = 2147483647
 )
 
+type SlbNewAdvhcTcpTableSnat int32
+
+const (
+	SlbNewAdvhcTcpTableSnat_Enabled     SlbNewAdvhcTcpTableSnat = 1
+	SlbNewAdvhcTcpTableSnat_Disabled    SlbNewAdvhcTcpTableSnat = 2
+	SlbNewAdvhcTcpTableSnat_Unsupported SlbNewAdvhcTcpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcTcpTableParams struct {
 	// TCP Health check id.
 	ID string `json:"ID,omitempty"`
@@ -131,6 +139,8 @@ type SlbNewAdvhcTcpTableParams struct {
 	ConnTerm SlbNewAdvhcTcpTableConnTerm `json:"ConnTerm,omitempty"`
 	// This flag determines whether HC is allowed for standalone real.
 	Always SlbNewAdvhcTcpTableAlways `json:"Always,omitempty"`
+	// TCP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcTcpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcTcpTableParams) iMABean() {}

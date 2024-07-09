@@ -79,6 +79,15 @@ const (
 	SlbCurAppwallWebappsCfgTableWebappMode_Unsupported SlbCurAppwallWebappsCfgTableWebappMode = 2147483647
 )
 
+type SlbCurAppwallWebappsCfgTableWebappCldirection int32
+
+const (
+	SlbCurAppwallWebappsCfgTableWebappCldirection_Request       SlbCurAppwallWebappsCfgTableWebappCldirection = 0
+	SlbCurAppwallWebappsCfgTableWebappCldirection_Response      SlbCurAppwallWebappsCfgTableWebappCldirection = 1
+	SlbCurAppwallWebappsCfgTableWebappCldirection_Bidirectional SlbCurAppwallWebappsCfgTableWebappCldirection = 2
+	SlbCurAppwallWebappsCfgTableWebappCldirection_Unsupported   SlbCurAppwallWebappsCfgTableWebappCldirection = 2147483647
+)
+
 type SlbCurAppwallWebappsCfgTableParams struct {
 	// Secure web application ID
 	WebappId string `json:"WebappId,omitempty"`
@@ -92,6 +101,10 @@ type SlbCurAppwallWebappsCfgTableParams struct {
 	WebappEnableAuthSso SlbCurAppwallWebappsCfgTableWebappEnableAuthSso `json:"WebappEnableAuthSso,omitempty"`
 	// Secure web application mode.
 	WebappMode SlbCurAppwallWebappsCfgTableWebappMode `json:"WebappMode,omitempty"`
+	// Set timeout.
+	WebappCltimeout uint32 `json:"WebappCltimeout,omitempty"`
+	// Set direction.
+	WebappCldirection SlbCurAppwallWebappsCfgTableWebappCldirection `json:"WebappCldirection,omitempty"`
 }
 
 func (p SlbCurAppwallWebappsCfgTableParams) iMABean() {}

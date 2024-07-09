@@ -83,6 +83,23 @@ const (
 	SlbNewCfgEnhContRuleTableDelete_Unsupported SlbNewCfgEnhContRuleTableDelete = 2147483647
 )
 
+type SlbNewCfgEnhContRuleTableBotMProcessing int32
+
+const (
+	SlbNewCfgEnhContRuleTableBotMProcessing_Inherit     SlbNewCfgEnhContRuleTableBotMProcessing = 1
+	SlbNewCfgEnhContRuleTableBotMProcessing_Specific    SlbNewCfgEnhContRuleTableBotMProcessing = 2
+	SlbNewCfgEnhContRuleTableBotMProcessing_Disabled    SlbNewCfgEnhContRuleTableBotMProcessing = 3
+	SlbNewCfgEnhContRuleTableBotMProcessing_Unsupported SlbNewCfgEnhContRuleTableBotMProcessing = 2147483647
+)
+
+type SlbNewCfgEnhContRuleTableSecwaProcessing int32
+
+const (
+	SlbNewCfgEnhContRuleTableSecwaProcessing_Inherit     SlbNewCfgEnhContRuleTableSecwaProcessing = 1
+	SlbNewCfgEnhContRuleTableSecwaProcessing_Disabled    SlbNewCfgEnhContRuleTableSecwaProcessing = 2
+	SlbNewCfgEnhContRuleTableSecwaProcessing_Unsupported SlbNewCfgEnhContRuleTableSecwaProcessing = 2147483647
+)
+
 type SlbNewCfgEnhContRuleTableSidebandProccessing int32
 
 const (
@@ -121,6 +138,12 @@ type SlbNewCfgEnhContRuleTableParams struct {
 	Delete SlbNewCfgEnhContRuleTableDelete `json:"Delete,omitempty"`
 	// Fastview web application name associated with this rule.
 	FastWa string `json:"FastWa,omitempty"`
+	// Set Bot Manager processing for this rule.
+	BotMProcessing SlbNewCfgEnhContRuleTableBotMProcessing `json:"BotMProcessing,omitempty"`
+	// Set Bot Manager Policy for this rule.
+	BotMPolicy string `json:"BotMPolicy,omitempty"`
+	// Set Secured Web Application Processing for this rule.
+	SecwaProcessing SlbNewCfgEnhContRuleTableSecwaProcessing `json:"SecwaProcessing,omitempty"`
 	// Set SecurePath Policy for this rule.
 	SecurePathPolicy string `json:"SecurePathPolicy,omitempty"`
 	// Set Sideband Processing for this rule.

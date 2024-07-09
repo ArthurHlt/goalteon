@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcSmtpTableDelete_Unsupported SlbNewAdvhcSmtpTableDelete = 2147483647
 )
 
+type SlbNewAdvhcSmtpTableSnat int32
+
+const (
+	SlbNewAdvhcSmtpTableSnat_Enabled     SlbNewAdvhcSmtpTableSnat = 1
+	SlbNewAdvhcSmtpTableSnat_Disabled    SlbNewAdvhcSmtpTableSnat = 2
+	SlbNewAdvhcSmtpTableSnat_Unsupported SlbNewAdvhcSmtpTableSnat = 2147483647
+)
+
 type SlbNewAdvhcSmtpTableParams struct {
 	// SMTP health check id.
 	ID string `json:"ID,omitempty"`
@@ -113,6 +121,8 @@ type SlbNewAdvhcSmtpTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcSmtpTableDelete `json:"Delete,omitempty"`
+	// SMTP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcSmtpTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcSmtpTableParams) iMABean() {}

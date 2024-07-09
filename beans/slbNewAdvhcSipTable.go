@@ -94,6 +94,22 @@ const (
 	SlbNewAdvhcSipTableDelete_Unsupported SlbNewAdvhcSipTableDelete = 2147483647
 )
 
+type SlbNewAdvhcSipTableSnat int32
+
+const (
+	SlbNewAdvhcSipTableSnat_Enabled     SlbNewAdvhcSipTableSnat = 1
+	SlbNewAdvhcSipTableSnat_Disabled    SlbNewAdvhcSipTableSnat = 2
+	SlbNewAdvhcSipTableSnat_Unsupported SlbNewAdvhcSipTableSnat = 2147483647
+)
+
+type SlbNewAdvhcSipTableSips int32
+
+const (
+	SlbNewAdvhcSipTableSips_Enabled     SlbNewAdvhcSipTableSips = 1
+	SlbNewAdvhcSipTableSips_Disabled    SlbNewAdvhcSipTableSips = 2
+	SlbNewAdvhcSipTableSips_Unsupported SlbNewAdvhcSipTableSips = 2147483647
+)
+
 type SlbNewAdvhcSipTableParams struct {
 	// SIP Health check id .
 	ID string `json:"ID,omitempty"`
@@ -137,6 +153,12 @@ type SlbNewAdvhcSipTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcSipTableDelete `json:"Delete,omitempty"`
+	// SIP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcSipTableSnat `json:"Snat,omitempty"`
+	// SIP Health check SIPS enable/disable flag.
+	Sips SlbNewAdvhcSipTableSips `json:"Sips,omitempty"`
+	// SIP Health check Cipher-suite allowed for SSL for SIPS Context.
+	SipsCipherUserdef string `json:"SipsCipherUserdef,omitempty"`
 }
 
 func (p SlbNewAdvhcSipTableParams) iMABean() {}

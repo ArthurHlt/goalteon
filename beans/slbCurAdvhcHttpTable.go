@@ -156,6 +156,14 @@ const (
 	SlbCurAdvhcHttpTableAlways_Unsupported SlbCurAdvhcHttpTableAlways = 2147483647
 )
 
+type SlbCurAdvhcHttpTableSnat int32
+
+const (
+	SlbCurAdvhcHttpTableSnat_Enabled     SlbCurAdvhcHttpTableSnat = 1
+	SlbCurAdvhcHttpTableSnat_Disabled    SlbCurAdvhcHttpTableSnat = 2
+	SlbCurAdvhcHttpTableSnat_Unsupported SlbCurAdvhcHttpTableSnat = 2147483647
+)
+
 type SlbCurAdvhcHttpTableConnTout int32
 
 const (
@@ -233,6 +241,8 @@ type SlbCurAdvhcHttpTableParams struct {
 	Http2 SlbCurAdvhcHttpTableHttp2 `json:"Http2,omitempty"`
 	// This flag determines whether HC is allowed for standalone real.
 	Always SlbCurAdvhcHttpTableAlways `json:"Always,omitempty"`
+	// HTTP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcHttpTableSnat `json:"Snat,omitempty"`
 	// Connection termination on timeout type.
 	ConnTout SlbCurAdvhcHttpTableConnTout `json:"ConnTout,omitempty"`
 }

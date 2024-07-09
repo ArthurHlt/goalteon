@@ -145,7 +145,8 @@ IpCurCfgIntfEntry ::= SEQUENCE {
     ipCurCfgIntfVlan          Integer32,
     ipCurCfgIntfPeer	      DisplayString,
     ipCurCfgIntfDescription   DisplayString,
-    ipCurCfgIntfBfd           INTEGER
+    ipCurCfgIntfBfd           INTEGER,
+    ipCurCfgIntfHcsnat	      DisplayString
     }
 
 ipCurCfgIntfIndex OBJECT-TYPE
@@ -286,6 +287,14 @@ ipCurCfgIntfBfd OBJECT-TYPE
         "Current BFD on/off configuration on the interface."
     ::= { ipCurCfgIntfEntry 15 }
 
+ipCurCfgIntfHcsnat OBJECT-TYPE
+    SYNTAX   DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "The src NAT (PIP) for health checks  IP of the interface."
+    ::= { ipCurCfgIntfEntry 16 }
+
 ipNewCfgIntfTable OBJECT-TYPE
     SYNTAX  SEQUENCE OF IpNewCfgIntfEntry
     MAX-ACCESS  not-accessible
@@ -319,7 +328,8 @@ IpNewCfgIntfEntry ::= SEQUENCE {
     ipNewCfgIntfRouteAdv      INTEGER,
     ipNewCfgIntfDelete	      INTEGER,
     ipNewCfgIntfPeer          DisplayString,
-    ipNewCfgIntfDescription   DisplayString
+    ipNewCfgIntfDescription   DisplayString,
+    ipNewCfgIntfHcsnat        DisplayString
     }
  
 ipNewCfgIntfIndex OBJECT-TYPE
@@ -460,6 +470,14 @@ ipNewCfgIntfDescription  OBJECT-TYPE
     DESCRIPTION
         "The Description of the interface."
     ::= { ipNewCfgIntfEntry 15 }
+
+ipNewCfgIntfHcsnat  OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..40))
+    MAX-ACCESS  read-create
+    STATUS  current
+    DESCRIPTION
+        "The src NAT (PIP) for health checks IP of the interface."
+    ::= { ipNewCfgIntfEntry 16 }
 
 ipCurLanIfId OBJECT-TYPE
     SYNTAX Integer32
@@ -2146,7 +2164,7 @@ ipFwdCurCfgDirectedBcast OBJECT-TYPE
         unsupported(2147483647)
 	}
     MAX-ACCESS read-only
-    STATUS current
+    STATUS obsolete
     DESCRIPTION
         "Enable or disable forwarding directed broadcasts.
          Note:This mib is not supported for VX instance of Virtualization."
@@ -2159,11 +2177,37 @@ ipFwdNewCfgDirectedBcast OBJECT-TYPE
         unsupported(2147483647)
 	}
     MAX-ACCESS read-write
-    STATUS current
+    STATUS obsolete
     DESCRIPTION
         "Enable or disable forwarding directed broadcasts.
          Note:This mib is not supported for VX instance of Virtualization."
     ::= { ipFwdGeneralCfg 4 }
+
+ipFwdCurCfgDropBrd OBJECT-TYPE
+    SYNTAX INTEGER {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Enable or disable to Drop broadcast packets destined to our subnets.
+         Note:This mib is not supported for VX instance of Virtualization."
+    ::= { ipFwdGeneralCfg 9 }
+
+ipFwdNewCfgDropBrd OBJECT-TYPE
+    SYNTAX INTEGER {
+        enabled(2),
+        disabled(3),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION
+        "Enable or disable to Drop broadcast packets destined to our subnets.
+         Note:This mib is not supported for VX instance of Virtualization."
+    ::= { ipFwdGeneralCfg 10 }
 
 ipFwdCurCfgNoICMPRedirect OBJECT-TYPE
     SYNTAX INTEGER {
@@ -8114,6 +8158,296 @@ bgpNewCfgASdotNumber OBJECT-TYPE
         Note:This mib is not supported for VX instance of virtualization."
       ::= { bgpGeneral 20 }
 
+bgpCurCfgPpip OBJECT-TYPE
+    SYNTAX INTEGER {
+        on(1),
+        off(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Enable or disable the Ppip.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpGeneral 21 }
+
+bgpNewCfgPpip OBJECT-TYPE
+    SYNTAX INTEGER {
+        on(1),
+        off(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION
+        "Enable or disable the Ppip.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpGeneral 22 }
+
+bgpCurCfgVpip OBJECT-TYPE
+    SYNTAX INTEGER {
+        on(1),
+        off(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Enable or disable the Vpip.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpGeneral 23 }
+
+bgpNewCfgVpip OBJECT-TYPE
+    SYNTAX INTEGER {
+        on(1),
+        off(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION
+        "Enable or disable the Vpip.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpGeneral 24 }
+
+bgpCurCfgExtpip OBJECT-TYPE
+    SYNTAX INTEGER {
+        on(1),
+        off(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Enable or disable the Extpip.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpGeneral 25 }
+
+bgpNewCfgExtpip OBJECT-TYPE
+    SYNTAX INTEGER {
+        on(1),
+        off(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS read-write
+    STATUS current
+    DESCRIPTION
+        "Enable or disable the Extpip.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpGeneral 26 }
+
+bgpCurCfgPipTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF BgpCurCfgPipEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "The table of current BGP PIP configuration.
+         Note:This mib is not supported on VX instance of Virtualization."
+    ::= { bgpGeneral 27 }
+
+bgpCurCfgPipTableEntry OBJECT-TYPE
+    SYNTAX  BgpCurCfgPipEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Information about a BGP PIP."
+    INDEX   { bgpCurCfgPipIndx }
+    ::= { bgpCurCfgPipTable 1 }
+	
+BgpCurCfgPipEntry ::= SEQUENCE {
+     bgpCurCfgPipIndx              Integer32,
+     bgpCurCfgPipState             INTEGER,
+     bgpCurCfgpipIpVer             INTEGER,
+     bgpCurCfgpipIpV4              IpAddress,
+     bgpCurCfgpipIpV4Mask          IpAddress,
+     bgpCurCfgpipIpV6              DisplayString,
+     bgpCurCfgpipIpV6Mask          INTEGER
+}
+
+bgpCurCfgPipIndx OBJECT-TYPE
+    SYNTAX Integer32
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The BGP pip number for which the BGP pip table is related.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpCurCfgPipTableEntry 1 }
+	
+bgpCurCfgPipState OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+	    "Enable or disable the BGP PIP."
+    ::= {bgpCurCfgPipTableEntry 2 }
+
+bgpCurCfgpipIpVer OBJECT-TYPE
+    SYNTAX  INTEGER {
+        ipv4(4),
+        ipv6(6),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-only
+    STATUS  current
+    DESCRIPTION
+        "IP version for BGP PIP entry."
+    ::= {bgpCurCfgPipTableEntry 3 }
+	
+bgpCurCfgpipIpV4 OBJECT-TYPE
+    SYNTAX IpAddress
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Local ipv4 address of the BGP PIP entry. This is valid only when ip version is set to v4."
+    ::= { bgpCurCfgPipTableEntry 4 }
+
+bgpCurCfgpipIpV4Mask OBJECT-TYPE
+    SYNTAX IpAddress
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Local ipv4 network mask of the BGP PIP entry. This is valid only when ip version is set to v4."
+    ::= { bgpCurCfgPipTableEntry 5 }
+
+bgpCurCfgpipIpV6 OBJECT-TYPE
+   SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-only
+    STATUS  current
+    DESCRIPTION
+    "  The Local IPV6 address of the BGP PIP entry
+       Address should be 4-byte hexadecimal colon notation. Valid IPv6 address should be in
+       any of the following forms xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx
+       This is valid only when ip version is set to ipv6."
+   ::= { bgpCurCfgPipTableEntry 6 }
+
+bgpCurCfgpipIpV6Mask OBJECT-TYPE
+    SYNTAX   INTEGER(0..128)
+    MAX-ACCESS read-only
+    STATUS  current
+    DESCRIPTION
+        "The prefix length associated with the local IPV6 address of the BGP PIP entry.
+         This is valid only when ip version is set to ipv6."
+    ::= { bgpCurCfgPipTableEntry 7 }
+
+bgpNewCfgPipTable OBJECT-TYPE
+    SYNTAX  SEQUENCE OF BgpNewCfgPipEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "The table for configuring Bgp PIP.
+         Note:This mib is not supported on VX instance of Virtualization."
+    ::= { bgpGeneral 28 }
+
+
+bgpNewCfgPipTableEntry OBJECT-TYPE
+    SYNTAX  BgpNewCfgPipEntry
+    MAX-ACCESS  not-accessible
+    STATUS  current
+    DESCRIPTION
+        "Information about a BGP PIP."
+    INDEX   { bgpNewCfgPipIndx }
+    ::= { bgpNewCfgPipTable 1 }
+
+
+BgpNewCfgPipEntry ::= SEQUENCE {
+     bgpNewCfgPipIndx                Integer32,
+     bgpNewCfgPipState               INTEGER,
+     bgpNewCfgpipIpVer               INTEGER,
+     bgpNewCfgpipIpV4                IpAddress,
+     bgpNewCfgpipIpV4Mask            IpAddress,
+     bgpNewCfgpipIpV6                DisplayString,
+     bgpNewCfgpipIpV6Mask            INTEGER,
+     bgpNewCfgPipDelete              INTEGER
+}
+
+bgpNewCfgPipIndx OBJECT-TYPE
+    SYNTAX Integer32
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The BGP PIP number for which the BGP PIP table is related.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpNewCfgPipTableEntry 1}
+	
+bgpNewCfgPipState OBJECT-TYPE
+    SYNTAX  INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-create
+    STATUS  current
+    DESCRIPTION
+        "Enable or disable the BGP PIP."
+    ::= {bgpNewCfgPipTableEntry 2 }
+	
+bgpNewCfgpipIpVer OBJECT-TYPE
+    SYNTAX  INTEGER {
+        ipv4(4),
+        ipv6(6),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-create
+    STATUS  current
+    DESCRIPTION
+        "IP version for BGP PIP entry."
+    ::= {bgpNewCfgPipTableEntry 3 }
+	
+
+bgpNewCfgpipIpV4 OBJECT-TYPE
+    SYNTAX IpAddress
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Local ipv4 address of the BGP PIP entry. This is valid only when ip version is set to v4."
+    ::= { bgpNewCfgPipTableEntry 4 }
+
+bgpNewCfgpipIpV4Mask OBJECT-TYPE
+    SYNTAX IpAddress
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Local ipv4 network mask of the BGP PIP entry. This is valid only ip version is set to v4."
+    ::= { bgpNewCfgPipTableEntry 5 }
+	
+bgpNewCfgpipIpV6 OBJECT-TYPE
+   SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-create
+    STATUS  current
+    DESCRIPTION
+    "  The Local IPV6 address of the BGP PIP entry
+       Address should be 4-byte hexadecimal colon notation. Valid IPv6 address should be in
+       any of the following forms xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx
+       This is valid only when ip version is set to ipv6."
+   ::= { bgpNewCfgPipTableEntry 6 }
+   
+bgpNewCfgpipIpV6Mask OBJECT-TYPE
+    SYNTAX   INTEGER(0..128)
+    MAX-ACCESS read-create
+    STATUS  current
+    DESCRIPTION
+        "The prefix length associated with the local IPV6 address of the BGP PIP entry.
+         This is valid only when ip version is set to ipv6."
+    ::= { bgpNewCfgPipTableEntry 7 }
+	
+bgpNewCfgPipDelete OBJECT-TYPE
+    SYNTAX  INTEGER {
+        other(1),
+        delete(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS  read-create
+    STATUS  current
+    DESCRIPTION
+        "When set to the value of 2 (delete), the entire row is deleted.
+     When read, other(1) is returned. Setting the value to anything
+     other than 2(delete) has no effect on the state of the row."
+    ::= { bgpNewCfgPipTableEntry 8 }
+
 bgpPeerTableMax OBJECT-TYPE
     SYNTAX Integer32
     MAX-ACCESS read-only
@@ -8169,6 +8503,11 @@ BgpCurCfgPeerEntry ::= SEQUENCE {
     bgpCurCfgPeerStdCommAdv     INTEGER,
     bgpCurCfgPeerLarCommAdv     INTEGER,
     bgpCurCfgPeerExtCommAdv     INTEGER,
+    bgpCurCfgPeerIpVer          INTEGER,
+    bgpCurCfgPeerRemoteAddr6    DisplayString,
+    bgpCurCfgPeerSecureHops	INTEGER,
+    bgpCurCfgPeerPassword       DisplayString,
+    bgpCurCfgPeerPasswordStatus INTEGER,
     bgpCurCfgPeerRemoteAsdot    DisplayString
     }
  
@@ -8508,6 +8847,73 @@ bgpCurCfgPeerExtCommAdv OBJECT-TYPE
          Note:This mib is not supported for VX instance of virtualization."
     ::= { bgpCurCfgPeerEntry 30 }
 
+bgpCurCfgPeerIpVer  OBJECT-TYPE
+    SYNTAX INTEGER {
+        ipv4(1),
+        ipv6(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The IP address version of the BGP peer address. Default value is
+         IPv4.
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode.
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpCurCfgPeerEntry 31 }
+
+bgpCurCfgPeerRemoteAddr6    OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(0..40))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The IPv6 address of the BGP peer. Address should be 16-byte hexadecimal 
+         colon notation.Valid IPv6 address should be in any of the following forms
+         xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or
+         xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx.
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode.
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpCurCfgPeerEntry 32 }
+
+bgpCurCfgPeerSecureHops OBJECT-TYPE
+    SYNTAX INTEGER (1..255) 
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+	"The secure hop count of the BGP peer IP datagram.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpCurCfgPeerEntry 33 }
+
+bgpCurCfgPeerPassword    OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(8..20))
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "The password to establish connection with another BGP peer. Same 
+         password must be configured on both the BGP peer 
+         to establish the connection successfully
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode.
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpCurCfgPeerEntry 34 }
+
+bgpCurCfgPeerPasswordStatus    OBJECT-TYPE
+    SYNTAX INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS read-only
+    STATUS current
+    DESCRIPTION
+        "Enable/disable configuration of BGP Peer password
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode. 
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpCurCfgPeerEntry 35 }
+
 bgpCurCfgPeerRemoteAsdot OBJECT-TYPE
     SYNTAX DisplayString (SIZE(0..15))
     MAX-ACCESS read-only
@@ -8516,6 +8922,7 @@ bgpCurCfgPeerRemoteAsdot OBJECT-TYPE
         "The remote AS number of the BGP peer.  0 means none.
     Note:This mib is not supported for VX instance of virtualization."
     ::= { bgpCurCfgPeerEntry 36 }
+
 
 bgpNewCfgPeerTable OBJECT-TYPE
     SYNTAX SEQUENCE OF BgpNewCfgPeerEntry
@@ -8568,6 +8975,11 @@ BgpNewCfgPeerEntry ::= SEQUENCE {
     bgpNewCfgPeerStdCommAdv     INTEGER,
     bgpNewCfgPeerLarCommAdv     INTEGER,
     bgpNewCfgPeerExtCommAdv     INTEGER,
+    bgpNewCfgPeerIpVer          INTEGER,
+    bgpNewCfgPeerRemoteAddr6    DisplayString,
+    bgpNewCfgPeerSecureHops	INTEGER,
+    bgpNewCfgPeerPassword       DisplayString,
+    bgpNewCfgPeerPasswordStatus INTEGER,
     bgpNewCfgPeerRemoteAsdot    DisplayString
     }
  
@@ -8962,6 +9374,73 @@ bgpNewCfgPeerExtCommAdv OBJECT-TYPE
          Note:This mib is not supported for VX instance of virtualization."
     ::= { bgpNewCfgPeerEntry 34 }
 
+bgpNewCfgPeerIpVer  OBJECT-TYPE
+    SYNTAX INTEGER {
+        ipv4(1),
+        ipv6(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "The IP address version of the BGP peer address. Default value
+         is IPv4.
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode.
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpNewCfgPeerEntry 35 }
+
+bgpNewCfgPeerRemoteAddr6 OBJECT-TYPE
+    SYNTAX DisplayString (SIZE(0..40))
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "The IPv6 address of the BGP peer. Address should be 16-byte hexadecimal 
+         colon notation.Valid IPv6 address should be in any of the following forms
+         xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx or
+         xxxx::xxxx:xxxx:xxxx:xxxx or ::xxxx.
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode.
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpNewCfgPeerEntry 36 }
+
+bgpNewCfgPeerSecureHops OBJECT-TYPE
+    SYNTAX INTEGER (1..255) 
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+	"The secure hop count of the BGP peer IP datagram.
+    Note:This mib is not supported for VX instance of virtualization."
+    ::= { bgpNewCfgPeerEntry 37 }
+
+bgpNewCfgPeerPassword    OBJECT-TYPE
+    SYNTAX  DisplayString (SIZE(8..20))
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "The password to establish connection with another BGP peer. Same 
+         password must be configured on both the BGP peer 
+         to establish the connection successfully
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode.
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpNewCfgPeerEntry 38 }
+
+bgpNewCfgPeerPasswordStatus    OBJECT-TYPE
+    SYNTAX INTEGER {
+        enabled(1),
+        disabled(2),
+        unsupported(2147483647)
+    }
+    MAX-ACCESS read-create
+    STATUS current
+    DESCRIPTION
+        "Enable/disable configuration of BGP Peer password
+         NOTE: 
+         This MIB object is supported only in FRR BGP mode. 
+         This mib is not supported for VX instance of virtualization."
+    ::= { bgpNewCfgPeerEntry 39 }
+
 bgpNewCfgPeerRemoteAsdot OBJECT-TYPE
     SYNTAX DisplayString (SIZE(0..15))
     MAX-ACCESS read-create
@@ -8970,7 +9449,7 @@ bgpNewCfgPeerRemoteAsdot OBJECT-TYPE
         "The remote AS number of the BGP peer.  0 means none.
     Note:This mib is not supported for VX instance of virtualization."
     ::= { bgpNewCfgPeerEntry 40 }
-
+    
 --
 -- BGP Aggregation Table
 --
@@ -15292,6 +15771,19 @@ tunelClearStats OBJECT-TYPE
         "Setting this to clear(2) results in clearing the IP Tunnel statistics.
         Note:This mib is not supported for VX instance of virtualization."
     ::= { clearStats 4 }
+
+botMangerClearStats OBJECT-TYPE
+    SYNTAX  INTEGER { 
+        ok(1),
+        clear(2),
+        unsupported(2147483647)
+        }
+    MAX-ACCESS  read-write
+    STATUS  current  
+    DESCRIPTION
+        "Setting this to clear(2) results in clearing the bot manager statistics.
+        Note:This mib is not supported for VX instance of virtualization." 
+    ::= { clearStats 5 }
 -- Ospf Statistics 
 
 -- Ospf Statistics for all interfaces and OSPF areas 

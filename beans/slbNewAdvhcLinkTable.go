@@ -78,6 +78,14 @@ const (
 	SlbNewAdvhcLinkTableDelete_Unsupported SlbNewAdvhcLinkTableDelete = 2147483647
 )
 
+type SlbNewAdvhcLinkTableSnat int32
+
+const (
+	SlbNewAdvhcLinkTableSnat_Enabled     SlbNewAdvhcLinkTableSnat = 1
+	SlbNewAdvhcLinkTableSnat_Disabled    SlbNewAdvhcLinkTableSnat = 2
+	SlbNewAdvhcLinkTableSnat_Unsupported SlbNewAdvhcLinkTableSnat = 2147483647
+)
+
 type SlbNewAdvhcLinkTableParams struct {
 	// Link Health check id.
 	ID string `json:"ID,omitempty"`
@@ -111,6 +119,8 @@ type SlbNewAdvhcLinkTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcLinkTableDelete `json:"Delete,omitempty"`
+	// Link Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcLinkTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcLinkTableParams) iMABean() {}

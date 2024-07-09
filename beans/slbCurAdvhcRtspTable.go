@@ -79,6 +79,14 @@ const (
 	SlbCurAdvhcRtspTableMethod_Unsupported SlbCurAdvhcRtspTableMethod = 2147483647
 )
 
+type SlbCurAdvhcRtspTableSnat int32
+
+const (
+	SlbCurAdvhcRtspTableSnat_Enabled     SlbCurAdvhcRtspTableSnat = 1
+	SlbCurAdvhcRtspTableSnat_Disabled    SlbCurAdvhcRtspTableSnat = 2
+	SlbCurAdvhcRtspTableSnat_Unsupported SlbCurAdvhcRtspTableSnat = 2147483647
+)
+
 type SlbCurAdvhcRtspTableParams struct {
 	// RTSP health check id.
 	ID string `json:"ID,omitempty"`
@@ -114,6 +122,8 @@ type SlbCurAdvhcRtspTableParams struct {
 	Path string `json:"Path,omitempty"`
 	// RTSP health check response code.
 	ResponseCodes string `json:"ResponseCodes,omitempty"`
+	// RTSP Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcRtspTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcRtspTableParams) iMABean() {}

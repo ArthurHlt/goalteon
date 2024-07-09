@@ -87,6 +87,14 @@ const (
 	SlbNewAdvhcRtspTableDelete_Unsupported SlbNewAdvhcRtspTableDelete = 2147483647
 )
 
+type SlbNewAdvhcRtspTableSnat int32
+
+const (
+	SlbNewAdvhcRtspTableSnat_Enabled     SlbNewAdvhcRtspTableSnat = 1
+	SlbNewAdvhcRtspTableSnat_Disabled    SlbNewAdvhcRtspTableSnat = 2
+	SlbNewAdvhcRtspTableSnat_Unsupported SlbNewAdvhcRtspTableSnat = 2147483647
+)
+
 type SlbNewAdvhcRtspTableParams struct {
 	// RTSP health check id.
 	ID string `json:"ID,omitempty"`
@@ -128,6 +136,8 @@ type SlbNewAdvhcRtspTableParams struct {
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.
 	Delete SlbNewAdvhcRtspTableDelete `json:"Delete,omitempty"`
+	// RTSP Health Check src NAT (PIP) flag.
+	Snat SlbNewAdvhcRtspTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbNewAdvhcRtspTableParams) iMABean() {}

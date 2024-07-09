@@ -70,6 +70,14 @@ const (
 	SlbCurAdvhcLinkTableInvert_Unsupported SlbCurAdvhcLinkTableInvert = 2147483647
 )
 
+type SlbCurAdvhcLinkTableSnat int32
+
+const (
+	SlbCurAdvhcLinkTableSnat_Enabled     SlbCurAdvhcLinkTableSnat = 1
+	SlbCurAdvhcLinkTableSnat_Disabled    SlbCurAdvhcLinkTableSnat = 2
+	SlbCurAdvhcLinkTableSnat_Unsupported SlbCurAdvhcLinkTableSnat = 2147483647
+)
+
 type SlbCurAdvhcLinkTableParams struct {
 	// Link Health check id.
 	ID string `json:"ID,omitempty"`
@@ -97,6 +105,8 @@ type SlbCurAdvhcLinkTableParams struct {
 	DownInterval uint64 `json:"DownInterval,omitempty"`
 	// Link Health check invert flag.
 	Invert SlbCurAdvhcLinkTableInvert `json:"Invert,omitempty"`
+	// Link Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcLinkTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcLinkTableParams) iMABean() {}

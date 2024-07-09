@@ -71,6 +71,14 @@ const (
 	SlbCurAdvhcAdvVirtualWireTableInvert_Unsupported SlbCurAdvhcAdvVirtualWireTableInvert = 2147483647
 )
 
+type SlbCurAdvhcAdvVirtualWireTableSnat int32
+
+const (
+	SlbCurAdvhcAdvVirtualWireTableSnat_Enabled     SlbCurAdvhcAdvVirtualWireTableSnat = 1
+	SlbCurAdvhcAdvVirtualWireTableSnat_Disabled    SlbCurAdvhcAdvVirtualWireTableSnat = 2
+	SlbCurAdvhcAdvVirtualWireTableSnat_Unsupported SlbCurAdvhcAdvVirtualWireTableSnat = 2147483647
+)
+
 type SlbCurAdvhcAdvVirtualWireTableParams struct {
 	// Describes Virtual Wire Health Check ID.
 	ID string `json:"ID,omitempty"`
@@ -98,6 +106,8 @@ type SlbCurAdvhcAdvVirtualWireTableParams struct {
 	DownInterval uint64 `json:"DownInterval,omitempty"`
 	// Describes Virtual Wire Health Check invert state.
 	Invert SlbCurAdvhcAdvVirtualWireTableInvert `json:"Invert,omitempty"`
+	// Describes Virtual Wire Health Check src NAT (PIP) flag.
+	Snat SlbCurAdvhcAdvVirtualWireTableSnat `json:"Snat,omitempty"`
 }
 
 func (p SlbCurAdvhcAdvVirtualWireTableParams) iMABean() {}
