@@ -18,7 +18,7 @@ import (
 )
 
 const (
-	DefaultCount = 1024
+	DefaultCount = 9000
 )
 
 type Client struct {
