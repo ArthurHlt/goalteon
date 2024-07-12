@@ -1,6 +1,7 @@
 package goalteon
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/ArthurHlt/goalteon/beans"
 	"github.com/mitchellh/mapstructure"
@@ -40,6 +41,7 @@ const (
 )
 
 type StatusGlobal struct {
+	NoApplyPending        bool
 	AgSaveConfig          AgSaveConfig `mapstructure:"agSaveConfig"`
 	AgSaveLastError       error
 	AgApplyConfig         AgApplyConfig `mapstructure:"agApplyConfig"`
@@ -101,6 +103,32 @@ func (c *Client) Save() (*StatusResponse, error) {
 		return nil, err
 	}
 	return UnmarshalStatusResponse(resp)
+}
+
+func (c *Client) IsApplyPending() (bool, error) {
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/config?prop=agApplyPending", c.Target), nil)
+	if err != nil {
+		return false, err
+	}
+	resp, err := c.Do(req)
+	if err != nil {
+		return false, err
+	}
+	defer resp.Body.Close()
+	b, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return false, err
+	}
+	applyPending := struct {
+		AgApplyPending int `json:"agApplyPending"`
+	}{}
+
+	err = json.Unmarshal(b, &applyPending)
+	if err != nil {
+		return false, err
+	}
+
+	return applyPending.AgApplyPending != 3, nil
 }
 
 func (c *Client) Apply() (*StatusResponse, error) {
@@ -186,6 +214,17 @@ func (c *Client) ShowDiffFlash() (string, error) {
 }
 
 func (c *Client) ApplySaveSync() (st *StatusGlobal, err error) {
+	isApplyPending, err := c.IsApplyPending()
+	if err != nil {
+		return nil, fmt.Errorf("error when checking if apply is pending: %s", err.Error())
+	}
+
+	if !isApplyPending {
+		return &StatusGlobal{
+			NoApplyPending: true,
+		}, nil
+	}
+
 	_, err = c.Apply()
 	if err != nil {
 		return nil, fmt.Errorf("error when applying: %s", err.Error())
