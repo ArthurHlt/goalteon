@@ -21,6 +21,7 @@ type ImpExpSslParams struct {
 	SslType    SslType
 	Passphrase string
 	SrcType    SrcType
+	RenewId    string
 }
 
 func (i *ImpExpSslParams) Values() url.Values {
@@ -34,6 +35,10 @@ func (i *ImpExpSslParams) Values() url.Values {
 	}
 	if i.SrcType == "" {
 		i.SrcType = ConfigSrcTypeTxt
+	}
+	if i.RenewId != "" {
+		v.Set("renew", "1")
+		v.Set("id", i.RenewId)
 	}
 	v.Set("src", string(i.SrcType))
 	return v
