@@ -68,3 +68,13 @@ func (c *Client) ImportSsl(data []byte, params *ImpExpSslParams) (*StatusRespons
 	}
 	return c.Post(&beans.SSLCertImportBean{Content: data}, params.Values())
 }
+
+func (c *Client) ImportSslAsBulk(data []byte, params *ImpExpSslParams) (*BulkItem, error) {
+	if params == nil {
+		return nil, fmt.Errorf("params are nil")
+	}
+	if params.ID == "" {
+		return nil, fmt.Errorf("id is required")
+	}
+	return NewBulkItem(BulkMethodPost, &beans.SSLCertImportBean{Content: data}, params.Values()), nil
+}

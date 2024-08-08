@@ -46,3 +46,13 @@ func (c *Client) ImportHcExtScript(data []byte, params *ImpExpHcExtScriptParams)
 	}
 	return c.Post(&beans.HcExtScriptImportBean{Content: data}, params.Values())
 }
+
+func (c *Client) ImportHcExtScriptAsBulk(data []byte, params *ImpExpHcExtScriptParams) (*BulkItem, error) {
+	if params == nil {
+		return nil, fmt.Errorf("params are nil")
+	}
+	if params.ID == "" {
+		return nil, fmt.Errorf("id is required")
+	}
+	return NewBulkItem(BulkMethodPost, &beans.HcExtScriptImportBean{Content: data}, params.Values()), nil
+}

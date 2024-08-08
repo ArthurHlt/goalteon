@@ -51,3 +51,13 @@ func (c *Client) ImportAppShape(data []byte, params *ImpExpAppShapeParams) (*Sta
 	}
 	return c.Post(&beans.AppShapeImportBean{Content: data}, params.Values())
 }
+
+func (c *Client) ImportAppShapeAsBulk(data []byte, params *ImpExpAppShapeParams) (*BulkItem, error) {
+	if params == nil {
+		return nil, fmt.Errorf("params are nil")
+	}
+	if params.ID == "" {
+		return nil, fmt.Errorf("id is required")
+	}
+	return NewBulkItem(BulkMethodPost, &beans.AppShapeImportBean{Content: data}, params.Values()), nil
+}
