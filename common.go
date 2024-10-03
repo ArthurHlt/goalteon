@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"reflect"
+	"strings"
 )
 
 type StatusResponse struct {
@@ -78,7 +79,7 @@ func UnmarshalResponse(resp *http.Response, params beans.BeanType) error {
 		return err
 	}
 
-	if resp.StatusCode > 299 || resp.StatusCode < 200 {
+	if resp.StatusCode > 299 || resp.StatusCode < 200 || strings.Contains(string(b), `"status":"err"`) {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
 			status = &StatusResponse{
@@ -107,7 +108,7 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 	if err != nil {
 		return nil, err
 	}
-	if resp.StatusCode > 299 || resp.StatusCode < 200 {
+	if resp.StatusCode > 299 || resp.StatusCode < 200 || strings.Contains(string(b), `"status":"err"`) {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
 			status = &StatusResponse{

@@ -30,9 +30,10 @@ func (m BulkMethod) ToHttpMethod() string {
 }
 
 type BulkItem struct {
-	Method    BulkMethod
-	Bean      beans.Bean
-	UrlParams url.Values
+	Method       BulkMethod
+	Bean         beans.Bean
+	UrlParams    url.Values
+	IgnoreErrors bool
 }
 
 func NewBulkItem(method BulkMethod, bean beans.Bean, urlParams url.Values) *BulkItem {
@@ -70,7 +71,7 @@ func (c *Client) Bulk(items []*BulkItem) ([]*StatusResponse, error) {
 			return nil, err
 		}
 		sr, err := UnmarshalStatusResponse(resp)
-		if err != nil {
+		if err != nil && !item.IgnoreErrors {
 			return nil, fmt.Errorf("on item %d: %w", i, err)
 		}
 		srs = append(srs, sr)
