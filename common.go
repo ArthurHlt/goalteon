@@ -36,6 +36,7 @@ func UnmarshalStatusResponse(resp *http.Response) (*StatusResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	b = sanitizeJson(b)
 	if resp.StatusCode > 299 || resp.StatusCode < 200 {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
@@ -78,7 +79,7 @@ func UnmarshalResponse(resp *http.Response, params beans.BeanType) error {
 	if err != nil {
 		return err
 	}
-
+	b = sanitizeJson(b)
 	if resp.StatusCode > 299 || resp.StatusCode < 200 || strings.Contains(string(b), `"status":"err"`) {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
@@ -108,6 +109,7 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 	if err != nil {
 		return nil, err
 	}
+	b = sanitizeJson(b)
 	if resp.StatusCode > 299 || resp.StatusCode < 200 || strings.Contains(string(b), `"status":"err"`) {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
 		if err != nil {
@@ -130,6 +132,13 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 		res = append(res, valSlice.Index(i).Interface().(beans.BeanType))
 	}
 	return res, nil
+}
+
+func sanitizeJson(data []byte) []byte {
+	s := string(data)
+	strings.Replace(s, "\n", "", -1)
+	strings.Replace(s, "\t", " ", -1)
+	return []byte(s)
 }
 
 func Translate[T beans.BeanType](params beans.BeanType) T {
