@@ -13,6 +13,7 @@ type StatusResponse struct {
 	StatusCode int    `json:"-"`
 	Status     string `json:"status"`
 	Message    string `json:"message"`
+	TestErr    string `json:"testErr"`
 }
 
 func (s *StatusResponse) IsError() bool {
@@ -20,7 +21,8 @@ func (s *StatusResponse) IsError() bool {
 }
 
 func (s *StatusResponse) String() string {
-	return fmt.Sprintf("status (Code %d): %s, message: %s", s.StatusCode, s.Status, s.Message)
+	message := s.Message + s.TestErr
+	return fmt.Sprintf("status (Code %d): %s, message: %s", s.StatusCode, s.Status, message)
 }
 
 func (s *StatusResponse) Error() string {
