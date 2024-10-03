@@ -136,8 +136,8 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 
 func sanitizeJson(data []byte) []byte {
 	s := string(data)
-	strings.Replace(s, "\n", "", -1)
-	strings.Replace(s, "\t", " ", -1)
+	s = strings.Replace(s, "\n", "", -1)
+	s = strings.Replace(s, "\t", " ", -1)
 	return []byte(s)
 }
 
