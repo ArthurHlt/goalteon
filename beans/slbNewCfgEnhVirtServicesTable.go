@@ -248,7 +248,7 @@ type SlbNewCfgEnhVirtServicesTableParams struct {
 	// The layer4 virtual port number of the service. it can be either 1 for ip or between 9 to 65534, virt port no. 2 to 9 are invalid
 	VirtPort uint64 `json:"VirtPort,omitempty"`
 	// The layer4 real port number of the service, it can be either 0 for multiple real ports or 1 for ip service or between 5 to 65534. (2 to 5 are invalid)
-	RealPort uint64 `json:"RealPort,omitempty"`
+	RealPort uint64 `json:"RealPort"`
 	// Set protocol for the virtual service to
 	// UDP or TCP or SCTP or tcpAndUdp or stateless.
 	// tcpAndUdp is applicable only to ip service.

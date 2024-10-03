@@ -14,6 +14,12 @@ import (
 	"github.com/sleepinggenius2/gosmi/types"
 )
 
+var noOmit map[string]map[string]bool = map[string]map[string]bool{
+	"SlbNewCfgEnhVirtServicesTable": {
+		"RealPort": true,
+	},
+}
+
 type VerbStructure struct {
 	Name        string
 	Description string
@@ -135,9 +141,16 @@ func (v *VerbStructure) WriteStructParams() string {
 	sb.WriteString(fmt.Sprintf("type %sParams struct {\n", tableTitled))
 	for _, column := range v.Columns {
 		comments := column.WriteComments()
+		omitEmpty := ",omitempty"
+		noOmitInfo, inNoOmit := noOmit[tableTitled]
+		if inNoOmit {
+			if shouldOmit, inNoOmit := noOmitInfo[column.Name]; inNoOmit && shouldOmit {
+				omitEmpty = ""
+			}
+		}
 		comments = strings.Replace(strings.TrimSuffix(comments, "\n"), "\n", "\n\t", -1)
 		sb.WriteString("\t" + comments + "\n")
-		sb.WriteString(fmt.Sprintf("\t%s %s `json:\"%s,omitempty\"`\n", strings.Title(column.Name), column.TypeString(tableTitled), column.Name))
+		sb.WriteString(fmt.Sprintf("\t%s %s `json:\"%s%s\"`\n", strings.Title(column.Name), column.TypeString(tableTitled), column.Name, omitEmpty))
 	}
 	sb.WriteString("}\n\n")
 
