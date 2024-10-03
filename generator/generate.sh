@@ -14,3 +14,5 @@ go run -tags generator main.go -p MIBS -m ALTEON-CHEETAH-SWITCH-MIB.mib .1.3.6.1
 go run -tags generator main.go -p MIBS -m ALTEON-CHEETAH-SWITCH-MIB.mib  .1.3.6.1.4.1.1872.2.5.1.1.8.5
 # AgentInfo
 go run -tags generator main.go -p MIBS -m ALTEON-CHEETAH-SWITCH-MIB.mib  .1.3.6.1.4.1.1872.2.5.1.3
+# AgSyslogMsgTable
+go run -tags generator main.go -p MIBS -m ALTEON-CHEETAH-SWITCH-MIB.mib  .1.3.6.1.4.1.1872.2.5.1.1.5.11
