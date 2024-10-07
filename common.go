@@ -138,6 +138,7 @@ func sanitizeJson(data []byte) []byte {
 	s := string(data)
 	s = strings.Replace(s, "\n", "", -1)
 	s = strings.Replace(s, "\t", " ", -1)
+	s = strings.Replace(s, "U+0085", "\\n", -1)
 	return []byte(s)
 }
 
