@@ -157,7 +157,7 @@ type Layer7NewCfgContentClassTableParams struct {
 	// This is an action object.Enter the content Class ID(key id)
 	// to which the current content Class has to be copied.
 	// Value 1 is returned always when read this object.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// Content Class Type.
 	Type Layer7NewCfgContentClassTableType `json:"Type,omitempty"`
 }

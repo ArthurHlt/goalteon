@@ -73,7 +73,7 @@ type SlbNewAcclCfgCompBrwsListTableParams struct {
 	// Delete Compression Browser list.
 	Del SlbNewAcclCfgCompBrwsListTableDel `json:"Del,omitempty"`
 	// Duplicating an entire browser list by defining the destination browser list id.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewAcclCfgCompBrwsListTableParams) iMABean() {}

@@ -81,7 +81,7 @@ type SlbNewNwclssCfgNetworkClassesTableParams struct {
 	// By setting the value to delete(2), the entire row is deleted.
 	Del SlbNewNwclssCfgNetworkClassesTableDel `json:"Del,omitempty"`
 	// Duplicating an entire Network class by defining the destination Network class id.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// The network class type should be either 'address' or 'region' to be added to the network.
 	Type SlbNewNwclssCfgNetworkClassesTableType `json:"Type,omitempty"`
 }

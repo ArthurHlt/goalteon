@@ -1,6 +1,27 @@
 package beans
 
-import "reflect"
+import (
+	"encoding/json"
+	"reflect"
+	"strconv"
+)
+
+type DisplayString string
+
+func (d *DisplayString) UnmarshalJSON(data []byte) error {
+	var s string
+	err := json.Unmarshal(data, &s)
+	if err != nil {
+		var i int
+		err = json.Unmarshal(data, &i)
+		if err != nil {
+			return err
+		}
+		s = strconv.Itoa(i)
+	}
+	*d = DisplayString(s)
+	return nil
+}
 
 type Bean interface {
 	Name() string

@@ -73,7 +73,7 @@ type SlbNewDataclassCfgDataClassesTableParams struct {
 	// By setting the value to delete(2), the entire row is deleted.
 	Del SlbNewDataclassCfgDataClassesTableDel `json:"Del,omitempty"`
 	// Duplicating an entire Data class by defining the destination Data class id.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewDataclassCfgDataClassesTableParams) iMABean() {}

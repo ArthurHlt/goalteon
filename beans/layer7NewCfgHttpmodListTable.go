@@ -71,7 +71,7 @@ type Layer7NewCfgHttpmodListTableParams struct {
 	// Status (enable/disable) of rule_list.
 	AdminStatus Layer7NewCfgHttpmodListTableAdminStatus `json:"AdminStatus,omitempty"`
 	// Copy rule-list.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// Delete HTTP modifications rule-list.
 	Delete Layer7NewCfgHttpmodListTableDelete `json:"Delete,omitempty"`
 }

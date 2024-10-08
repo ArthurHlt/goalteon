@@ -195,7 +195,7 @@ type SlbNewCfgEnhRealServerTableParams struct {
 	// The server type.
 	LLBType SlbNewCfgEnhRealServerTableLLBType `json:"LLBType,omitempty"`
 	// The alphanumeric index of the new copy to be created.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// List of ingress ports attached to the real server (security device), used for SSL inspection WebUI wizard.
 	// 	Using the following format: xx, xx, xx
 	PortsIngress string `json:"PortsIngress,omitempty"`

@@ -129,7 +129,7 @@ type SlbNewCfgEnhContRuleTableParams struct {
 	// Application redirection for the rule.
 	Redirection string `json:"Redirection,omitempty"`
 	// The Number to which current rule is to be copied.
-	Copy uint32 `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// Enable or disable Content Based Services Rule .
 	State SlbNewCfgEnhContRuleTableState `json:"State,omitempty"`
 	// When set to the value of 2 (delete), the entire row is deleted.

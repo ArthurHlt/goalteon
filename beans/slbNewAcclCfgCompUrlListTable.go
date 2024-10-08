@@ -73,7 +73,7 @@ type SlbNewAcclCfgCompUrlListTableParams struct {
 	// Delete Compression URL list.
 	Del SlbNewAcclCfgCompUrlListTableDel `json:"Del,omitempty"`
 	// Duplicating an entire Rule-List by defining the destination Rule-list id.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewAcclCfgCompUrlListTableParams) iMABean() {}

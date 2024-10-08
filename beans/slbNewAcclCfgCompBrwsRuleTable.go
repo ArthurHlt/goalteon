@@ -116,7 +116,7 @@ type SlbNewAcclCfgCompBrwsRuleTableParams struct {
 	// By setting the value to delete(2), the entire row is deleted.
 	Delete SlbNewAcclCfgCompBrwsRuleTableDelete `json:"Delete,omitempty"`
 	// Copy rule to another index in the same rule-list.
-	Copy int32 `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewAcclCfgCompBrwsRuleTableParams) iMABean() {}

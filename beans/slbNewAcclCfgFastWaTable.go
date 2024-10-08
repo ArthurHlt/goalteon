@@ -73,7 +73,7 @@ type SlbNewAcclCfgFastWaTableParams struct {
 	// Web application name.
 	Name string `json:"Name,omitempty"`
 	// Web application name.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewAcclCfgFastWaTableParams) iMABean() {}

@@ -369,7 +369,7 @@ type SlbNewCfgEnhGroupTableParams struct {
 	// Group type.
 	Type SlbNewCfgEnhGroupTableType `json:"Type,omitempty"`
 	// The alphanumeric index of the new copy to be created.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// Enable or disable IDS group participation in inspection chain.
 	IdsChain SlbNewCfgEnhGroupTableIdsChain `json:"IdsChain,omitempty"`
 	// The Group security device type.

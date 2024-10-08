@@ -116,7 +116,7 @@ type SlbNewAdvhcWtsTableParams struct {
 	// WTS Health check user name.
 	UserName string `json:"UserName,omitempty"`
 	// WTS Health check copy indicator.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// When set to the value of 2 (delete), the entire row is deleted.
 	// When read, other(1) is returned. Setting the value to anything
 	// other than 2(delete) has no effect on the state of the row.

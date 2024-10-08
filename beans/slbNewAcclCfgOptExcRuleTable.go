@@ -186,7 +186,7 @@ type SlbNewAcclCfgOptExcRuleTableParams struct {
 	Delete SlbNewAcclCfgOptExcRuleTableDelete `json:"Delete,omitempty"`
 	// Copy rule to another index in the same rule-list. When read,
 	// zero is returned.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewAcclCfgOptExcRuleTableParams) iMABean() {}

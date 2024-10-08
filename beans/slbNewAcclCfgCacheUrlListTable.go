@@ -73,7 +73,7 @@ type SlbNewAcclCfgCacheUrlListTableParams struct {
 	// Delete Caching URL list.
 	Del SlbNewAcclCfgCacheUrlListTableDel `json:"Del,omitempty"`
 	// Duplicating an entire Rule-List by defining the destination Rule-list id.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p SlbNewAcclCfgCacheUrlListTableParams) iMABean() {}

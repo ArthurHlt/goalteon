@@ -121,7 +121,7 @@ type Layer7NewCfgHttpmodRuleTableParams struct {
 	// Status (enable/disable) of rule.
 	AdminStatus Layer7NewCfgHttpmodRuleTableAdminStatus `json:"AdminStatus,omitempty"`
 	// Copy rules.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 	// By setting the value to delete(2), the entire row is deleted.
 	Delete Layer7NewCfgHttpmodRuleTableDelete `json:"Delete,omitempty"`
 	// Element to be modified.

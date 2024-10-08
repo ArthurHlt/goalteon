@@ -96,7 +96,7 @@ type Layer7NewCfgContentClassPathTableParams struct {
 	DataclassID string `json:"DataclassID,omitempty"`
 	// This is an action object.Enter the new Classpath
 	// to which the curent Classpath has to be copied.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p Layer7NewCfgContentClassPathTableParams) iMABean() {}

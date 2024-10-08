@@ -105,7 +105,7 @@ type Layer7NewCfgContentClassHeaderTableParams struct {
 	Delete Layer7NewCfgContentClassHeaderTableDelete `json:"Delete,omitempty"`
 	// This is an action object.Enter the new Header
 	// to which the curent Header has to be copied.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p Layer7NewCfgContentClassHeaderTableParams) iMABean() {}

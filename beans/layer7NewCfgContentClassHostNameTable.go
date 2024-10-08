@@ -86,7 +86,7 @@ type Layer7NewCfgContentClassHostNameTableParams struct {
 	DataclassID string `json:"DataclassID,omitempty"`
 	// This is an action object.Enter the new HostName
 	// to which the curent HostName has to be copied.
-	Copy string `json:"Copy,omitempty"`
+	Copy DisplayString `json:"Copy,omitempty"`
 }
 
 func (p Layer7NewCfgContentClassHostNameTableParams) iMABean() {}

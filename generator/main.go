@@ -20,6 +20,28 @@ var noOmit map[string]map[string]bool = map[string]map[string]bool{
 	},
 }
 
+var toDisplayString = map[string]map[string]bool{
+	"*": {
+		"Copy": true,
+	},
+}
+
+func isDisplayString(columnName, tableName string) bool {
+	toDisplay := toDisplayString["*"]
+	toDisplayTable, ok := toDisplayString[tableName]
+	if ok {
+		for k, v := range toDisplayTable {
+			toDisplay[k] = v
+		}
+	}
+	isDs, ok := toDisplay[columnName]
+	if !ok {
+		return false
+	}
+	return isDs
+
+}
+
 type VerbStructure struct {
 	Name        string
 	Description string
@@ -73,7 +95,7 @@ func (v *VerbStructure) WriteStructMain() string {
 		comments := column.WriteComments()
 		comments = strings.Replace(strings.TrimSuffix(comments, "\n"), "\n", "\n\t", -1)
 		sb.WriteString("\t" + comments + "\n")
-		sb.WriteString(fmt.Sprintf("\t%s %s\n", strings.Title(column.Name), column.TypeString(nameTitled)))
+		sb.WriteString(fmt.Sprintf("\t%s %s\n", strings.Title(column.Name), column.TypeString(column.Name, nameTitled)))
 	}
 	sb.WriteString(fmt.Sprintf("\tParams *%sParams\n", nameTitled))
 	sb.WriteString("}\n\n")
@@ -84,7 +106,7 @@ func (v *VerbStructure) WriteStructMain() string {
 
 	sb.WriteString(fmt.Sprintf("func New%s(\n", nameTitled))
 	for _, column := range v.Index {
-		sb.WriteString(fmt.Sprintf("\t%s %s,\n", column.Name, column.TypeString(nameTitled)))
+		sb.WriteString(fmt.Sprintf("\t%s %s,\n", column.Name, column.TypeString(column.Name, nameTitled)))
 	}
 	sb.WriteString(fmt.Sprintf("\tparams *%sParams,\n", nameTitled))
 	sb.WriteString(fmt.Sprintf(") *%s {\n", nameTitled))
@@ -150,7 +172,7 @@ func (v *VerbStructure) WriteStructParams() string {
 		}
 		comments = strings.Replace(strings.TrimSuffix(comments, "\n"), "\n", "\n\t", -1)
 		sb.WriteString("\t" + comments + "\n")
-		sb.WriteString(fmt.Sprintf("\t%s %s `json:\"%s%s\"`\n", strings.Title(column.Name), column.TypeString(tableTitled), column.Name, omitEmpty))
+		sb.WriteString(fmt.Sprintf("\t%s %s `json:\"%s%s\"`\n", strings.Title(column.Name), column.TypeString(column.Name, tableTitled), column.Name, omitEmpty))
 	}
 	sb.WriteString("}\n\n")
 
@@ -167,10 +189,14 @@ type EnrichNode struct {
 	gosmi.SmiNode
 }
 
-func (e *EnrichNode) TypeString(tableName string) string {
+func (e *EnrichNode) TypeString(columnName, tableName string) string {
 	if e.SmiType.BaseType == types.BaseTypeEnum {
 		return tableName + strings.Title(e.Name)
 	}
+	if isDisplayString(columnName, tableName) {
+		return "DisplayString"
+	}
+
 	return baseTypeToType(e.SmiType.BaseType)
 }
 
