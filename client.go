@@ -7,6 +7,7 @@ import (
 	"fmt"
 	transport "github.com/ArthurHlt/basicauth-transport"
 	"github.com/ArthurHlt/goalteon/beans"
+	"github.com/avast/retry-go/v4"
 	"io"
 	"log"
 	"net/http"
@@ -79,14 +80,27 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 
 		log.Printf("running request '%s %s' with content:\n\t%s\n", req.Method, req.URL.String(), string(content))
 	}
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
+	var resp *http.Response
+	var doErr error
+	// we retry when we habe an unauthorized error
+	// because alteon has a bug that sometimes return 401 (probably when it's considering the session as expired)
+	_ = retry.Do(func() error {
+		resp, doErr = c.httpClient.Do(req)
+		if doErr != nil {
+			return nil
+		}
+		if resp.StatusCode == http.StatusUnauthorized {
+			return fmt.Errorf("unauthorized")
+		}
+		return nil
+	}, retry.Attempts(3), retry.Delay(200*time.Millisecond))
+	if doErr != nil {
 		if c.debug {
 			log.Printf("Error when running request '%s %s': %s\n",
-				req.Method, req.URL.String(), err.Error(),
+				req.Method, req.URL.String(), doErr.Error(),
 			)
 		}
-		return nil, err
+		return nil, doErr
 	}
 	if !c.debug {
 		return resp, nil
