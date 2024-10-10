@@ -84,6 +84,7 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 	var doErr error
 	// we retry when we habe an unauthorized error
 	// because alteon has a bug that sometimes return 401 (probably when it's considering the session as expired)
+	// there is another but when checking apply that appply is not finished but mark as finished so we retry
 	_ = retry.Do(func() error {
 		resp, doErr = c.httpClient.Do(req)
 		if doErr != nil {
@@ -92,8 +93,11 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 		if resp.StatusCode == http.StatusUnauthorized {
 			return fmt.Errorf("unauthorized")
 		}
+		if resp.StatusCode == http.StatusNotAcceptable {
+			return fmt.Errorf("not acceptable")
+		}
 		return nil
-	}, retry.Attempts(3), retry.Delay(200*time.Millisecond))
+	}, retry.Attempts(3), retry.Delay(350*time.Millisecond))
 	if doErr != nil {
 		if c.debug {
 			log.Printf("Error when running request '%s %s': %s\n",
