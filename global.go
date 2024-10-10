@@ -266,6 +266,16 @@ func (c *Client) ApplySaveSync() (st *StatusGlobal, err error) {
 	if err != nil {
 		return nil, fmt.Errorf("error when syncing: %s", err.Error())
 	}
+	for {
+		st, err = c.StatusGlobal()
+		if err != nil {
+			return st, fmt.Errorf("error syncing: %s", err.Error())
+		}
+		if st.AgSyncStatus != AgSyncStatusInProgress {
+			break
+		}
+		time.Sleep(200 * time.Millisecond)
+	}
 	return st, nil
 }
 
