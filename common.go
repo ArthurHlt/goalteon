@@ -36,6 +36,13 @@ func UnmarshalStatusResponse(resp *http.Response) (*StatusResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	if len(b) == 0 {
+		return &StatusResponse{
+			StatusCode: resp.StatusCode,
+			Status:     http.StatusText(resp.StatusCode),
+			Message:    http.StatusText(resp.StatusCode),
+		}, nil
+	}
 	b = sanitizeJson(b)
 	if resp.StatusCode > 299 || resp.StatusCode < 200 {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
@@ -79,6 +86,9 @@ func UnmarshalResponse(resp *http.Response, params beans.BeanType) error {
 	if err != nil {
 		return err
 	}
+	if len(b) == 0 {
+		return nil
+	}
 	b = sanitizeJson(b)
 	if resp.StatusCode > 299 || resp.StatusCode < 200 || strings.Contains(string(b), `"status":"err"`) {
 		status, err := UnmarshalStatus(resp.StatusCode, b)
@@ -108,6 +118,9 @@ func UnmarshalListResponse(resp *http.Response, bean beans.Bean) ([]beans.BeanTy
 	b, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
+	}
+	if len(b) == 0 {
+		return []beans.BeanType{}, nil
 	}
 	b = sanitizeJson(b)
 	if resp.StatusCode > 299 || resp.StatusCode < 200 || strings.Contains(string(b), `"status":"err"`) {

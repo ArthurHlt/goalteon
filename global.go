@@ -7,7 +7,6 @@ import (
 	"github.com/mitchellh/mapstructure"
 	"io"
 	"net/http"
-	"strings"
 	"time"
 )
 
@@ -139,14 +138,6 @@ func (c *Client) Apply() (*StatusResponse, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		// another bug in alteon in which it give a content length but no content
-		if strings.Contains(err.Error(), "http: ContentLength=") {
-			return &StatusResponse{
-				StatusCode: http.StatusOK,
-				Status:     http.StatusText(http.StatusOK),
-				Message:    http.StatusText(http.StatusOK),
-			}, nil
-		}
 		return nil, err
 	}
 	return UnmarshalStatusResponse(resp)
@@ -159,14 +150,6 @@ func (c *Client) Sync() (*StatusResponse, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		// another bug in alteon in which it give a content length but no content
-		if strings.Contains(err.Error(), "http: ContentLength=") {
-			return &StatusResponse{
-				StatusCode: http.StatusOK,
-				Status:     http.StatusText(http.StatusOK),
-				Message:    http.StatusText(http.StatusOK),
-			}, nil
-		}
 		return nil, err
 	}
 	return UnmarshalStatusResponse(resp)
@@ -179,14 +162,6 @@ func (c *Client) Revert() (*StatusResponse, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		// another bug in alteon in which it give a content length but no content
-		if strings.Contains(err.Error(), "http: ContentLength=") {
-			return &StatusResponse{
-				StatusCode: http.StatusOK,
-				Status:     http.StatusText(http.StatusOK),
-				Message:    http.StatusText(http.StatusOK),
-			}, nil
-		}
 		return nil, err
 	}
 	return UnmarshalStatusResponse(resp)
@@ -199,14 +174,6 @@ func (c *Client) RevertAll() (*StatusResponse, error) {
 	}
 	resp, err := c.Do(req)
 	if err != nil {
-		// another bug in alteon in which it give a content length but no content
-		if strings.Contains(err.Error(), "http: ContentLength=") {
-			return &StatusResponse{
-				StatusCode: http.StatusOK,
-				Status:     http.StatusText(http.StatusOK),
-				Message:    http.StatusText(http.StatusOK),
-			}, nil
-		}
 		return nil, err
 	}
 	return UnmarshalStatusResponse(resp)

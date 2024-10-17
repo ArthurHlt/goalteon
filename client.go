@@ -90,7 +90,14 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 		if doErr != nil {
 			// another bug in alteon in which it give a content length but no content
 			if strings.Contains(doErr.Error(), "http: ContentLength=") {
-				return doErr
+				resp = &http.Response{
+					Status:        http.StatusText(http.StatusOK),
+					StatusCode:    http.StatusOK,
+					Header:        make(http.Header),
+					Body:          io.NopCloser(&bytes.Buffer{}),
+					ContentLength: 0,
+				}
+				doErr = nil
 			}
 			return nil
 		}
@@ -104,7 +111,18 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 			return fmt.Errorf("not acceptable")
 		}
 		return nil
-	}, retry.Attempts(10), retry.Delay(500*time.Millisecond))
+	},
+		retry.Attempts(10),
+		retry.Delay(350*time.Millisecond),
+		retry.DelayType(retry.FixedDelay),
+		retry.OnRetry(func(n uint, err error) {
+			if c.debug {
+				log.Printf("retrying request '%s %s' because of error: %s\n",
+					req.Method, req.URL.String(), err.Error(),
+				)
+			}
+		}),
+	)
 	if retErr != nil {
 		doErr = retErr
 	}
